@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08985553162D228F000CD6A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985552162D228F000CD6A0 /* UIKit.framework */; };
+		08985555162D228F000CD6A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985554162D228F000CD6A0 /* Foundation.framework */; };
+		08985557162D228F000CD6A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985556162D228F000CD6A0 /* CoreGraphics.framework */; };
+		0898555D162D228F000CD6A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0898555B162D228F000CD6A0 /* InfoPlist.strings */; };
+		0898555F162D228F000CD6A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0898555E162D228F000CD6A0 /* main.m */; };
+		08985563162D228F000CD6A0 /* CBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08985562162D228F000CD6A0 /* CBAppDelegate.m */; };
+		08985565162D228F000CD6A0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 08985564162D228F000CD6A0 /* Default.png */; };
+		08985567162D228F000CD6A0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08985566162D228F000CD6A0 /* Default@2x.png */; };
+		08985569162D228F000CD6A0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08985568162D228F000CD6A0 /* Default-568h@2x.png */; };
+		08985571162D228F000CD6A0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985570162D228F000CD6A0 /* SenTestingKit.framework */; };
+		08985572162D228F000CD6A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985552162D228F000CD6A0 /* UIKit.framework */; };
+		08985573162D228F000CD6A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985554162D228F000CD6A0 /* Foundation.framework */; };
+		0898557B162D228F000CD6A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08985579162D228F000CD6A0 /* InfoPlist.strings */; };
+		0898557E162D228F000CD6A0 /* sWiBooTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0898557D162D228F000CD6A0 /* sWiBooTests.m */; };
+		089855AA162D237F000CD6A0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985570162D228F000CD6A0 /* SenTestingKit.framework */; };
+		089855AB162D237F000CD6A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985552162D228F000CD6A0 /* UIKit.framework */; };
+		089855AC162D237F000CD6A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985554162D228F000CD6A0 /* Foundation.framework */; };
+		089855B2162D237F000CD6A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089855B0162D237F000CD6A0 /* InfoPlist.strings */; };
+		089855B5162D237F000CD6A0 /* sWiBooLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 089855B4162D237F000CD6A0 /* sWiBooLogicTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		08985574162D228F000CD6A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08985545162D228F000CD6A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0898554D162D228F000CD6A0;
+			remoteInfo = sWiBoo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0898554E162D228F000CD6A0 /* sWiBoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sWiBoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		08985552162D228F000CD6A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		08985554162D228F000CD6A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		08985556162D228F000CD6A0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0898555A162D228F000CD6A0 /* sWiBoo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sWiBoo-Info.plist"; sourceTree = "<group>"; };
+		0898555C162D228F000CD6A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0898555E162D228F000CD6A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		08985560162D228F000CD6A0 /* sWiBoo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sWiBoo-Prefix.pch"; sourceTree = "<group>"; };
+		08985561162D228F000CD6A0 /* CBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBAppDelegate.h; sourceTree = "<group>"; };
+		08985562162D228F000CD6A0 /* CBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CBAppDelegate.m; sourceTree = "<group>"; };
+		08985564162D228F000CD6A0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		08985566162D228F000CD6A0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		08985568162D228F000CD6A0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0898556F162D228F000CD6A0 /* sWiBooTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sWiBooTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		08985570162D228F000CD6A0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		08985578162D228F000CD6A0 /* sWiBooTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sWiBooTests-Info.plist"; sourceTree = "<group>"; };
+		0898557A162D228F000CD6A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0898557C162D228F000CD6A0 /* sWiBooTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sWiBooTests.h; sourceTree = "<group>"; };
+		0898557D162D228F000CD6A0 /* sWiBooTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sWiBooTests.m; sourceTree = "<group>"; };
+		089855A9162D237F000CD6A0 /* sWiBooLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sWiBooLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		089855AF162D237F000CD6A0 /* sWiBooLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sWiBooLogicTests-Info.plist"; sourceTree = "<group>"; };
+		089855B1162D237F000CD6A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089855B3162D237F000CD6A0 /* sWiBooLogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sWiBooLogicTests.h; sourceTree = "<group>"; };
+		089855B4162D237F000CD6A0 /* sWiBooLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sWiBooLogicTests.m; sourceTree = "<group>"; };
+		089855B6162D237F000CD6A0 /* sWiBooLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sWiBooLogicTests-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0898554B162D228F000CD6A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08985553162D228F000CD6A0 /* UIKit.framework in Frameworks */,
+				08985555162D228F000CD6A0 /* Foundation.framework in Frameworks */,
+				08985557162D228F000CD6A0 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0898556B162D228F000CD6A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08985571162D228F000CD6A0 /* SenTestingKit.framework in Frameworks */,
+				08985572162D228F000CD6A0 /* UIKit.framework in Frameworks */,
+				08985573162D228F000CD6A0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		089855A5162D237F000CD6A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				089855AA162D237F000CD6A0 /* SenTestingKit.framework in Frameworks */,
+				089855AB162D237F000CD6A0 /* UIKit.framework in Frameworks */,
+				089855AC162D237F000CD6A0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08985543162D228F000CD6A0 = {
+			isa = PBXGroup;
+			children = (
+				08985558162D228F000CD6A0 /* sWiBoo */,
+				08985576162D228F000CD6A0 /* sWiBooApplicationTests */,
+				089855AD162D237F000CD6A0 /* sWiBooLogicTests */,
+				08985551162D228F000CD6A0 /* Frameworks */,
+				0898554F162D228F000CD6A0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0898554F162D228F000CD6A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0898554E162D228F000CD6A0 /* sWiBoo.app */,
+				0898556F162D228F000CD6A0 /* sWiBooTests.octest */,
+				089855A9162D237F000CD6A0 /* sWiBooLogicTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		08985551162D228F000CD6A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08985552162D228F000CD6A0 /* UIKit.framework */,
+				08985554162D228F000CD6A0 /* Foundation.framework */,
+				08985556162D228F000CD6A0 /* CoreGraphics.framework */,
+				08985570162D228F000CD6A0 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08985558162D228F000CD6A0 /* sWiBoo */ = {
+			isa = PBXGroup;
+			children = (
+				08985561162D228F000CD6A0 /* CBAppDelegate.h */,
+				08985562162D228F000CD6A0 /* CBAppDelegate.m */,
+				08985559162D228F000CD6A0 /* Supporting Files */,
+			);
+			path = sWiBoo;
+			sourceTree = "<group>";
+		};
+		08985559162D228F000CD6A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0898555A162D228F000CD6A0 /* sWiBoo-Info.plist */,
+				0898555B162D228F000CD6A0 /* InfoPlist.strings */,
+				0898555E162D228F000CD6A0 /* main.m */,
+				08985560162D228F000CD6A0 /* sWiBoo-Prefix.pch */,
+				08985564162D228F000CD6A0 /* Default.png */,
+				08985566162D228F000CD6A0 /* Default@2x.png */,
+				08985568162D228F000CD6A0 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		08985576162D228F000CD6A0 /* sWiBooApplicationTests */ = {
+			isa = PBXGroup;
+			children = (
+				0898557C162D228F000CD6A0 /* sWiBooTests.h */,
+				0898557D162D228F000CD6A0 /* sWiBooTests.m */,
+				08985577162D228F000CD6A0 /* Supporting Files */,
+			);
+			name = sWiBooApplicationTests;
+			path = sWiBooTests;
+			sourceTree = "<group>";
+		};
+		08985577162D228F000CD6A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				08985578162D228F000CD6A0 /* sWiBooTests-Info.plist */,
+				08985579162D228F000CD6A0 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		089855AD162D237F000CD6A0 /* sWiBooLogicTests */ = {
+			isa = PBXGroup;
+			children = (
+				089855B3162D237F000CD6A0 /* sWiBooLogicTests.h */,
+				089855B4162D237F000CD6A0 /* sWiBooLogicTests.m */,
+				089855AE162D237F000CD6A0 /* Supporting Files */,
+			);
+			path = sWiBooLogicTests;
+			sourceTree = "<group>";
+		};
+		089855AE162D237F000CD6A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				089855AF162D237F000CD6A0 /* sWiBooLogicTests-Info.plist */,
+				089855B0162D237F000CD6A0 /* InfoPlist.strings */,
+				089855B6162D237F000CD6A0 /* sWiBooLogicTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0898554D162D228F000CD6A0 /* sWiBoo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08985581162D228F000CD6A0 /* Build configuration list for PBXNativeTarget "sWiBoo" */;
+			buildPhases = (
+				0898554A162D228F000CD6A0 /* Sources */,
+				0898554B162D228F000CD6A0 /* Frameworks */,
+				0898554C162D228F000CD6A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sWiBoo;
+			productName = sWiBoo;
+			productReference = 0898554E162D228F000CD6A0 /* sWiBoo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0898556E162D228F000CD6A0 /* sWiBooApplicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08985584162D228F000CD6A0 /* Build configuration list for PBXNativeTarget "sWiBooApplicationTests" */;
+			buildPhases = (
+				0898556A162D228F000CD6A0 /* Sources */,
+				0898556B162D228F000CD6A0 /* Frameworks */,
+				0898556C162D228F000CD6A0 /* Resources */,
+				0898556D162D228F000CD6A0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08985575162D228F000CD6A0 /* PBXTargetDependency */,
+			);
+			name = sWiBooApplicationTests;
+			productName = sWiBooTests;
+			productReference = 0898556F162D228F000CD6A0 /* sWiBooTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		089855A8162D237F000CD6A0 /* sWiBooLogicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 089855B9162D237F000CD6A0 /* Build configuration list for PBXNativeTarget "sWiBooLogicTests" */;
+			buildPhases = (
+				089855A4162D237F000CD6A0 /* Sources */,
+				089855A5162D237F000CD6A0 /* Frameworks */,
+				089855A6162D237F000CD6A0 /* Resources */,
+				089855A7162D237F000CD6A0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sWiBooLogicTests;
+			productName = sWiBooLogicTests;
+			productReference = 089855A9162D237F000CD6A0 /* sWiBooLogicTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08985545162D228F000CD6A0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CB;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Lei Yan";
+			};
+			buildConfigurationList = 08985548162D228F000CD6A0 /* Build configuration list for PBXProject "sWiBoo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 08985543162D228F000CD6A0;
+			productRefGroup = 0898554F162D228F000CD6A0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0898554D162D228F000CD6A0 /* sWiBoo */,
+				0898556E162D228F000CD6A0 /* sWiBooApplicationTests */,
+				089855A8162D237F000CD6A0 /* sWiBooLogicTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0898554C162D228F000CD6A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0898555D162D228F000CD6A0 /* InfoPlist.strings in Resources */,
+				08985565162D228F000CD6A0 /* Default.png in Resources */,
+				08985567162D228F000CD6A0 /* Default@2x.png in Resources */,
+				08985569162D228F000CD6A0 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0898556C162D228F000CD6A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0898557B162D228F000CD6A0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		089855A6162D237F000CD6A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				089855B2162D237F000CD6A0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0898556D162D228F000CD6A0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		089855A7162D237F000CD6A0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0898554A162D228F000CD6A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0898555F162D228F000CD6A0 /* main.m in Sources */,
+				08985563162D228F000CD6A0 /* CBAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0898556A162D228F000CD6A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0898557E162D228F000CD6A0 /* sWiBooTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		089855A4162D237F000CD6A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				089855B5162D237F000CD6A0 /* sWiBooLogicTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		08985575162D228F000CD6A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0898554D162D228F000CD6A0 /* sWiBoo */;
+			targetProxy = 08985574162D228F000CD6A0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0898555B162D228F000CD6A0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0898555C162D228F000CD6A0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		08985579162D228F000CD6A0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0898557A162D228F000CD6A0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		089855B0162D237F000CD6A0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089855B1162D237F000CD6A0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0898557F162D228F000CD6A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		08985580162D228F000CD6A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		08985582162D228F000CD6A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sWiBoo/sWiBoo-Prefix.pch";
+				INFOPLIST_FILE = "sWiBoo/sWiBoo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		08985583162D228F000CD6A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sWiBoo/sWiBoo-Prefix.pch";
+				INFOPLIST_FILE = "sWiBoo/sWiBoo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		08985585162D228F000CD6A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/sWiBoo.app/sWiBoo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sWiBoo/sWiBoo-Prefix.pch";
+				INFOPLIST_FILE = "sWiBooTests/sWiBooTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		08985586162D228F000CD6A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/sWiBoo.app/sWiBoo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sWiBoo/sWiBoo-Prefix.pch";
+				INFOPLIST_FILE = "sWiBooTests/sWiBooTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		089855B7162D237F000CD6A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sWiBooLogicTests/sWiBooLogicTests-Prefix.pch";
+				INFOPLIST_FILE = "sWiBooLogicTests/sWiBooLogicTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		089855B8162D237F000CD6A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sWiBooLogicTests/sWiBooLogicTests-Prefix.pch";
+				INFOPLIST_FILE = "sWiBooLogicTests/sWiBooLogicTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		08985548162D228F000CD6A0 /* Build configuration list for PBXProject "sWiBoo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0898557F162D228F000CD6A0 /* Debug */,
+				08985580162D228F000CD6A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08985581162D228F000CD6A0 /* Build configuration list for PBXNativeTarget "sWiBoo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08985582162D228F000CD6A0 /* Debug */,
+				08985583162D228F000CD6A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08985584162D228F000CD6A0 /* Build configuration list for PBXNativeTarget "sWiBooApplicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08985585162D228F000CD6A0 /* Debug */,
+				08985586162D228F000CD6A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		089855B9162D237F000CD6A0 /* Build configuration list for PBXNativeTarget "sWiBooLogicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				089855B7162D237F000CD6A0 /* Debug */,
+				089855B8162D237F000CD6A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08985545162D228F000CD6A0 /* Project object */;
+}
