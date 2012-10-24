@@ -11,6 +11,23 @@
 		089461F7163833C300E0E9F1 /* CBStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089461F5163833C300E0E9F1 /* CBStartViewController.xib */; };
 		089461FB163833D100E0E9F1 /* sWiBoo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 089461F9163833D100E0E9F1 /* sWiBoo.xcdatamodeld */; };
 		089462011638340500E0E9F1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 089462001638340500E0E9F1 /* CoreData.framework */; };
+		089462591638360600E0E9F1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 089462581638360600E0E9F1 /* QuartzCore.framework */; };
+		0894625C1638361600E0E9F1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0894625B1638361600E0E9F1 /* MapKit.framework */; };
+		0894625E1638361B00E0E9F1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0894625D1638361B00E0E9F1 /* ImageIO.framework */; };
+		08946292163836AF00E0E9F1 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08946262163836AF00E0E9F1 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		08946293163836AF00E0E9F1 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 08946264163836AF00E0E9F1 /* blackArrow.png */; };
+		08946294163836AF00E0E9F1 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08946265163836AF00E0E9F1 /* blackArrow@2x.png */; };
+		08946295163836AF00E0E9F1 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 08946266163836AF00E0E9F1 /* blueArrow.png */; };
+		08946296163836AF00E0E9F1 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08946267163836AF00E0E9F1 /* blueArrow@2x.png */; };
+		08946297163836AF00E0E9F1 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 08946268163836AF00E0E9F1 /* grayArrow.png */; };
+		08946298163836AF00E0E9F1 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08946269163836AF00E0E9F1 /* grayArrow@2x.png */; };
+		08946299163836AF00E0E9F1 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0894626A163836AF00E0E9F1 /* whiteArrow.png */; };
+		0894629A163836AF00E0E9F1 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0894626B163836AF00E0E9F1 /* whiteArrow@2x.png */; };
+		0894629B163836AF00E0E9F1 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0894626E163836AF00E0E9F1 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		089462A8163836AF00E0E9F1 /* SinaWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0894628A163836AF00E0E9F1 /* SinaWeibo.bundle */; };
+		089462A9163836AF00E0E9F1 /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0894628C163836AF00E0E9F1 /* SinaWeibo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		089462AA163836AF00E0E9F1 /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0894628E163836AF00E0E9F1 /* SinaWeiboAuthorizeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		089462AB163836AF00E0E9F1 /* SinaWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 08946291163836AF00E0E9F1 /* SinaWeiboRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		08985553162D228F000CD6A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985552162D228F000CD6A0 /* UIKit.framework */; };
 		08985555162D228F000CD6A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985554162D228F000CD6A0 /* Foundation.framework */; };
 		08985557162D228F000CD6A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985556162D228F000CD6A0 /* CoreGraphics.framework */; };
@@ -48,6 +65,29 @@
 		089461F5163833C300E0E9F1 /* CBStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBStartViewController.xib; sourceTree = "<group>"; };
 		089461FA163833D100E0E9F1 /* sWiBoo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sWiBoo.xcdatamodel; sourceTree = "<group>"; };
 		089462001638340500E0E9F1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		089462581638360600E0E9F1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0894625B1638361600E0E9F1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0894625D1638361B00E0E9F1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		08946261163836AF00E0E9F1 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		08946262163836AF00E0E9F1 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		08946264163836AF00E0E9F1 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		08946265163836AF00E0E9F1 /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		08946266163836AF00E0E9F1 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		08946267163836AF00E0E9F1 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		08946268163836AF00E0E9F1 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
+		08946269163836AF00E0E9F1 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
+		0894626A163836AF00E0E9F1 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
+		0894626B163836AF00E0E9F1 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
+		0894626D163836AF00E0E9F1 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		0894626E163836AF00E0E9F1 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		0894628A163836AF00E0E9F1 /* SinaWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SinaWeibo.bundle; sourceTree = "<group>"; };
+		0894628B163836AF00E0E9F1 /* SinaWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeibo.h; sourceTree = "<group>"; };
+		0894628C163836AF00E0E9F1 /* SinaWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeibo.m; sourceTree = "<group>"; };
+		0894628D163836AF00E0E9F1 /* SinaWeiboAuthorizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboAuthorizeView.h; sourceTree = "<group>"; };
+		0894628E163836AF00E0E9F1 /* SinaWeiboAuthorizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboAuthorizeView.m; sourceTree = "<group>"; };
+		0894628F163836AF00E0E9F1 /* SinaWeiboConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboConstants.h; sourceTree = "<group>"; };
+		08946290163836AF00E0E9F1 /* SinaWeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiboRequest.h; sourceTree = "<group>"; };
+		08946291163836AF00E0E9F1 /* SinaWeiboRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiboRequest.m; sourceTree = "<group>"; };
 		0898554E162D228F000CD6A0 /* sWiBoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sWiBoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08985552162D228F000CD6A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		08985554162D228F000CD6A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -80,6 +120,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0894625E1638361B00E0E9F1 /* ImageIO.framework in Frameworks */,
+				0894625C1638361600E0E9F1 /* MapKit.framework in Frameworks */,
+				089462591638360600E0E9F1 /* QuartzCore.framework in Frameworks */,
 				089462011638340500E0E9F1 /* CoreData.framework in Frameworks */,
 				08985553162D228F000CD6A0 /* UIKit.framework in Frameworks */,
 				08985555162D228F000CD6A0 /* Foundation.framework in Frameworks */,
@@ -110,9 +153,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0894625F163836AF00E0E9F1 /* ThirdPart */ = {
+			isa = PBXGroup;
+			children = (
+				08946260163836AF00E0E9F1 /* EGOTableViewPullRefresh */,
+				0894626C163836AF00E0E9F1 /* JSONKit */,
+				08946289163836AF00E0E9F1 /* SinaWeibo */,
+			);
+			name = ThirdPart;
+			path = sWiBoo/ThirdPart;
+			sourceTree = "<group>";
+		};
+		08946260163836AF00E0E9F1 /* EGOTableViewPullRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				08946261163836AF00E0E9F1 /* EGORefreshTableHeaderView.h */,
+				08946262163836AF00E0E9F1 /* EGORefreshTableHeaderView.m */,
+				08946263163836AF00E0E9F1 /* Resources */,
+			);
+			path = EGOTableViewPullRefresh;
+			sourceTree = "<group>";
+		};
+		08946263163836AF00E0E9F1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				08946264163836AF00E0E9F1 /* blackArrow.png */,
+				08946265163836AF00E0E9F1 /* blackArrow@2x.png */,
+				08946266163836AF00E0E9F1 /* blueArrow.png */,
+				08946267163836AF00E0E9F1 /* blueArrow@2x.png */,
+				08946268163836AF00E0E9F1 /* grayArrow.png */,
+				08946269163836AF00E0E9F1 /* grayArrow@2x.png */,
+				0894626A163836AF00E0E9F1 /* whiteArrow.png */,
+				0894626B163836AF00E0E9F1 /* whiteArrow@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0894626C163836AF00E0E9F1 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				0894626D163836AF00E0E9F1 /* JSONKit.h */,
+				0894626E163836AF00E0E9F1 /* JSONKit.m */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		08946289163836AF00E0E9F1 /* SinaWeibo */ = {
+			isa = PBXGroup;
+			children = (
+				0894628A163836AF00E0E9F1 /* SinaWeibo.bundle */,
+				0894628B163836AF00E0E9F1 /* SinaWeibo.h */,
+				0894628C163836AF00E0E9F1 /* SinaWeibo.m */,
+				0894628D163836AF00E0E9F1 /* SinaWeiboAuthorizeView.h */,
+				0894628E163836AF00E0E9F1 /* SinaWeiboAuthorizeView.m */,
+				0894628F163836AF00E0E9F1 /* SinaWeiboConstants.h */,
+				08946290163836AF00E0E9F1 /* SinaWeiboRequest.h */,
+				08946291163836AF00E0E9F1 /* SinaWeiboRequest.m */,
+			);
+			path = SinaWeibo;
+			sourceTree = "<group>";
+		};
 		08985543162D228F000CD6A0 = {
 			isa = PBXGroup;
 			children = (
+				0894625F163836AF00E0E9F1 /* ThirdPart */,
 				08985558162D228F000CD6A0 /* sWiBoo */,
 				08985576162D228F000CD6A0 /* sWiBooApplicationTests */,
 				089855AD162D237F000CD6A0 /* sWiBooLogicTests */,
@@ -134,6 +238,9 @@
 		08985551162D228F000CD6A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0894625D1638361B00E0E9F1 /* ImageIO.framework */,
+				0894625B1638361600E0E9F1 /* MapKit.framework */,
+				089462581638360600E0E9F1 /* QuartzCore.framework */,
 				089462001638340500E0E9F1 /* CoreData.framework */,
 				08985552162D228F000CD6A0 /* UIKit.framework */,
 				08985554162D228F000CD6A0 /* Foundation.framework */,
@@ -307,6 +414,15 @@
 				08985567162D228F000CD6A0 /* Default@2x.png in Resources */,
 				08985569162D228F000CD6A0 /* Default-568h@2x.png in Resources */,
 				089461F7163833C300E0E9F1 /* CBStartViewController.xib in Resources */,
+				08946293163836AF00E0E9F1 /* blackArrow.png in Resources */,
+				08946294163836AF00E0E9F1 /* blackArrow@2x.png in Resources */,
+				08946295163836AF00E0E9F1 /* blueArrow.png in Resources */,
+				08946296163836AF00E0E9F1 /* blueArrow@2x.png in Resources */,
+				08946297163836AF00E0E9F1 /* grayArrow.png in Resources */,
+				08946298163836AF00E0E9F1 /* grayArrow@2x.png in Resources */,
+				08946299163836AF00E0E9F1 /* whiteArrow.png in Resources */,
+				0894629A163836AF00E0E9F1 /* whiteArrow@2x.png in Resources */,
+				089462A8163836AF00E0E9F1 /* SinaWeibo.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +482,11 @@
 				08985563162D228F000CD6A0 /* CBAppDelegate.m in Sources */,
 				089461F6163833C300E0E9F1 /* CBStartViewController.m in Sources */,
 				089461FB163833D100E0E9F1 /* sWiBoo.xcdatamodeld in Sources */,
+				08946292163836AF00E0E9F1 /* EGORefreshTableHeaderView.m in Sources */,
+				0894629B163836AF00E0E9F1 /* JSONKit.m in Sources */,
+				089462A9163836AF00E0E9F1 /* SinaWeibo.m in Sources */,
+				089462AA163836AF00E0E9F1 /* SinaWeiboAuthorizeView.m in Sources */,
+				089462AB163836AF00E0E9F1 /* SinaWeiboRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,7 +566,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -466,7 +587,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
