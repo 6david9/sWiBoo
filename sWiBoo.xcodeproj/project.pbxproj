@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		089461F6163833C300E0E9F1 /* CBStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 089461F4163833C300E0E9F1 /* CBStartViewController.m */; };
+		089461F7163833C300E0E9F1 /* CBStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089461F5163833C300E0E9F1 /* CBStartViewController.xib */; };
+		089461FB163833D100E0E9F1 /* sWiBoo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 089461F9163833D100E0E9F1 /* sWiBoo.xcdatamodeld */; };
+		089462011638340500E0E9F1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 089462001638340500E0E9F1 /* CoreData.framework */; };
 		08985553162D228F000CD6A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985552162D228F000CD6A0 /* UIKit.framework */; };
 		08985555162D228F000CD6A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985554162D228F000CD6A0 /* Foundation.framework */; };
 		08985557162D228F000CD6A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08985556162D228F000CD6A0 /* CoreGraphics.framework */; };
@@ -39,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		089461F3163833C300E0E9F1 /* CBStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBStartViewController.h; sourceTree = "<group>"; };
+		089461F4163833C300E0E9F1 /* CBStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBStartViewController.m; sourceTree = "<group>"; };
+		089461F5163833C300E0E9F1 /* CBStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBStartViewController.xib; sourceTree = "<group>"; };
+		089461FA163833D100E0E9F1 /* sWiBoo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sWiBoo.xcdatamodel; sourceTree = "<group>"; };
+		089462001638340500E0E9F1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0898554E162D228F000CD6A0 /* sWiBoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sWiBoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08985552162D228F000CD6A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		08985554162D228F000CD6A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,7 +61,7 @@
 		08985564162D228F000CD6A0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		08985566162D228F000CD6A0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		08985568162D228F000CD6A0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		0898556F162D228F000CD6A0 /* sWiBooTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sWiBooTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0898556F162D228F000CD6A0 /* sWiBooTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = sWiBooTests.octest; path = sWiBooApplicationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08985570162D228F000CD6A0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		08985578162D228F000CD6A0 /* sWiBooTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sWiBooTests-Info.plist"; sourceTree = "<group>"; };
 		0898557A162D228F000CD6A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -71,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				089462011638340500E0E9F1 /* CoreData.framework in Frameworks */,
 				08985553162D228F000CD6A0 /* UIKit.framework in Frameworks */,
 				08985555162D228F000CD6A0 /* Foundation.framework in Frameworks */,
 				08985557162D228F000CD6A0 /* CoreGraphics.framework in Frameworks */,
@@ -124,6 +134,7 @@
 		08985551162D228F000CD6A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				089462001638340500E0E9F1 /* CoreData.framework */,
 				08985552162D228F000CD6A0 /* UIKit.framework */,
 				08985554162D228F000CD6A0 /* Foundation.framework */,
 				08985556162D228F000CD6A0 /* CoreGraphics.framework */,
@@ -137,6 +148,10 @@
 			children = (
 				08985561162D228F000CD6A0 /* CBAppDelegate.h */,
 				08985562162D228F000CD6A0 /* CBAppDelegate.m */,
+				089461F3163833C300E0E9F1 /* CBStartViewController.h */,
+				089461F4163833C300E0E9F1 /* CBStartViewController.m */,
+				089461F5163833C300E0E9F1 /* CBStartViewController.xib */,
+				089461F9163833D100E0E9F1 /* sWiBoo.xcdatamodeld */,
 				08985559162D228F000CD6A0 /* Supporting Files */,
 			);
 			path = sWiBoo;
@@ -291,6 +306,7 @@
 				08985565162D228F000CD6A0 /* Default.png in Resources */,
 				08985567162D228F000CD6A0 /* Default@2x.png in Resources */,
 				08985569162D228F000CD6A0 /* Default-568h@2x.png in Resources */,
+				089461F7163833C300E0E9F1 /* CBStartViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +364,8 @@
 			files = (
 				0898555F162D228F000CD6A0 /* main.m in Sources */,
 				08985563162D228F000CD6A0 /* CBAppDelegate.m in Sources */,
+				089461F6163833C300E0E9F1 /* CBStartViewController.m in Sources */,
+				089461FB163833D100E0E9F1 /* sWiBoo.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,8 +596,22 @@
 				089855B8162D237F000CD6A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		089461F9163833D100E0E9F1 /* sWiBoo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				089461FA163833D100E0E9F1 /* sWiBoo.xcdatamodel */,
+			);
+			currentVersion = 089461FA163833D100E0E9F1 /* sWiBoo.xcdatamodel */;
+			path = sWiBoo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 08985545162D228F000CD6A0 /* Project object */;
 }
