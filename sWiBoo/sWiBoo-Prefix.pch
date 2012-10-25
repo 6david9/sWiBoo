@@ -16,4 +16,6 @@
     #import <MapKit/MapKit.h>
     #import <QuartzCore/QuartzCore.h>
     #import <CoreGraphics/CoreGraphics.h>
+
+    #import "sWiBoo.h"
 #endif

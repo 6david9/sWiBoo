@@ -15,12 +15,18 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize viewController = _viewController;
+@synthesize weibo = _weibo;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[CBStartViewController alloc] initWithNibName:@"CBStartViewController" bundle:nil];
+    self.viewController.managedObjectContext = [self managedObjectContext];
+    self.viewController.appDelegate = self;
+    self.viewController.weibo = [self weibo];
+    [self restoreWeibo];
     self.window.rootViewController = self.viewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -31,6 +37,8 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [self saveWeibo];
+    [self saveContext];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -42,6 +50,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [self restoreWeibo];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -52,6 +61,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self restoreWeibo];
+    [self saveContext];
 }
 
 - (void)saveContext
@@ -65,6 +76,53 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+    }
+}
+
+#pragma mark - Sina Weibo
+- (SinaWeibo *)weibo
+{
+    if (_weibo != nil)
+        return _weibo;
+    
+    NSAssert(self.viewController != nil, @"必须先初始化self.viewController");
+    _weibo = [[SinaWeibo alloc] initWithAppKey:kAppKey appSecret:kAppSecret appRedirectURI:kRedirectURL andDelegate:self.viewController];
+    
+    return _weibo;
+}
+
+- (void)saveWeibo
+{
+    SinaWeibo *weibo = self.weibo;
+    
+    if (weibo != nil) {
+        NSDictionary *weiboDict = [[NSMutableDictionary alloc] initWithCapacity:5];
+        
+        [weiboDict setValue:weibo.userID forKey:@"userID"];
+        [weiboDict setValue:weibo.accessToken forKey:@"accessToken"];
+        [weiboDict setValue:weibo.expirationDate forKey:@"expirationDate"];
+        [weiboDict setValue:weibo.refreshToken forKey:@"refreshToken"];
+        [weiboDict setValue:weibo.ssoCallbackScheme forKey:@"ssoCallbackScheme"];
+        
+        // 保存微博登录信息
+        [[NSUserDefaults standardUserDefaults] setValue:weiboDict forKey:@"weibo"];
+    }
+}
+
+- (void)restoreWeibo
+{
+    SinaWeibo *weibo = self.weibo;
+    
+    if (weibo != nil) {
+        NSDictionary *weiboDict = (NSDictionary *)[[NSUserDefaults standardUserDefaults] valueForKey:@"weibo"];
+        
+        if (weiboDict != nil) {
+            weibo.userID = [weiboDict valueForKey:@"userID"];
+            weibo.accessToken = [weiboDict valueForKey:@"accessToken"];
+            weibo.expirationDate = [weiboDict valueForKey:@"expirationDate"];
+            weibo.refreshToken = [weiboDict valueForKey:@"refreshToken"];
+            weibo.ssoCallbackScheme = [weiboDict valueForKey:@"ssoCallbackScheme"];
+        } 
     }
 }
 
@@ -93,7 +151,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"CoreDataTest" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"sWiBoo" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -106,7 +164,7 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CoreDataTest.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"sWiBoo.sqlite"];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

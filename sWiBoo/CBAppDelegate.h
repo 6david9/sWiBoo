@@ -18,8 +18,11 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (strong, nonatomic) CBStartViewController *viewController;
+@property (readonly, strong, nonatomic) SinaWeibo *weibo;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (void)saveWeibo;
+- (void)restoreWeibo;
 
 @end

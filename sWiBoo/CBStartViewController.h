@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CBStartViewController : UIViewController
+@class SinaWeibo;
+@class CBAppDelegate;
+@interface CBStartViewController : UIViewController <SinaWeiboDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (weak, nonatomic) SinaWeibo *weibo;
+@property (weak, nonatomic) CBAppDelegate *appDelegate;
+
+- (IBAction)login:(id)sender;
 
 @end
