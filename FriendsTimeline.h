@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * bmiddle_pic;
 @property (nonatomic, retain) NSNumber * comments_count;
-@property (nonatomic, retain) NSString * created_at;
+@property (nonatomic, retain) NSDate * created_at;
 @property (nonatomic, retain) NSNumber * favorited;
 @property (nonatomic, retain) NSString * original_pic;
 @property (nonatomic, retain) NSNumber * reposts_count;

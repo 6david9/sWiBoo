@@ -19,6 +19,7 @@
 - (void)configureCell:(CBTimelineCell *)cell atIndexPath:(NSIndexPath *)indexpath;
 - (void)loadingMore;
 - (void)fetch;
+- (void)refresh;
 - (BOOL)weiboIsExist:(NSNumber *)weiboID;
 
 @end
@@ -41,6 +42,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // 添加刷新按钮
+    UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+    self.navigationItem.leftBarButtonItem = refresh;
     
     _cellNib = [UINib nibWithNibName:@"CBTimelineCell" bundle:nil];
     
@@ -70,27 +75,32 @@
 {
     
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    NSLog(@"%d", [sectionInfo numberOfObjects]);
     return [sectionInfo numberOfObjects];
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    CBTimelineCell *cell = (CBTimelineCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    NSUInteger height = cell.bounds.size.height;
-//    
-//    return height;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.cellNib instantiateWithOwner:self options:nil];
+    CBTimelineCell *cell = self.tmpCell;
+    self.tmpCell = nil;
+    [self configureCell:cell atIndexPath:indexPath];
+    
+    return [cell heihgt];
+    
+//    return 85;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"TimelineCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CBTimelineCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-//        [self.cellNib instantiateWithOwner:self options:nil];
-//        cell = [self.tmpCell copy];
-//        self.tmpCell = nil;
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        [self.cellNib instantiateWithOwner:self options:nil];
+        cell = self.tmpCell;
+        self.tmpCell = nil;
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     [self configureCell:cell atIndexPath:indexPath];
@@ -102,30 +112,41 @@
 #pragma mark - Configure Cell
 - (void)configureCell:(CBTimelineCell *)cell atIndexPath:(NSIndexPath *)indexpath
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSManagedObject *obj = [[self fetchedResultsController] objectAtIndexPath:indexpath];
-    cell.textLabel.text = [obj valueForKey:@"text"];
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+    FriendsTimeline *obj = [[self fetchedResultsController] objectAtIndexPath:indexpath];
+    UserInfo *user = obj.user;
     
-//    cell.name = [obj valueForKey:@"screen_name"];
-//    cell.numComment = [[obj valueForKey:@"comments_count"] integerValue];
-//    cell.numRetweet = [[obj valueForKey:@"reposts_count"] integerValue];
     
-//    NSURL *avatarURL = [NSURL URLWithString:[obj valueForKey:@"profile_image_url"]];
-//    [cell setAvatarWithURL:avatarURL];
-//    
-//    NSString *content = [obj valueForKey:@"text"];
-//    NSURL *imageURL = [NSURL URLWithString:[obj valueForKey:@"bmiddle_pic"]];
-//    [cell setContent:content andImageWithURL:imageURL];
+    cell.name = [user valueForKey:@"screen_name"];
+    cell.numComment = [[obj valueForKey:@"comments_count"] integerValue];
+    cell.numRetweet = [[obj valueForKey:@"reposts_count"] integerValue];
+    
+    // 设置头像
+    NSURL *avatarURL = [NSURL URLWithString:[user valueForKey:@"profile_image_url"]];
+    [cell setAvatarWithURL:avatarURL];
+
+    // 设置正文内容
+    NSString *content = [obj valueForKey:@"text"];
+    NSURL *imageURL = [NSURL URLWithString:[obj valueForKey:@"bmiddle_pic"]];
+    [cell setContent:content andImageWithURL:imageURL];
 }
 
 #pragma mark - Loading More
+- (void)refresh
+{
+    [self loadingMore];
+}
+
 - (void)loadingMore
 {
     SinaWeibo *weibo = self.weibo;
     
     NSAssert(weibo != nil, @"loadingMore: 属性weibo未赋值");
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:1];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:2];
     [params setValue:weibo.accessToken forKey:@"access_token"];
+    if (lastStatusID != nil) {
+        [params setValue:lastStatusID forKey:@"since_id"];
+    }
     [weibo requestWithURL:@"statuses/friends_timeline.json" params:params httpMethod:@"GET" delegate:self];
 }
 
@@ -140,11 +161,20 @@
         [statuses enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
             
             if (![self weiboIsExist:[obj valueForKey:@"id"]]) {
+                // 保存最后条微博的id
+                if ([obj isEqual:[statuses lastObject]]) {
+                    lastStatusID = [obj valueForKey:@"idstr"];
+                    NSLog(@"laststatusid");
+                }
                 
+                // 创建托管对象
                 FriendsTimeline *statusObject = [NSEntityDescription insertNewObjectForEntityForName:@"FriendsTimeline" inManagedObjectContext:context];
                 statusObject.status_id = [obj valueForKey:@"id"];
                 statusObject.status_idstr = [obj valueForKey:@"idstr"];
-                statusObject.created_at = [obj valueForKey:@"created_at"];
+                NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+                [dateFormater setDateFormat:@"EE MMM dd H:mm:ss +z yyy"];
+                NSDate *createDate = [dateFormater dateFromString:[obj valueForKey:@"created_at"]];
+                statusObject.created_at = createDate;
                 statusObject.source = [obj valueForKey:@"source"];
                 statusObject.text = [obj valueForKey:@"text"];
                 statusObject.favorited = [obj valueForKey:@"favorited"];
@@ -179,19 +209,17 @@
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FriendsTimeline" inManagedObjectContext:self.managedObjectContext];
-    [request setEntity:entity];
+    NSEntityDescription *timelineEntity = [NSEntityDescription entityForName:@"FriendsTimeline" inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:timelineEntity];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created_at" ascending:NO];
-    [request setSortDescriptors:@[sortDescriptor]];
+    NSSortDescriptor *tsortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created_at" ascending:NO];
+    [request setSortDescriptors:@[tsortDescriptor]];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"status_id == %@", weiboID];
     [request setPredicate:predicate];
 
     NSError *error = nil;
     NSArray * results = [self.managedObjectContext executeFetchRequest:request error:&error];
-    
-    NSLog(@"%d", [results count]);
     if (error != nil)
         NSLog(@"error: %@", error);
     
@@ -232,18 +260,18 @@
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView beginUpdates];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
@@ -257,7 +285,7 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
     UITableView *tableView = self.tableView;
     
     switch(type) {

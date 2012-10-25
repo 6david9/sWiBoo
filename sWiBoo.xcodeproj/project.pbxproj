@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		083FA15616395AD200471B8E /* FriendsTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 083FA15516395AD200471B8E /* FriendsTimeline.m */; };
 		083FA15916395AD700471B8E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 083FA15816395AD700471B8E /* UserInfo.m */; };
+		083FA1B8163997EA00471B8E /* FriendsTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 083FA1B7163997EA00471B8E /* FriendsTimeline.m */; };
 		089461F6163833C300E0E9F1 /* CBStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 089461F4163833C300E0E9F1 /* CBStartViewController.m */; };
 		089461F7163833C300E0E9F1 /* CBStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089461F5163833C300E0E9F1 /* CBStartViewController.xib */; };
 		089461FB163833D100E0E9F1 /* sWiBoo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 089461F9163833D100E0E9F1 /* sWiBoo.xcdatamodeld */; };
@@ -76,10 +76,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		083FA15416395AD200471B8E /* FriendsTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendsTimeline.h; path = ../FriendsTimeline.h; sourceTree = "<group>"; };
-		083FA15516395AD200471B8E /* FriendsTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendsTimeline.m; path = ../FriendsTimeline.m; sourceTree = "<group>"; };
 		083FA15716395AD700471B8E /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfo.h; path = ../UserInfo.h; sourceTree = "<group>"; };
 		083FA15816395AD700471B8E /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfo.m; path = ../UserInfo.m; sourceTree = "<group>"; };
+		083FA1B6163997EA00471B8E /* FriendsTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendsTimeline.h; path = ../FriendsTimeline.h; sourceTree = "<group>"; };
+		083FA1B7163997EA00471B8E /* FriendsTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendsTimeline.m; path = ../FriendsTimeline.m; sourceTree = "<group>"; };
 		089461F3163833C300E0E9F1 /* CBStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBStartViewController.h; sourceTree = "<group>"; };
 		089461F4163833C300E0E9F1 /* CBStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBStartViewController.m; sourceTree = "<group>"; };
 		089461F5163833C300E0E9F1 /* CBStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBStartViewController.xib; sourceTree = "<group>"; };
@@ -200,8 +200,8 @@
 			children = (
 				083FA15716395AD700471B8E /* UserInfo.h */,
 				083FA15816395AD700471B8E /* UserInfo.m */,
-				083FA15416395AD200471B8E /* FriendsTimeline.h */,
-				083FA15516395AD200471B8E /* FriendsTimeline.m */,
+				083FA1B6163997EA00471B8E /* FriendsTimeline.h */,
+				083FA1B7163997EA00471B8E /* FriendsTimeline.m */,
 			);
 			name = "Managed Object";
 			sourceTree = "<group>";
@@ -633,8 +633,8 @@
 				0894630D1638653B00E0E9F1 /* UIImageView+AsynImage.m in Sources */,
 				0894630E1638653B00E0E9F1 /* UILabel+AsynText.m in Sources */,
 				0894631A1638675200E0E9F1 /* CBTimelineContentView.m in Sources */,
-				083FA15616395AD200471B8E /* FriendsTimeline.m in Sources */,
 				083FA15916395AD700471B8E /* UserInfo.m in Sources */,
+				083FA1B8163997EA00471B8E /* FriendsTimeline.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

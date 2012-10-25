@@ -95,6 +95,9 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAwLjgwMDAwMDAxMTkgMC40MDAwMDAwMDYAA</bytes>
 								</object>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUIContentMode">7</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
 									<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>
 									<string key="IBUIDisplayName">Freeform</string>
@@ -174,7 +177,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 84}</string>
+						<string key="NSFrameSize">{300, 84}</string>
 						<reference key="NSSuperview" ref="133069635"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="805461237"/>
@@ -195,10 +198,10 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="399302426"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
+				<bool key="IBUIClipsSubviews">YES</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<reference key="IBUIContentView" ref="399302426"/>
 				<string key="IBUIReuseIdentifier">TimelineCell</string>
-				<real value="85" key="IBUIRowHeight"/>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -277,11 +280,11 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="805461237"/>
 							<reference ref="97495012"/>
-							<reference ref="349585208"/>
 							<reference ref="937867454"/>
 							<reference ref="826159330"/>
 							<reference ref="64013574"/>
 							<reference ref="634619120"/>
+							<reference ref="349585208"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

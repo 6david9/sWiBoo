@@ -24,5 +24,6 @@
 
 - (void)setAvatarWithURL:(NSURL *)URL;
 - (void)setContent:(NSString *)content andImageWithURL:(NSURL *)URL;
+- (CGFloat)heihgt;
 
 @end

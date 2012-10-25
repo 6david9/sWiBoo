@@ -17,15 +17,6 @@
 @synthesize numComment = _numComment;
 @synthesize numRetweet = _numRetweet;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
@@ -67,6 +58,11 @@
     
     [TimelineContentView setText:content andImageWithURL:URL width:contentWidth];
     [TimelineContentView setNeedsDisplay];
+}
+
+- (CGFloat)heihgt
+{
+    return (64 + TimelineContentView.frame.size.height);
 }
 
 @end

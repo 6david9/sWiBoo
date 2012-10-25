@@ -10,6 +10,9 @@
 
 @class CBTimelineCell;
 @interface CBHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, SinaWeiboRequestDelegate>
+{
+    NSString *lastStatusID;
+}
 
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
