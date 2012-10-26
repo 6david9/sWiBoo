@@ -49,6 +49,7 @@
     
     _cellNib = [UINib nibWithNibName:@"CBTimelineCell" bundle:nil];
     
+    // 在视图载入时加载更多
 //    [self loadingMore];
     [self fetch];
 }

@@ -40,6 +40,7 @@
     // 清除图片
     _imageView.image = nil;
     _imageView = nil;
+    _hasImage = NO;
     
     // 重置frame大小
     self.frame = CGRectMake(20, 43, 280, 21);
