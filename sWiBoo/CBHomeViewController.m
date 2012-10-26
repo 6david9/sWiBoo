@@ -103,7 +103,6 @@
         [self.cellNib instantiateWithOwner:self options:nil];
         cell = self.tmpCell;
         self.tmpCell = nil;
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSLog(@"cellForRowAtIndexPath:");
     [self configureCell:cell atIndexPath:indexPath];
@@ -115,10 +114,8 @@
 #pragma mark - Configure Cell
 - (void)configureCell:(CBTimelineCell *)cell atIndexPath:(NSIndexPath *)indexpath
 {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
     FriendsTimeline *obj = [[self fetchedResultsController] objectAtIndexPath:indexpath];
     UserInfo *user = obj.user;
-    
     
     cell.name = [user valueForKey:@"screen_name"];
     cell.numComment = [[obj valueForKey:@"comments_count"] integerValue];
@@ -264,19 +261,16 @@
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView beginUpdates];
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
     [self.tableView reloadData];
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
@@ -290,7 +284,6 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
     UITableView *tableView = self.tableView;
     
     switch(type) {

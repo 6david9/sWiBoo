@@ -55,7 +55,6 @@
 {
     NSString *home = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-//    return [home stringByAppendingPathComponent:@"Avatar"];
     return home;
 }
 
