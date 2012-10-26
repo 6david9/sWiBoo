@@ -38,7 +38,8 @@
 {
     [super setSelected:selected animated:animated];
     
-    NSLog(@"selected row height: %f", [self heihgt]);
+    // 取消这句contentview绘制不正常
+    [self heihgt];
 
     // Configure the view for the selected state
 }
@@ -106,7 +107,7 @@
         
         TimelineContentView.textHeight = newSize.height;
         TimelineContentView.frame = CGRectMake(20, 43, contentWidth, contentHeight);
-        self.contentView.bounds = CGRectMake(0, 0, 320, 64+contentHeight);
+//        self.contentView.bounds = CGRectMake(0, 0, 320, 64+contentHeight);
         
         return (64 + contentHeight);
     } else
