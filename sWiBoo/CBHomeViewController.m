@@ -49,7 +49,7 @@
     
     _cellNib = [UINib nibWithNibName:@"CBTimelineCell" bundle:nil];
     
-    [self loadingMore];
+//    [self loadingMore];
     [self fetch];
 }
 
@@ -86,6 +86,8 @@
     self.tmpCell = nil;
     [self configureCell:cell atIndexPath:indexPath];
     
+    NSLog(@"row:%d, height:%f", indexPath.row, [cell heihgt]);
+    NSLog(@"heightForRowAtIndexPath:");
     return [cell heihgt];
     
 //    return 85;
@@ -102,7 +104,7 @@
         self.tmpCell = nil;
 //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
+    NSLog(@"cellForRowAtIndexPath:");
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -127,8 +129,9 @@
 
     // 设置正文内容
     NSString *content = [obj valueForKey:@"text"];
-    NSURL *imageURL = [NSURL URLWithString:[obj valueForKey:@"bmiddle_pic"]];
+    NSURL *imageURL = [NSURL URLWithString:[obj valueForKey:@"thumbnail_pic"]];
     [cell setContent:content andImageWithURL:imageURL];
+    NSLog(@"content: %@", content);
 }
 
 #pragma mark - Loading More
@@ -266,6 +269,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+    [self.tableView reloadData];
 //    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 

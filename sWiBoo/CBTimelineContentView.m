@@ -7,19 +7,42 @@
 //
 
 #import "CBTimelineContentView.h"
+#import "UIImageView+AsynImage.h"
+
+@interface CBTimelineContentView ()
+
+
+@end
 
 @implementation CBTimelineContentView
+
+@synthesize textHeight = _textHeight;
 
 - (void)setText:(NSString *)text andImageWithURL:(NSURL *)URL width:(CGFloat)width
 {
     _text = text;
     _width = width;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData *imageData = [NSData dataWithContentsOfURL:URL];
-        UIImage *aImage = [[UIImage alloc] initWithData:imageData];
-        _image = aImage;
-    });
-    [self adjustSize];
+    NSAssert( (_text != nil) && (_width > 0), @"error: _text属性和_width属性未正确赋值");
+    
+    if (URL != nil) {
+        _hasImage = YES;
+
+        _imageView = [[UIImageView alloc] init];
+        [_imageView setImageWithURL:URL];
+        NSAssert(_imageView!= nil, @"imageview is nil");
+    }
+    
+    [self setNeedsDisplay];
+}
+
+- (void)resetContent
+{
+    // 清除图片
+    _imageView.image = nil;
+    _imageView = nil;
+    
+    // 重置frame大小
+    self.frame = CGRectMake(20, 43, 280, 21);
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -32,19 +55,18 @@
     // 绘制文字
     CGRect drawingRect = self.bounds;
     [_text drawInRect:drawingRect withFont:systemFont];
-}
-
--(void)adjustSize
-{
-    CGFloat fontSize = 13.0f;
-    UIFont *systemFont = [UIFont systemFontOfSize:fontSize];
     
-    CGSize constrainedSize = CGSizeMake(_width, 100);
-    CGSize newSize = [_text sizeWithFont:systemFont constrainedToSize:constrainedSize];
-    
-    CGFloat x = self.frame.origin.x;
-    CGFloat y = self.frame.origin.y;
-    self.frame = CGRectMake(x, y, _width, newSize.height);
+    // 绘制图片
+    if (_hasImage) {
+        _imageView.frame = CGRectMake(0, 3 + _textHeight, 100, 100);
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self addSubview:_imageView];
+        
+        // 调整图片位置为水平居中
+        CGFloat imageX = self.bounds.size.width/2;
+        CGFloat imageY = _imageView.center.y;
+        _imageView.center = CGPointMake(imageX, imageY);
+    }
 }
 
 @end

@@ -11,10 +11,14 @@
 @interface CBTimelineContentView : UIView
 {
     NSString *_text;
-    UIImage *_image;
+    UIImageView *_imageView;
     CGFloat _width;
+    BOOL _hasImage;
 }
 
+@property (nonatomic, assign) CGFloat textHeight;
+
 - (void)setText:(NSString *)text andImageWithURL:(NSURL *)URL width:(CGFloat)width;
+- (void)resetContent;
 
 @end

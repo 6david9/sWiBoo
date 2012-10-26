@@ -18,6 +18,8 @@
     IBOutlet CBTimelineContentView *TimelineContentView;
 }
 
+
+
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) NSUInteger numComment;
 @property (nonatomic, assign) NSUInteger numRetweet;
