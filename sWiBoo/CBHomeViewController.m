@@ -275,6 +275,7 @@
 {
     [self.tableView endUpdates];
     [self.tableView reloadData];
+    [self.tableView scrollsToTop];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
