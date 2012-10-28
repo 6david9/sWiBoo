@@ -9,6 +9,7 @@
 #import "CBHomeViewController.h"
 
 #import "CBTimelineCell.h"
+#import "CBComposeViewController.h"
 #import "FriendsTimeline.h"
 #import "UserInfo.h"
 
@@ -20,6 +21,7 @@
 - (void)loadingMore;
 - (void)fetch;
 - (void)refresh;
+- (void)compose;
 - (BOOL)weiboIsExist:(NSNumber *)weiboID;
 
 @end
@@ -46,6 +48,10 @@
     // 添加刷新按钮
     UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
     self.navigationItem.leftBarButtonItem = refresh;
+    
+    // 添加发微博按钮
+    UIBarButtonItem *compose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(compose)];
+    self.navigationItem.rightBarButtonItem = compose;
     
     _cellNib = [UINib nibWithNibName:@"CBTimelineCell" bundle:nil];
     
@@ -87,10 +93,7 @@
     self.tmpCell = nil;
     [self configureCell:cell atIndexPath:indexPath];
     
-    NSLog(@"row:%d, height:%f", indexPath.row, [cell heihgt]);
-    NSLog(@"heightForRowAtIndexPath:");
     return [cell heihgt];
-    
 //    return 85;
 }
 
@@ -104,7 +107,6 @@
         cell = self.tmpCell;
         self.tmpCell = nil;
     }
-    NSLog(@"cellForRowAtIndexPath:");
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -129,13 +131,19 @@
     NSString *content = [obj valueForKey:@"text"];
     NSURL *imageURL = [NSURL URLWithString:[obj valueForKey:@"thumbnail_pic"]];
     [cell setContent:content andImageWithURL:imageURL];
-    NSLog(@"content: %@", content);
 }
 
 #pragma mark - Loading More
 - (void)refresh
 {
     [self loadingMore];
+}
+
+- (void)compose
+{
+    CBComposeViewController *composeViewController = [[CBComposeViewController alloc] initWithNibName:@"CBComposeViewController" bundle:nil];
+    [composeViewController setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:composeViewController animated:YES];
 }
 
 - (void)loadingMore
@@ -148,7 +156,7 @@
     if (lastStatusID != nil) {
         [params setValue:lastStatusID forKey:@"since_id"];
     }
-    [weibo requestWithURL:@"statuses/friends_timeline.json" params:params httpMethod:@"GET" delegate:self];
+    [weibo requestWithURL:@"statuses/home_timeline.json" params:params httpMethod:@"GET" delegate:self];
 }
 
 - (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result
