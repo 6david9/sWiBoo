@@ -346,7 +346,9 @@ static CGFloat kBorderWidth = 10;
 {
     NSString *authPagePath = [SinaWeiboRequest serializeURL:kSinaWeiboWebAuthURL
                                                      params:authParams httpMethod:@"GET"];
-    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:authPagePath]]];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:authPagePath]
+                                          cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                      timeoutInterval:kSinaWeiboRequestTimeOutInterval]];
 }
 
 - (void)showWebView

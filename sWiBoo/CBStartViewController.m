@@ -58,7 +58,7 @@
 #pragma mark - Private Method
 - (void)successLogin
 {
-    UITabBarController *tabbarController = [[UITabBarController alloc] init];
+    self.mainTabbarController = [[UITabBarController alloc] init];
     
     CBHomeViewController *homeViewController = [[CBHomeViewController alloc] initWithNibName:@"CBHomeViewController" bundle:nil];
     homeViewController.managedObjectContext = self.managedObjectContext;
@@ -67,9 +67,9 @@
     
     CBMoreViewController *moreViewController = [[CBMoreViewController alloc] initWithNibName:@"CBMoreViewController" bundle:nil];
     
-    tabbarController.viewControllers = @[homeNavi, moreViewController];
-    [self addChildViewController:tabbarController];
-    [self.view addSubview:tabbarController.view];
+    self.mainTabbarController.viewControllers = @[homeNavi, moreViewController];
+    [self addChildViewController:self.mainTabbarController];
+    [self.view addSubview:self.mainTabbarController.view];
 }
 
 #pragma mark - Sina Weibo Delegate
@@ -82,12 +82,18 @@
     if (appDelegate != nil)
         [appDelegate saveWeibo];
     
-    [self successLogin];
+    if ([self.weibo isAuthValid])
+        [self successLogin];
 }
 
 - (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"weibo"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self.mainTabbarController removeFromParentViewController];
+    // !!!!!!!!!!!!由于网络缓存问题，不能立即退出 !!!!!!!!!!!!!!!!!
 }
 
 - (void)sinaweiboLogInDidCancel:(SinaWeibo *)sinaweibo

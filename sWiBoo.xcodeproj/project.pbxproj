@@ -802,9 +802,7 @@
 		089462BE16383FA900E0E9F1 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				089461F3163833C300E0E9F1 /* CBStartViewController.h */,
-				089461F4163833C300E0E9F1 /* CBStartViewController.m */,
-				089461F5163833C300E0E9F1 /* CBStartViewController.xib */,
+				089AE8E9164283EF00D0E187 /* Start */,
 				089462C51638444A00E0E9F1 /* Tabbar Controllers */,
 			);
 			name = "View Controllers";
@@ -984,6 +982,16 @@
 				089855B6162D237F000CD6A0 /* sWiBooLogicTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		089AE8E9164283EF00D0E187 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				089461F3163833C300E0E9F1 /* CBStartViewController.h */,
+				089461F4163833C300E0E9F1 /* CBStartViewController.m */,
+				089461F5163833C300E0E9F1 /* CBStartViewController.xib */,
+			);
+			name = Start;
 			sourceTree = "<group>";
 		};
 		089F314E1642653B006E96D1 /* Detail Status */ = {

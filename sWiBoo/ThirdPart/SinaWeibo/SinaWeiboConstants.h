@@ -26,6 +26,8 @@
 #define kSinaWeiboAppAuthURL_iPhone        @"sinaweibosso://login"
 #define kSinaWeiboAppAuthURL_iPad          @"sinaweibohdsso://login"
 
+#define kSinaWeiboRequestTimeOutInterval   180.0
+
 typedef enum
 {
 	kSinaWeiboSDKErrorCodeParseError       = 200,

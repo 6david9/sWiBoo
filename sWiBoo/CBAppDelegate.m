@@ -111,6 +111,7 @@
 
 - (void)restoreWeibo
 {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     SinaWeibo *weibo = self.weibo;
     
     if (weibo != nil) {
@@ -124,6 +125,15 @@
             weibo.ssoCallbackScheme = [weiboDict valueForKey:@"ssoCallbackScheme"];
         } 
     }
+}
+
+- (void)logoutWeibo
+{
+    self.weibo.userID = nil;
+    self.weibo.accessToken = nil;
+    self.weibo.expirationDate = nil;
+    self.weibo.refreshToken = nil;
+    self.weibo.ssoCallbackScheme = nil;
 }
 
 #pragma mark - Core Data stack

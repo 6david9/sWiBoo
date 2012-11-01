@@ -24,5 +24,6 @@
 - (NSURL *)applicationDocumentsDirectory;
 - (void)saveWeibo;
 - (void)restoreWeibo;
+- (void)logoutWeibo;
 
 @end

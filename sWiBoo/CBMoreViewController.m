@@ -7,6 +7,7 @@
 //
 
 #import "CBMoreViewController.h"
+#import "CBAppDelegate.h"
 
 @interface CBMoreViewController ()
 
@@ -36,6 +37,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)logout:(id)sender {
+- (CBAppDelegate *)appDelegate
+{
+    return (CBAppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (IBAction)logout:(id)sender
+{
+    [[[self appDelegate] weibo] logOut];
+    [[self appDelegate] logoutWeibo];
+    [self.tabBarController.view removeFromSuperview];
 }
 @end

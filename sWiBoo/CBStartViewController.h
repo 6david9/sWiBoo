@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (weak, nonatomic) SinaWeibo *weibo;
 @property (weak, nonatomic) CBAppDelegate *appDelegate;
+@property (strong, nonatomic) UITabBarController *mainTabbarController;
 
 - (IBAction)login:(id)sender;
 
