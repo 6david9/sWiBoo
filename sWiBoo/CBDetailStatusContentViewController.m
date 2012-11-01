@@ -1,25 +1,24 @@
 //
-//  CBMoreViewController.m
+//  CBDetailStatusContentViewController.m
 //  sWiBoo
 //
-//  Created by ly on 10/24/12.
+//  Created by ly on 11/1/12.
 //  Copyright (c) 2012 Lei Yan. All rights reserved.
 //
 
-#import "CBMoreViewController.h"
+#import "CBDetailStatusContentViewController.h"
 
-@interface CBMoreViewController ()
+@interface CBDetailStatusContentViewController ()
 
 @end
 
-@implementation CBMoreViewController
+@implementation CBDetailStatusContentViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"More", @"更多");
-        self.tabBarItem.image = [UIImage imageNamed:@"navigationbar_more_highlighted.png"];
+        // Custom initialization
     }
     return self;
 }
@@ -36,6 +35,4 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)logout:(id)sender {
-}
 @end

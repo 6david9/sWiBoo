@@ -19,7 +19,7 @@
 }
 
 
-
+@property (nonatomic, strong) NSString * status_idstr;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) NSUInteger numComment;
 @property (nonatomic, assign) NSUInteger numRetweet;

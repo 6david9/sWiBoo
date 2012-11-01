@@ -12,6 +12,7 @@
 #import "CBComposeViewController.h"
 #import "FriendsTimeline.h"
 #import "UserInfo.h"
+#import "CBDetailStatusViewController.h"
 
 @interface CBHomeViewController ()
 
@@ -36,6 +37,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Home", @"主页");
+        self.tabBarItem.image = [UIImage imageNamed:@"navigationbar_home.png"];
     }
     return self;
 }
@@ -112,6 +114,27 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 取消选择
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // 跳转到详细页面
+    CBDetailStatusViewController *detailStatusViewController = [[CBDetailStatusViewController alloc] initWithNibName:@"CBDetailStatusViewController" bundle:nil];
+    detailStatusViewController.hidesBottomBarWhenPushed = YES;
+    // 为下一页面创建新cell
+    CBTimelineCell *cell = (CBTimelineCell *)[tableView cellForRowAtIndexPath:indexPath];
+    UINib *cellNib = [UINib nibWithNibName:@"CBTimelineCell" bundle:nil];
+    [cellNib instantiateWithOwner:self options:nil];
+    detailStatusViewController.headCell = (CBTimelineCell *)self.tmpCell;
+    self.tmpCell = nil;
+    cellNib = nil;
+    [self configureCell:detailStatusViewController.headCell atIndexPath:indexPath];
+    detailStatusViewController.headCellHeight = cell.bounds.size.height;
+    
+    [self.navigationController pushViewController:detailStatusViewController animated:YES];
+}
+
 
 #pragma mark - Configure Cell
 - (void)configureCell:(CBTimelineCell *)cell atIndexPath:(NSIndexPath *)indexpath
@@ -119,6 +142,7 @@
     FriendsTimeline *obj = [[self fetchedResultsController] objectAtIndexPath:indexpath];
     UserInfo *user = obj.user;
     
+    cell.status_idstr = [obj valueForKey:@"status_idstr"];
     cell.name = [user valueForKey:@"screen_name"];
     cell.numComment = [[obj valueForKey:@"comments_count"] integerValue];
     cell.numRetweet = [[obj valueForKey:@"reposts_count"] integerValue];
