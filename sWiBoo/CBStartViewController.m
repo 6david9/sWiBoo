@@ -94,7 +94,9 @@
     
     [self.mainTabbarController removeFromParentViewController];
     // !!!!!!!!!!!!由于网络缓存问题，不能立即退出 !!!!!!!!!!!!!!!!!
-    // 解决办法，删除http cookie
+    // 解决办法：
+    //          在授权验证请求中添加 forcelogin=true
+    //          删除http cookie
     
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];

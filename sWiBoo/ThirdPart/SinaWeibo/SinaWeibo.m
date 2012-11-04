@@ -329,7 +329,8 @@
                                     self.appKey, @"client_id",
                                     @"code", @"response_type",
                                     self.appRedirectURI, @"redirect_uri", 
-                                    @"mobile", @"display", nil];
+                                    @"mobile", @"display",
+                                    @"true", @"forcelogin", nil];       // 解决授权注销后立即登陆无需验证错误
             
             SinaWeiboAuthorizeView *authorizeView = \
             [[SinaWeiboAuthorizeView alloc] initWithAuthParams:params
