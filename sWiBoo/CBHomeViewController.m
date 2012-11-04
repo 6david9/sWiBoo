@@ -16,7 +16,7 @@
 
 @interface CBHomeViewController ()
 
-@property (strong, nonatomic) UINib *cellNib;
+@property (strong, nonatomic) UINib *_cellNib;
 
 - (void)configureCell:(CBTimelineCell *)cell atIndexPath:(NSIndexPath *)indexpath;
 - (void)loadingMore;
@@ -29,7 +29,7 @@
 
 @implementation CBHomeViewController
 
-@synthesize cellNib = _cellNib;
+@synthesize _cellNib = _cellNib;
 @synthesize fetchedResultsController = _fetchedResultsController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -47,6 +47,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _cellNib = [UINib nibWithNibName:@"CBTimelineCell" bundle:nil];
+    
     // 添加刷新按钮
     UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
     self.navigationItem.leftBarButtonItem = refresh;
@@ -62,15 +64,32 @@
     [self fetch];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+//    [NSFetchedResultsController deleteCacheWithName:@"StatusCache"];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [NSFetchedResultsController deleteCacheWithName:@"StatusCache"];
 }
 
 - (void)viewDidUnload {
     [self setTableView:nil];
     [self setTmpCell:nil];
+    _cellNib = nil;
     [super viewDidUnload];
 }
 
@@ -90,7 +109,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.cellNib instantiateWithOwner:self options:nil];
+    [self._cellNib instantiateWithOwner:self options:nil];
     CBTimelineCell *cell = self.tmpCell;
     self.tmpCell = nil;
     [self configureCell:cell atIndexPath:indexPath];
@@ -105,7 +124,7 @@
     CBTimelineCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        [self.cellNib instantiateWithOwner:self options:nil];
+        [self._cellNib instantiateWithOwner:self options:nil];
         cell = self.tmpCell;
         self.tmpCell = nil;
     }
@@ -119,18 +138,18 @@
     // 取消选择
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    // 跳转到详细页面
+    /* 跳转到详细页面 */
     CBDetailStatusViewController *detailStatusViewController = [[CBDetailStatusViewController alloc] initWithNibName:@"CBDetailStatusViewController" bundle:nil];
     detailStatusViewController.hidesBottomBarWhenPushed = YES;
+    
     // 为下一页面创建新cell
     CBTimelineCell *cell = (CBTimelineCell *)[tableView cellForRowAtIndexPath:indexPath];
-    UINib *cellNib = [UINib nibWithNibName:@"CBTimelineCell" bundle:nil];
-    [cellNib instantiateWithOwner:self options:nil];
+    [_cellNib instantiateWithOwner:self options:nil];
     detailStatusViewController.headCell = (CBTimelineCell *)self.tmpCell;
     self.tmpCell = nil;
-    cellNib = nil;
     [self configureCell:detailStatusViewController.headCell atIndexPath:indexPath];
     detailStatusViewController.headCellHeight = cell.bounds.size.height;
+    detailStatusViewController.status_idstr = detailStatusViewController.headCell.status_idstr;
     
     [self.navigationController pushViewController:detailStatusViewController animated:YES];
 }
@@ -197,7 +216,6 @@
                 // 保存最后条微博的id
                 if ([obj isEqual:[statuses lastObject]]) {
                     lastStatusID = [obj valueForKey:@"idstr"];
-                    NSLog(@"laststatusid");
                 }
                 
                 // 创建托管对象
@@ -206,8 +224,8 @@
                 statusObject.status_idstr = [obj valueForKey:@"idstr"];
                 NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
                 [dateFormater setDateFormat:@"EE MMM dd H:mm:ss +z yyy"];
-                NSDate *createDate = [dateFormater dateFromString:[obj valueForKey:@"created_at"]];
-                statusObject.created_at = createDate;
+                NSDate *createatDate = [dateFormater dateFromString:[obj valueForKey:@"created_at"]];
+                statusObject.created_at = createatDate;
                 statusObject.source = [obj valueForKey:@"source"];
                 statusObject.text = [obj valueForKey:@"text"];
                 statusObject.favorited = [obj valueForKey:@"favorited"];
@@ -283,7 +301,7 @@
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created_at" ascending:NO];
         [request setSortDescriptors:@[sortDescriptor]];
         
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Status"];
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"StatusCache"];
         _fetchedResultsController.delegate = self;
     }
     
@@ -347,7 +365,5 @@
         NSLog(@"fetch error: %@", error);
     NSLog(@"fetch");
 }
-
-
 
 @end

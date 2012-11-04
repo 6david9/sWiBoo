@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C60" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Comment" representedClassName="Comment" syncable="YES">
+        <attribute name="comment_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="FriendsTimeline" representedClassName="FriendsTimeline" syncable="YES">
         <attribute name="bmiddle_pic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comments_count" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -22,7 +30,8 @@
         <relationship name="status" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FriendsTimeline" inverseName="user" inverseEntity="FriendsTimeline" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Comment" positionX="385" positionY="-1414" width="128" height="135"/>
         <element name="FriendsTimeline" positionX="27" positionY="-1530" width="128" height="238"/>
-        <element name="UserInfo" positionX="315" positionY="-1395" width="128" height="103"/>
+        <element name="UserInfo" positionX="207" positionY="-1449" width="128" height="103"/>
     </elements>
 </model>

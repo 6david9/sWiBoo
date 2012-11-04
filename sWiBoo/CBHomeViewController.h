@@ -12,6 +12,7 @@
 @interface CBHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, SinaWeiboRequestDelegate>
 {
     NSString *lastStatusID;
+    UINib *_cellNib;
 }
 
 

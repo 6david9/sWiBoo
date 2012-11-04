@@ -162,6 +162,7 @@
 		084E0D72163D607300F9331D /* 144.gif in Resources */ = {isa = PBXBuildFile; fileRef = 084E0CE0163D607200F9331D /* 144.gif */; };
 		084E0D73163D607300F9331D /* 145.gif in Resources */ = {isa = PBXBuildFile; fileRef = 084E0CE1163D607200F9331D /* 145.gif */; };
 		084E0D74163D607300F9331D /* 146.gif in Resources */ = {isa = PBXBuildFile; fileRef = 084E0CE2163D607200F9331D /* 146.gif */; };
+		085BBEFE16464EA0005BB343 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 085BBEFD16464EA0005BB343 /* Comment.m */; };
 		0863DF3B163A6A2100133645 /* FriendsTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 0863DF38163A6A2100133645 /* FriendsTimeline.m */; };
 		0863DF3C163A6A2100133645 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0863DF3A163A6A2100133645 /* UserInfo.m */; };
 		0863DF4C163A749500133645 /* CBComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0863DF4A163A749500133645 /* CBComposeViewController.m */; };
@@ -399,6 +400,8 @@
 		084E0CE0163D607200F9331D /* 144.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 144.gif; sourceTree = "<group>"; };
 		084E0CE1163D607200F9331D /* 145.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 145.gif; sourceTree = "<group>"; };
 		084E0CE2163D607200F9331D /* 146.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 146.gif; sourceTree = "<group>"; };
+		085BBEFC16464EA0005BB343 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = ../Comment.h; sourceTree = "<group>"; };
+		085BBEFD16464EA0005BB343 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = ../Comment.m; sourceTree = "<group>"; };
 		0863DF37163A6A2100133645 /* FriendsTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTimeline.h; sourceTree = "<group>"; };
 		0863DF38163A6A2100133645 /* FriendsTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTimeline.m; sourceTree = "<group>"; };
 		0863DF39163A6A2100133645 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -540,6 +543,8 @@
 				0863DF38163A6A2100133645 /* FriendsTimeline.m */,
 				0863DF39163A6A2100133645 /* UserInfo.h */,
 				0863DF3A163A6A2100133645 /* UserInfo.m */,
+				085BBEFC16464EA0005BB343 /* Comment.h */,
+				085BBEFD16464EA0005BB343 /* Comment.m */,
 			);
 			name = "Managed Object";
 			sourceTree = "<group>";
@@ -1367,6 +1372,7 @@
 				084E0C4F163D537000F9331D /* CBEmotionView.m in Sources */,
 				089F314B16426534006E96D1 /* CBDetailStatusViewController.m in Sources */,
 				089F315216426A0C006E96D1 /* CBDetailStatusContentViewController.m in Sources */,
+				085BBEFE16464EA0005BB343 /* Comment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

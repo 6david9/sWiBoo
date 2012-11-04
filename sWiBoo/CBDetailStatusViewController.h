@@ -9,9 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @class CBTimelineCell;
-@interface CBDetailStatusViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CBDetailStatusViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SinaWeiboRequestDelegate, NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) CBTimelineCell *headCell;
 @property (nonatomic, assign) double headCellHeight;
+@property (nonatomic, strong, readonly) SinaWeibo *weibo;
+@property (nonatomic, strong) NSString *lastCommentID;
+@property (strong, nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSString *status_idstr;
 
 @end
