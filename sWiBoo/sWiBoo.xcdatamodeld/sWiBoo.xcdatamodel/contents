@@ -8,6 +8,13 @@
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Follower" representedClassName="Follower" syncable="YES">
+        <attribute name="follow_me" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idstr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="profile_image_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="screen_name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="FriendsTimeline" representedClassName="FriendsTimeline" syncable="YES">
         <attribute name="bmiddle_pic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comments_count" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -33,5 +40,6 @@
         <element name="Comment" positionX="385" positionY="-1414" width="128" height="135"/>
         <element name="FriendsTimeline" positionX="27" positionY="-1530" width="128" height="238"/>
         <element name="UserInfo" positionX="207" positionY="-1449" width="128" height="103"/>
+        <element name="Follower" positionX="160" positionY="192" width="128" height="120"/>
     </elements>
 </model>

@@ -163,6 +163,13 @@
 		084E0D73163D607300F9331D /* 145.gif in Resources */ = {isa = PBXBuildFile; fileRef = 084E0CE1163D607200F9331D /* 145.gif */; };
 		084E0D74163D607300F9331D /* 146.gif in Resources */ = {isa = PBXBuildFile; fileRef = 084E0CE2163D607200F9331D /* 146.gif */; };
 		085BBEFE16464EA0005BB343 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 085BBEFD16464EA0005BB343 /* Comment.m */; };
+		085BBF0A164660FF005BB343 /* CBFollowerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 085BBF08164660FF005BB343 /* CBFollowerViewController.m */; };
+		085BBF0B164660FF005BB343 /* CBFollowerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085BBF09164660FF005BB343 /* CBFollowerViewController.xib */; };
+		085BBF1016466501005BB343 /* poi_no_people.png in Resources */ = {isa = PBXBuildFile; fileRef = 085BBF0E16466501005BB343 /* poi_no_people.png */; };
+		085BBF1116466501005BB343 /* poi_no_people@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 085BBF0F16466501005BB343 /* poi_no_people@2x.png */; };
+		085BBF1416466953005BB343 /* CBFollowerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 085BBF1316466953005BB343 /* CBFollowerCell.m */; };
+		085BBF1716466978005BB343 /* CBFollowerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085BBF1616466978005BB343 /* CBFollowerCell.xib */; };
+		085BBF1D1646747C005BB343 /* Follower.m in Sources */ = {isa = PBXBuildFile; fileRef = 085BBF1C1646747A005BB343 /* Follower.m */; };
 		0863DF3B163A6A2100133645 /* FriendsTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 0863DF38163A6A2100133645 /* FriendsTimeline.m */; };
 		0863DF3C163A6A2100133645 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0863DF3A163A6A2100133645 /* UserInfo.m */; };
 		0863DF4C163A749500133645 /* CBComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0863DF4A163A749500133645 /* CBComposeViewController.m */; };
@@ -402,6 +409,16 @@
 		084E0CE2163D607200F9331D /* 146.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 146.gif; sourceTree = "<group>"; };
 		085BBEFC16464EA0005BB343 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = ../Comment.h; sourceTree = "<group>"; };
 		085BBEFD16464EA0005BB343 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = ../Comment.m; sourceTree = "<group>"; };
+		085BBF07164660FF005BB343 /* CBFollowerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBFollowerViewController.h; sourceTree = "<group>"; };
+		085BBF08164660FF005BB343 /* CBFollowerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBFollowerViewController.m; sourceTree = "<group>"; };
+		085BBF09164660FF005BB343 /* CBFollowerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBFollowerViewController.xib; sourceTree = "<group>"; };
+		085BBF0E16466501005BB343 /* poi_no_people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poi_no_people.png; sourceTree = "<group>"; };
+		085BBF0F16466501005BB343 /* poi_no_people@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poi_no_people@2x.png"; sourceTree = "<group>"; };
+		085BBF1216466953005BB343 /* CBFollowerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBFollowerCell.h; sourceTree = "<group>"; };
+		085BBF1316466953005BB343 /* CBFollowerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBFollowerCell.m; sourceTree = "<group>"; };
+		085BBF1616466978005BB343 /* CBFollowerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBFollowerCell.xib; sourceTree = "<group>"; };
+		085BBF1B1646747A005BB343 /* Follower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Follower.h; sourceTree = "<group>"; };
+		085BBF1C1646747A005BB343 /* Follower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follower.m; sourceTree = "<group>"; };
 		0863DF37163A6A2100133645 /* FriendsTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTimeline.h; sourceTree = "<group>"; };
 		0863DF38163A6A2100133645 /* FriendsTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTimeline.m; sourceTree = "<group>"; };
 		0863DF39163A6A2100133645 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -539,6 +556,8 @@
 		083FA15A16395AE500471B8E /* Managed Object */ = {
 			isa = PBXGroup;
 			children = (
+				085BBF1B1646747A005BB343 /* Follower.h */,
+				085BBF1C1646747A005BB343 /* Follower.m */,
 				0863DF37163A6A2100133645 /* FriendsTimeline.h */,
 				0863DF38163A6A2100133645 /* FriendsTimeline.m */,
 				0863DF39163A6A2100133645 /* UserInfo.h */,
@@ -702,6 +721,27 @@
 			path = Emotions;
 			sourceTree = "<group>";
 		};
+		085BBF0D16466105005BB343 /* Follower */ = {
+			isa = PBXGroup;
+			children = (
+				085BBF07164660FF005BB343 /* CBFollowerViewController.h */,
+				085BBF08164660FF005BB343 /* CBFollowerViewController.m */,
+				085BBF09164660FF005BB343 /* CBFollowerViewController.xib */,
+				085BBF1516466957005BB343 /* Follower Cell */,
+			);
+			name = Follower;
+			sourceTree = "<group>";
+		};
+		085BBF1516466957005BB343 /* Follower Cell */ = {
+			isa = PBXGroup;
+			children = (
+				085BBF1216466953005BB343 /* CBFollowerCell.h */,
+				085BBF1316466953005BB343 /* CBFollowerCell.m */,
+				085BBF1616466978005BB343 /* CBFollowerCell.xib */,
+			);
+			name = "Follower Cell";
+			sourceTree = "<group>";
+		};
 		0863DF43163A73B200133645 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -817,6 +857,7 @@
 			isa = PBXGroup;
 			children = (
 				089462C61638445A00E0E9F1 /* Home */,
+				085BBF0D16466105005BB343 /* Follower */,
 				089462CC163847CE00E0E9F1 /* More */,
 			);
 			name = "Tabbar Controllers";
@@ -848,6 +889,8 @@
 		089462E4163859A800E0E9F1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				085BBF0E16466501005BB343 /* poi_no_people.png */,
+				085BBF0F16466501005BB343 /* poi_no_people@2x.png */,
 				089AE8E0164282F700D0E187 /* navigationbar_home.png */,
 				089AE8E1164282F700D0E187 /* navigationbar_home@2x.png */,
 				089AE8E2164282F700D0E187 /* navigationbar_more_highlighted.png */,
@@ -1295,6 +1338,10 @@
 				089AE8E5164282F700D0E187 /* navigationbar_home@2x.png in Resources */,
 				089AE8E6164282F700D0E187 /* navigationbar_more_highlighted.png in Resources */,
 				089AE8E7164282F700D0E187 /* navigationbar_more_highlighted@2x.png in Resources */,
+				085BBF0B164660FF005BB343 /* CBFollowerViewController.xib in Resources */,
+				085BBF1016466501005BB343 /* poi_no_people.png in Resources */,
+				085BBF1116466501005BB343 /* poi_no_people@2x.png in Resources */,
+				085BBF1716466978005BB343 /* CBFollowerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,6 +1420,9 @@
 				089F314B16426534006E96D1 /* CBDetailStatusViewController.m in Sources */,
 				089F315216426A0C006E96D1 /* CBDetailStatusContentViewController.m in Sources */,
 				085BBEFE16464EA0005BB343 /* Comment.m in Sources */,
+				085BBF0A164660FF005BB343 /* CBFollowerViewController.m in Sources */,
+				085BBF1416466953005BB343 /* CBFollowerCell.m in Sources */,
+				085BBF1D1646747C005BB343 /* Follower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 #import "CBAppDelegate.h"
 #import "CBHomeViewController.h"
 #import "CBMoreViewController.h"
+#import "CBFollowerViewController.h"
 
 
 @interface CBStartViewController ()
@@ -65,9 +66,11 @@
     homeViewController.weibo = self.weibo;
     UINavigationController *homeNavi = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     
+    CBFollowerViewController *followerViewController = [[CBFollowerViewController alloc] initWithNibName:@"CBFollowerViewController" bundle:nil];
+    
     CBMoreViewController *moreViewController = [[CBMoreViewController alloc] initWithNibName:@"CBMoreViewController" bundle:nil];
     
-    self.mainTabbarController.viewControllers = @[homeNavi, moreViewController];
+    self.mainTabbarController.viewControllers = @[homeNavi, followerViewController, moreViewController];
     [self addChildViewController:self.mainTabbarController];
     [self.view addSubview:self.mainTabbarController.view];
 }
