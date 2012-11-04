@@ -94,6 +94,13 @@
     
     [self.mainTabbarController removeFromParentViewController];
     // !!!!!!!!!!!!由于网络缓存问题，不能立即退出 !!!!!!!!!!!!!!!!!
+    // 解决办法，删除http cookie
+    
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
 }
 
 - (void)sinaweiboLogInDidCancel:(SinaWeibo *)sinaweibo
