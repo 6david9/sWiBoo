@@ -11,6 +11,7 @@
 #import "CBFollowerCell.h"
 #import "Follower.h"
 #import "UIImageView+AsynImage.h"
+#import "CBUserDetailViewController.h"
 
 @interface CBFollowerViewController ()
 
@@ -101,9 +102,11 @@
     return cell;
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return NO;
+    CBUserDetailViewController *userDetailViewController = [[CBUserDetailViewController alloc] initWithNibName:@"CBUserDetailViewController" bundle:nil];
+    userDetailViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userDetailViewController animated:YES];
 }
 
 - (void)configureCell:(CBFollowerCell *)cell atIndexPath:(NSIndexPath *)indexpath
@@ -144,10 +147,7 @@
 }
 
 - (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"%@", result);
-    
+{   
     if ([result isKindOfClass:[NSDictionary class]]) {
         
         NSArray *users = [result valueForKey:@"users"];

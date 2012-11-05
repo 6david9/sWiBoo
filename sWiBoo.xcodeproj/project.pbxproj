@@ -176,6 +176,8 @@
 		0863DF4D163A749500133645 /* CBComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0863DF4B163A749500133645 /* CBComposeViewController.xib */; };
 		0863DF50163A76FE00133645 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0863DF4E163A76FE00133645 /* icon.png */; };
 		0863DF51163A76FE00133645 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0863DF4F163A76FE00133645 /* icon@2x.png */; };
+		087B96F81647EF86007CB223 /* CBUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 087B96F61647EF85007CB223 /* CBUserDetailViewController.m */; };
+		087B96F91647EF86007CB223 /* CBUserDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B96F71647EF85007CB223 /* CBUserDetailViewController.xib */; };
 		089461F6163833C300E0E9F1 /* CBStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 089461F4163833C300E0E9F1 /* CBStartViewController.m */; };
 		089461F7163833C300E0E9F1 /* CBStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089461F5163833C300E0E9F1 /* CBStartViewController.xib */; };
 		089461FB163833D100E0E9F1 /* sWiBoo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 089461F9163833D100E0E9F1 /* sWiBoo.xcdatamodeld */; };
@@ -428,6 +430,9 @@
 		0863DF4B163A749500133645 /* CBComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBComposeViewController.xib; sourceTree = "<group>"; };
 		0863DF4E163A76FE00133645 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		0863DF4F163A76FE00133645 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		087B96F51647EF85007CB223 /* CBUserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBUserDetailViewController.h; sourceTree = "<group>"; };
+		087B96F61647EF85007CB223 /* CBUserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBUserDetailViewController.m; sourceTree = "<group>"; };
+		087B96F71647EF85007CB223 /* CBUserDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBUserDetailViewController.xib; sourceTree = "<group>"; };
 		089461F3163833C300E0E9F1 /* CBStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBStartViewController.h; sourceTree = "<group>"; };
 		089461F4163833C300E0E9F1 /* CBStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBStartViewController.m; sourceTree = "<group>"; };
 		089461F5163833C300E0E9F1 /* CBStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBStartViewController.xib; sourceTree = "<group>"; };
@@ -727,6 +732,7 @@
 				085BBF07164660FF005BB343 /* CBFollowerViewController.h */,
 				085BBF08164660FF005BB343 /* CBFollowerViewController.m */,
 				085BBF09164660FF005BB343 /* CBFollowerViewController.xib */,
+				087B96FB1647EF8E007CB223 /* User Detail */,
 				085BBF1516466957005BB343 /* Follower Cell */,
 			);
 			name = Follower;
@@ -773,6 +779,16 @@
 				0863DF4F163A76FE00133645 /* icon@2x.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		087B96FB1647EF8E007CB223 /* User Detail */ = {
+			isa = PBXGroup;
+			children = (
+				087B96F51647EF85007CB223 /* CBUserDetailViewController.h */,
+				087B96F61647EF85007CB223 /* CBUserDetailViewController.m */,
+				087B96F71647EF85007CB223 /* CBUserDetailViewController.xib */,
+			);
+			name = "User Detail";
 			sourceTree = "<group>";
 		};
 		0894625F163836AF00E0E9F1 /* ThirdPart */ = {
@@ -1342,6 +1358,7 @@
 				085BBF1016466501005BB343 /* poi_no_people.png in Resources */,
 				085BBF1116466501005BB343 /* poi_no_people@2x.png in Resources */,
 				085BBF1716466978005BB343 /* CBFollowerCell.xib in Resources */,
+				087B96F91647EF86007CB223 /* CBUserDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1423,6 +1440,7 @@
 				085BBF0A164660FF005BB343 /* CBFollowerViewController.m in Sources */,
 				085BBF1416466953005BB343 /* CBFollowerCell.m in Sources */,
 				085BBF1D1646747C005BB343 /* Follower.m in Sources */,
+				087B96F81647EF86007CB223 /* CBUserDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
