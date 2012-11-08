@@ -11,7 +11,7 @@
 #import "FriendsTimeline.h"
 #import "UserInfo.h"
 #import "CBDetailStatusViewController.h"
-#import "CBStatusCell.h"
+#import "CBStatusCell/CBStatusCell.h"
 
 @interface CBHomeViewController ()
 
