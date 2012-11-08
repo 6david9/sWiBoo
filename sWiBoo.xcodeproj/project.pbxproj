@@ -589,6 +589,7 @@
 		083FA15A16395AE500471B8E /* Managed Object */ = {
 			isa = PBXGroup;
 			children = (
+				089461F9163833D100E0E9F1 /* sWiBoo.xcdatamodeld */,
 				08BA9162164AAD93008C80B9 /* FriendsTimeline.h */,
 				08BA9163164AAD93008C80B9 /* FriendsTimeline.m */,
 				0863DF39163A6A2100133645 /* UserInfo.h */,
@@ -1016,7 +1017,6 @@
 				089462BE16383FA900E0E9F1 /* View Controllers */,
 				08985559162D228F000CD6A0 /* Supporting Files */,
 				089462BF16383FCB00E0E9F1 /* sWiBoo.h */,
-				089461F9163833D100E0E9F1 /* sWiBoo.xcdatamodeld */,
 			);
 			path = sWiBoo;
 			sourceTree = "<group>";

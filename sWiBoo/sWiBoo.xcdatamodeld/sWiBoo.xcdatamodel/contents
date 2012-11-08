@@ -51,7 +51,7 @@
         <element name="Comment" positionX="385" positionY="-1414" width="128" height="135"/>
         <element name="Follower" positionX="160" positionY="192" width="128" height="120"/>
         <element name="FriendsTimeline" positionX="27" positionY="-1530" width="128" height="253"/>
-        <element name="UserInfo" positionX="207" positionY="-1282" width="128" height="103"/>
         <element name="RetweetedStatus" positionX="225" positionY="-1459" width="128" height="163"/>
+        <element name="UserInfo" positionX="207" positionY="-1282" width="128" height="103"/>
     </elements>
 </model>
