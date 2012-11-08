@@ -7,18 +7,17 @@
 //
 
 #import "CBHomeViewController.h"
-
-#import "CBTimelineCell.h"
 #import "CBComposeViewController.h"
 #import "FriendsTimeline.h"
 #import "UserInfo.h"
 #import "CBDetailStatusViewController.h"
+#import "CBStatusCell.h"
 
 @interface CBHomeViewController ()
 
 @property (strong, nonatomic) UINib *_cellNib;
 
-- (void)configureCell:(CBTimelineCell *)cell atIndexPath:(NSIndexPath *)indexpath;
+- (void)configureCell:(CBStatusCell *)cell atIndexPath:(NSIndexPath *)indexpath;
 - (void)loadingMore;
 - (void)fetch;
 - (void)refresh;
@@ -29,7 +28,6 @@
 
 @implementation CBHomeViewController
 
-@synthesize _cellNib = _cellNib;
 @synthesize fetchedResultsController = _fetchedResultsController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,9 +43,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    _cellNib = [UINib nibWithNibName:@"CBTimelineCell" bundle:nil];
     
     // 添加刷新按钮
     UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
@@ -56,8 +51,6 @@
     // 添加发微博按钮
     UIBarButtonItem *compose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(compose)];
     self.navigationItem.rightBarButtonItem = compose;
-    
-    _cellNib = [UINib nibWithNibName:@"CBTimelineCell" bundle:nil];
     
     // 在视图载入时加载更多
 //    [self loadingMore];
@@ -68,28 +61,23 @@
 {
     [super viewWillDisappear:animated];
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-//    [NSFetchedResultsController deleteCacheWithName:@"StatusCache"];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
     [NSFetchedResultsController deleteCacheWithName:@"StatusCache"];
 }
 
 - (void)viewDidUnload {
     [self setTableView:nil];
-    [self setTmpCell:nil];
-    _cellNib = nil;
     [super viewDidUnload];
 }
 
@@ -109,24 +97,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self._cellNib instantiateWithOwner:self options:nil];
-    CBTimelineCell *cell = self.tmpCell;
-    self.tmpCell = nil;
+    CBStatusCell *cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StatusCell"];
     [self configureCell:cell atIndexPath:indexPath];
     
-    return [cell heihgt];
-//    return 85;
+    return [cell height];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"TimelineCell";
-    CBTimelineCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"StatusCell";
+    CBStatusCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        [self._cellNib instantiateWithOwner:self options:nil];
-        cell = self.tmpCell;
-        self.tmpCell = nil;
+        cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     [self configureCell:cell atIndexPath:indexPath];
     
@@ -141,39 +124,44 @@
     /* 跳转到详细页面 */
     CBDetailStatusViewController *detailStatusViewController = [[CBDetailStatusViewController alloc] initWithNibName:@"CBDetailStatusViewController" bundle:nil];
     detailStatusViewController.hidesBottomBarWhenPushed = YES;
-    
+
     // 为下一页面创建新cell
-    CBTimelineCell *cell = (CBTimelineCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [_cellNib instantiateWithOwner:self options:nil];
-    detailStatusViewController.headCell = (CBTimelineCell *)self.tmpCell;
-    self.tmpCell = nil;
-    [self configureCell:detailStatusViewController.headCell atIndexPath:indexPath];
-    detailStatusViewController.headCellHeight = cell.bounds.size.height;
-    detailStatusViewController.status_idstr = detailStatusViewController.headCell.status_idstr;
-    
+    CBStatusCell *cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StatusCell"];
+    [self configureCell:cell atIndexPath:indexPath];
+    detailStatusViewController.headCell = cell;
+    detailStatusViewController.headCellHeight = [cell height];
+    detailStatusViewController.status_idstr = cell.status_idstr;
     [self.navigationController pushViewController:detailStatusViewController animated:YES];
+    
+    cell = nil;
 }
 
 
 #pragma mark - Configure Cell
-- (void)configureCell:(CBTimelineCell *)cell atIndexPath:(NSIndexPath *)indexpath
+- (void)configureCell:(CBStatusCell *)cell atIndexPath:(NSIndexPath *)indexpath
 {
     FriendsTimeline *obj = [[self fetchedResultsController] objectAtIndexPath:indexpath];
     UserInfo *user = obj.user;
     
-    cell.status_idstr = [obj valueForKey:@"status_idstr"];
-    cell.name = [user valueForKey:@"screen_name"];
-    cell.numComment = [[obj valueForKey:@"comments_count"] integerValue];
-    cell.numRetweet = [[obj valueForKey:@"reposts_count"] integerValue];
+    NSString *statusid = [obj valueForKey:@"status_idstr"];
+    NSString *name = [user valueForKey:@"screen_name"];
+    NSUInteger numComment = [[obj valueForKey:@"comments_count"] unsignedIntegerValue];
+    NSUInteger numRepost = [[obj valueForKey:@"reposts_count"] unsignedIntegerValue];
+    
+    [cell setStatus_idstr:statusid];
+    [cell setName:name];
+    [cell setCommentCount:numComment];
+    [cell setRepostCount:numRepost];
     
     // 设置头像
     NSURL *avatarURL = [NSURL URLWithString:[user valueForKey:@"profile_image_url"]];
     [cell setAvatarWithURL:avatarURL];
 
     // 设置正文内容
-    NSString *content = [obj valueForKey:@"text"];
-    NSURL *imageURL = [NSURL URLWithString:[obj valueForKey:@"thumbnail_pic"]];
-    [cell setContent:content andImageWithURL:imageURL];
+    NSString *text = [obj valueForKey:@"text"];
+    NSURL *repostImageURL = [NSURL URLWithString:[obj valueForKey:@"thumbnail_pic"]];
+    [cell setAvatarWithURL:avatarURL];
+    [cell setWhatISaid:text repostText:nil andImageWithURL:repostImageURL];
 }
 
 #pragma mark - Loading More
@@ -347,7 +335,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:(CBTimelineCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(CBStatusCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:

@@ -2,11 +2,12 @@
 //  FriendsTimeline.m
 //  sWiBoo
 //
-//  Created by ly on 10/25/12.
+//  Created by ly on 11/7/12.
 //  Copyright (c) 2012 Lei Yan. All rights reserved.
 //
 
 #import "FriendsTimeline.h"
+#import "RetweetedStatus.h"
 #import "UserInfo.h"
 
 
@@ -25,5 +26,6 @@
 @dynamic thumbnail_pic;
 @dynamic truncated;
 @dynamic user;
+@dynamic retweet_status;
 
 @end

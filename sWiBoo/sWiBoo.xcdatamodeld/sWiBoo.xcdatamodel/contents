@@ -28,7 +28,18 @@
         <attribute name="text" attributeType="String" syncable="YES"/>
         <attribute name="thumbnail_pic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="truncated" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="retweet_status" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RetweetedStatus" inverseName="status" inverseEntity="RetweetedStatus" syncable="YES"/>
         <relationship name="user" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserInfo" inverseName="status" inverseEntity="UserInfo" syncable="YES"/>
+    </entity>
+    <entity name="RetweetedStatus" representedClassName="RetweetedStatus" syncable="YES">
+        <attribute name="bmiddle_pic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="original_pic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="retweet_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnail_pic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="status" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FriendsTimeline" inverseName="retweet_status" inverseEntity="FriendsTimeline" syncable="YES"/>
     </entity>
     <entity name="UserInfo" representedClassName="UserInfo" syncable="YES">
         <attribute name="profile_image_url" attributeType="String" syncable="YES"/>
@@ -38,8 +49,9 @@
     </entity>
     <elements>
         <element name="Comment" positionX="385" positionY="-1414" width="128" height="135"/>
-        <element name="FriendsTimeline" positionX="27" positionY="-1530" width="128" height="238"/>
-        <element name="UserInfo" positionX="207" positionY="-1449" width="128" height="103"/>
         <element name="Follower" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="FriendsTimeline" positionX="27" positionY="-1530" width="128" height="253"/>
+        <element name="UserInfo" positionX="207" positionY="-1282" width="128" height="103"/>
+        <element name="RetweetedStatus" positionX="225" positionY="-1459" width="128" height="163"/>
     </elements>
 </model>

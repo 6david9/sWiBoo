@@ -8,16 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class CBTimelineCell;
+@class CBStatusCell;
 @interface CBHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, SinaWeiboRequestDelegate>
 {
     NSString *lastStatusID;
-    UINib *_cellNib;
 }
 
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet CBTimelineCell *tmpCell;
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;

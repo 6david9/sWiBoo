@@ -12,13 +12,14 @@
 #import "Follower.h"
 #import "UIImageView+AsynImage.h"
 #import "CBUserDetailViewController.h"
+#import "CBStatusCell.h"
 
 @interface CBFollowerViewController ()
 
 - (SinaWeibo *)weibo;
 - (void)loadingMore;
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexpath;
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)existUser:(NSNumber *)userID;
 
 @end
@@ -57,7 +58,7 @@
 
 - (void)viewDidUnload {
     [self setTableView:nil];
-    [self setTmpCell:nil];
+    [self setTmpFollowerCell:nil];
     [super viewDidUnload];
 }
 
@@ -94,8 +95,8 @@
     
     if (cell == nil) {
         [self.cellNib instantiateWithOwner:self options:nil];
-        cell = self.tmpCell;
-        self.tmpCell = nil;
+        cell = self.tmpFollowerCell;
+        self.tmpFollowerCell = nil;
     }
     [self configureCell:cell atIndexPath:indexPath];
     
@@ -104,15 +105,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Follower *follower = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    
+    CBStatusCell *headerView = nil;
+    [self configureCell:headerView atIndexPath:indexPath];
+    headerView.bounds = CGRectMake(0, 0, 320, [headerView height]);
+    
     CBUserDetailViewController *userDetailViewController = [[CBUserDetailViewController alloc] initWithNibName:@"CBUserDetailViewController" bundle:nil];
     userDetailViewController.hidesBottomBarWhenPushed = YES;
+    userDetailViewController.user_id = follower.idstr;
+    userDetailViewController.headerView = headerView;
+    headerView = nil;
+    
     [self.navigationController pushViewController:userDetailViewController animated:YES];
 }
 
-- (void)configureCell:(CBFollowerCell *)cell atIndexPath:(NSIndexPath *)indexpath
+- (void)configureCell:(CBFollowerCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-//    cell.name.text = @"new name";
-    Follower *follower = [[self fetchedResultsController] objectAtIndexPath:indexpath];
+    Follower *follower = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     NSURL *imageURL = [NSURL URLWithString:follower.profile_image_url];
    
     cell.name.text = follower.screen_name;

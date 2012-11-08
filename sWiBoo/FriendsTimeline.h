@@ -2,14 +2,14 @@
 //  FriendsTimeline.h
 //  sWiBoo
 //
-//  Created by ly on 10/25/12.
+//  Created by ly on 11/7/12.
 //  Copyright (c) 2012 Lei Yan. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class UserInfo;
+@class RetweetedStatus, UserInfo;
 
 @interface FriendsTimeline : NSManagedObject
 
@@ -26,5 +26,6 @@
 @property (nonatomic, retain) NSString * thumbnail_pic;
 @property (nonatomic, retain) NSNumber * truncated;
 @property (nonatomic, retain) UserInfo *user;
+@property (nonatomic, retain) RetweetedStatus *retweet_status;
 
 @end

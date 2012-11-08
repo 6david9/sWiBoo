@@ -7,7 +7,7 @@
 //
 
 #import "CBDetailStatusViewController.h"
-#import "CBTimelineCell.h"
+#import "CBStatusCell.h"
 #import "CBDetailStatusContentViewController.h"
 #import "CBAppDelegate.h"
 #import "Comment.h"
@@ -25,15 +25,6 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize fetchedResultsController = _fetchedResultsController;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,8 +32,8 @@
     NSAssert(self.headCell != nil, @"headCell不能为nil");
     NSAssert(self.headCellHeight > 0, @"headCellHeight未赋值");
     
-    NSLog(@"status idstr:%@", self.headCell.status_idstr);
-    NSLog(@"name: %@", self.headCell.name);
+//    NSLog(@"status idstr:%@", self.headCell.status_idstr);
+//    NSLog(@"name: %@", self.headCell.name);
     
     // 在导航栏右侧添加转发按钮
     UIImage *repostItemImage = [UIImage imageNamed:@"timeline_retweet_count_icon.png"];
@@ -51,7 +42,6 @@
     
     // 加载评论
     [self loadingMore];
-    
     [self fetch];
 }
 
@@ -93,7 +83,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    NSLog(@"table rows: %d", [sectionInfo numberOfObjects]);
     NSUInteger numComment = [sectionInfo numberOfObjects];
     return numComment;
 }
@@ -108,12 +97,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0)
         return (UITableViewCell *)self.headCell;
-    }
     
     static NSString *CellIdentifier = @"CommentCell";
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
@@ -126,8 +114,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -141,8 +128,6 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexpath
 {
-//    cell.textLabel.text = @"title";
-//    cell.detailTextLabel.text = @"subtitle";
     Comment *comment = [[self fetchedResultsController] objectAtIndexPath:indexpath];
     cell.textLabel.text = [comment valueForKey:@"user_name"];
     cell.detailTextLabel.text = [comment valueForKey:@"text"];
@@ -167,6 +152,7 @@
 {
     NSLog(@"无法显示评论信息: %@", error);
 }
+
 - (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result;
 {
     NSLog(@"接收到微博评论列表");
@@ -279,8 +265,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-//    [self.tableView reloadData];
-//    [self.tableView scrollsToTop];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
@@ -310,7 +294,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:(CBTimelineCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(CBStatusCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
@@ -325,11 +309,9 @@
 {
     NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error])
-        NSLog(@"fetch error: %@", error);
+        NSLog(@"评论加载失败: %@", error);
     else {
-        NSLog(@"fetch success");
-//        [self.tableView reloadData];
-//        NSLog(@"fetched objects:\n%@", [self.fetchedResultsController fetchedObjects]);
+        NSLog(@"评论加载成功");
     }
 }
 

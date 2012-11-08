@@ -12,7 +12,7 @@
 @interface CBFollowerViewController : UIViewController<SinaWeiboRequestDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet CBFollowerCell *tmpCell;
+@property (strong, nonatomic) IBOutlet CBFollowerCell *tmpFollowerCell;
 @property (strong, nonatomic) UINib *cellNib;
 
 @property (nonatomic, strong, readonly) SinaWeibo *weibo;

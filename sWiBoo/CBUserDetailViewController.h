@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CBUserDetailViewController : UIViewController
+@class CBStatusCell;
+@interface CBUserDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSString *user_id;
+@property (nonatomic, strong) CBStatusCell *headerView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
