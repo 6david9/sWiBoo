@@ -10,7 +10,6 @@
 #import "CBComposeViewController.h"
 #import "FriendsTimeline.h"
 #import "UserInfo.h"
-#import "RetweetedStatus.h"
 #import "CBDetailStatusViewController.h"
 #import "CBStatusCell/CBStatusCell.h"
 
@@ -232,20 +231,6 @@
                 userObject.profile_image_url = [user valueForKey:@"profile_image_url"];
                 userObject.status = statusObject;
                 statusObject.user = userObject;
-                
-                RetweetedStatus *retweetedStatusObject = [NSEntityDescription insertNewObjectForEntityForName:@"RetweetedStatus" inManagedObjectContext:context];
-                NSDictionary *retweetedStatus = [obj valueForKey:@"retweeted_status"];
-                retweetedStatusObject.retweet_id = [retweetedStatus valueForKey:@"idstr"];
-                retweetedStatusObject.user_name = [[retweetedStatus valueForKey:@"user"] valueForKey:@"screen_name"];
-                retweetedStatusObject.text = [retweetedStatus valueForKey:@"text"];
-                retweetedStatusObject.thumbnail_pic = [retweetedStatus valueForKey:@"thumbnail_pic"];
-                retweetedStatusObject.bmiddle_pic = [retweetedStatus valueForKey:@"bmiddle_pic"];
-                retweetedStatusObject.original_pic = [retweetedStatus valueForKey:@"original_pic"];
-                NSDate *retweetCreateatDate = [dateFormater dateFromString:[retweetedStatus valueForKey:@"created_at"]];
-                retweetedStatusObject.created_at = retweetCreateatDate;
-                retweetedStatusObject.status = statusObject;
-                statusObject.retweet_status = retweetedStatusObject;
-                
             }
         }];
         
