@@ -142,23 +142,32 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CBStatusCell *cell;
-    static NSString *CellIdentifier;
     
-    CellIdentifier = @"StatusCell";
-    cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    cell = [self newCellForTalble:tableView];
     [self configureCell:cell atIndexPath:indexPath];
     
     return [cell height];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CBStatusCell *)newCellForTalble:(UITableView *)tableView
 {
-    static NSString *CellIdentifier = @"StatusCell";
-    CBStatusCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier;
+    CBStatusCell *cell;
+    
+    CellIdentifier = @"StatusCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil)
         cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    
+    return cell;
+}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CBStatusCell *cell;
+    
+    cell = [self newCellForTalble:tableView];
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
