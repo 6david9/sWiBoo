@@ -12,7 +12,7 @@
 #import "Follower.h"
 #import "UIImageView+AsynImage.h"
 #import "CBUserDetailViewController.h"
-#import "CBStatusCell/CBStatusCell.h"
+#import "CBStatusCell.h"
 
 @interface CBFollowerViewController ()
 

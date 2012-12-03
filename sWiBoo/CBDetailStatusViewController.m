@@ -7,7 +7,7 @@
 //
 
 #import "CBDetailStatusViewController.h"
-#import "CBStatusCell/CBStatusCell.h"
+#import "CBStatusCell.h"
 #import "CBDetailStatusContentViewController.h"
 #import "CBAppDelegate.h"
 #import "Comment.h"

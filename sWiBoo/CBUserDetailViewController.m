@@ -7,7 +7,7 @@
 //
 
 #import "CBUserDetailViewController.h"
-#import "CBStatusCell/CBStatusCell.h"
+#import "CBStatusCell.h"
 
 @interface CBUserDetailViewController ()
 

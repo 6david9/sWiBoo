@@ -8,19 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "CBStatusTextView.h"
+#import "SDWebImageManagerDelegate.h"
 
-@interface CBStatusContentView : UIView
+@interface CBStatusContentView : UIView <SDWebImageManagerDelegate>
 
-@property (strong, nonatomic) CBStatusTextView  *textView;
-@property (strong, nonatomic) CBStatusTextView  *retweetView;
+@property (nonatomic, strong) CBStatusTextView *statusView;
+@property (nonatomic, strong) CBStatusTextView *repostStatusView;
 
-- (void)setText:(NSString *)text;
-- (void)setImage:(UIImage *)image;
-- (void)setRetweetedText:(NSString *)retweetedText;
-- (void)setRetweetedImage:(UIImage *)retweetedImage;
+- (void)addText:(NSString *)text;
+- (void)addImage:(UIImage *)image;
+- (void)addimageWithURL:(NSURL *)imageURL;
+- (void)addrepostText:(NSString *)repostText;
+- (void)addRepostImage:(UIImage *)repostImage;
+- (void)addRepostImageURL:(NSURL *)repostImageURL;
 
-- (void)reset;
-
-- (CGSize)neededSize;
+- (CGFloat)height;
 
 @end

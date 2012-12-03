@@ -21,4 +21,6 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) SinaWeibo *weibo;
 
+
+
 @end

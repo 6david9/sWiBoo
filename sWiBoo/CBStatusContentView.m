@@ -7,107 +7,113 @@
 //
 
 #import "CBStatusContentView.h"
-#import "UIView+CBResizeView.h"
+#import "SDWebImageManager.h"
 
 @interface CBStatusContentView()
 
-- (void)resizeView:(UIView *)view withNewSize:(CGSize)newSize;
+
+@property (nonatomic, strong) UIImageView *backgroudView;
+
+- (void)adjustStatusViewSize;
+- (void)adjustRepostViewSize;
 
 @end
 
 @implementation CBStatusContentView
 
-@synthesize textView                = _textView;
-@synthesize retweetView             = _retweetView;
+@synthesize statusView = _statusView;
+@synthesize backgroudView = _backgroudView;
 
-- (id)init
+- (id)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
+    
     if (self != nil) {
-        self.backgroundColor = [UIColor whiteColor];
+        CGRect statusViewFrame = CGRectMake(0, 0, frame.size.width, 0);
+        CGRect repostStatusViewFrame = CGRectMake(8, 0, frame.size.width-8*2, 0);
+        
+        _statusView = [[CBStatusTextView alloc] initWithFrame:statusViewFrame];
+        [_statusView setBackgroundColor:[UIColor clearColor]];
+        [self addSubview:_statusView];
+        
+        _repostStatusView = [[CBStatusTextView alloc] initWithFrame:repostStatusViewFrame];
+        [_repostStatusView setBackgroundColor:[UIColor clearColor]];
+        _repostStatusView.backgroudImage = [UIImage imageNamed:@"timeline_rt_border_t.png"];
+        [self addSubview:_repostStatusView];
+        
+        UIImage *backgroudImage = [[UIImage imageNamed:@"timeline_rt_border_t.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(7, 30, 4, 1)];
+        _backgroudView = [[UIImageView alloc] initWithImage:backgroudImage];
+        _backgroudView.frame = _repostStatusView.frame;
+        _backgroudView.hidden = YES;
+        [self insertSubview:_backgroudView belowSubview:_repostStatusView];
     }
+    
     return self;
 }
 
-- (void)reset
+- (CGFloat)height
 {
-    if (_textView != nil)
-        [_textView removeFromSuperview], _textView = nil;
+    return (self.statusView.frame.size.height + self.repostStatusView.frame.size.height);
+}
+
+- (void)adjustStatusViewSize
+{
+    CGRect frame  = self.statusView.frame;
+    CGFloat height = [self.statusView height];
+    frame.size.height = height;
+    self.statusView.frame = frame;
+}
+
+- (void)addText:(NSString *)text
+{
+    self.statusView.text = text;
+    [self adjustStatusViewSize];
+}
+
+- (void)addImage:(UIImage *)image
+{
+    self.statusView.image = image;
+    [self adjustStatusViewSize];
+}
+
+- (void)addimageWithURL:(NSURL *)imageURL
+{
+    [self.statusView setImageWithURL:imageURL];
+    [self adjustStatusViewSize];
+}
+
+- (void)adjustRepostViewSize
+{
+    CGRect frame  = self.repostStatusView.frame;
+    CGFloat height = [self.repostStatusView height];
+    frame.size.height = height+10;
+    frame.origin.y = self.statusView.frame.size.height;
+    self.repostStatusView.frame = frame;
+    self.backgroudView.frame = frame;
+}
+
+- (void)addrepostText:(NSString *)repostText
+{
+    _backgroudView.hidden = (repostText==nil) ? YES : NO;
     
-    if (_retweetView != nil)
-        [_retweetView removeFromSuperview], _retweetView = nil;
+    self.repostStatusView.text = repostText;
+    [self adjustRepostViewSize];
 }
 
-- (CBStatusTextView *)textView
+- (void)addRepostImage:(UIImage *)repostImage
 {
-    if (_textView == nil) {
-        _textView = [[CBStatusTextView alloc] init];
-        _textView.backgroundColor = [UIColor redColor];
-        _textView.frame = CGRectMake(0, 0, self.bounds.size.width, 0);
-        [self addSubview:_textView];
-    }
-    return _textView;
-}
-
-- (CBStatusTextView *)retweetView
-{
-    if (_retweetView == nil) {
-        _retweetView = [[CBStatusTextView alloc] init];
-        _retweetView.backgroundColor = [UIColor yellowColor];
-        _retweetView.frame = CGRectMake(0, 0, self.bounds.size.width, 0);
-        [self addSubview:_retweetView];
-    }
-    return _retweetView;
-}
-
-- (void)setText:(NSString *)text
-{
-    self.textView.textContentLabel.text = text;
-}
-
-- (void)setImage:(UIImage *)image
-{
-    self.textView.imageContentView.image = image;
-}
-
-- (void)setRetweetedText:(NSString *)retweetedText
-{
-    self.retweetView.textContentLabel.text = retweetedText;
-}
-
-- (void)setRetweetedImage:(UIImage *)retweetedImage
-{
-    self.retweetView.imageContentView.image = retweetedImage;
-}
-
-- (CGSize)neededSize
-{
-    CGSize newSize = CGSizeZero;
+    _backgroudView.hidden = (repostImage==nil) ? YES : NO;
     
-    if (_textView != nil) {
-        newSize.width = self.bounds.size.width;
-        newSize.height = [_textView neededSize].height;
-        
-        if (_retweetView != nil) {
-            newSize.height = [_textView neededSize].height + [_retweetView neededSize].height;
-        }
-    }
-    
-    return newSize;
+    self.repostStatusView.image = repostImage;
+    [self adjustRepostViewSize];
 }
 
-- (void)layoutSubviews
+- (void)addRepostImageURL:(NSURL *)repostImageURL
 {
-    if (_textView) {
-        [UIView resizeView:_textView withNewSize:[_textView neededSize]];
-        
-        if (_retweetView) {
-            CGSize newSize = [_retweetView neededSize];
-            CGRect newFrame = CGRectMake(0, _textView.frame.size.height, newSize.width, newSize.height);
-            _retweetView.frame = newFrame;
-        }
-    }  
+    _backgroudView.hidden = (repostImageURL==nil) ? YES : NO;
+    
+    [self.repostStatusView setImageWithURL:repostImageURL];
+    [self adjustRepostViewSize];
 }
-
 
 @end

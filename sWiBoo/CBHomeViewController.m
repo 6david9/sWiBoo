@@ -11,13 +11,16 @@
 #import "FriendsTimeline.h"
 #import "UserInfo.h"
 #import "CBDetailStatusViewController.h"
-#import "CBStatusCell/CBStatusCell.h"
+#import "CBStatusCell.h"
+
+#import "CBStatus.h"
 
 @interface CBHomeViewController ()
 
+@property (strong, nonatomic) NSMutableOrderedSet *status;
 @property (strong, nonatomic) UINib *_cellNib;
 
-- (void)configureCell:(CBStatusCell *)cell atIndexPath:(NSIndexPath *)indexpath;
+- (void)configureCell:(CBStatusCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 - (void)loadingMore;
 - (void)fetch;
 - (void)refresh;
@@ -29,6 +32,48 @@
 @implementation CBHomeViewController
 
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize status = _status;
+
+- (void)setup
+{
+    self.status = [[NSMutableOrderedSet alloc] init];
+    
+    
+    CBStatus *status = [[CBStatus alloc] init];
+    status.statusID = @"1234";
+    status.text = @"hellohellohellohellohellohellohellohellohello";
+    status.image = [UIImage imageNamed:@"jobs.jpg"];
+    status.imageURL = [NSURL URLWithString:@"http://ww1.sinaimg.cn/thumbnail/982a42b9gw1dzfpij9efjj.jpg"];
+    status.repostText = @"repost";
+    status.repostImage = [UIImage imageNamed:@"jobs.jpg"];
+    status.repostImageURL = [NSURL URLWithString:@"http://ww1.sinaimg.cn/thumbnail/982a42b9gw1dzfpij9efjj.jpg"];
+    status.avatarURL = [NSURL URLWithString:@"http://tp2.sinaimg.cn/2693551385/180/5629884601/1"];
+    status.commentCount = [NSNumber numberWithInt:10];
+    status.repostCount = [NSNumber numberWithInt:57009];
+    [self.status addObject:status];
+    
+    CBStatus *status2 = [[CBStatus alloc] init];
+    status.statusID = @"2345";
+    status2.text = @"hellohellohellohellohellohellohellohellohello";
+    status2.image = [UIImage imageNamed:@"jobs.jpg"];
+    status2.imageURL = [NSURL URLWithString:@"http://ww1.sinaimg.cn/thumbnail/982a42b9gw1dzfpij9efjj.jpg"];
+    status2.avatarURL = [NSURL URLWithString:@"http://tp2.sinaimg.cn/2693551385/180/5629884601/1"];
+    status2.commentCount = [NSNumber numberWithInt:10];
+    status2.repostCount = [NSNumber numberWithInt:57];
+    [self.status addObject:status2];
+    
+    CBStatus *status3 = [[CBStatus alloc] init];
+    status3.statusID = @"3456";
+    status3.text = @"hello";
+    status3.repostText = @"repost";
+    status3.repostImage = [UIImage imageNamed:@"jobs.jpg"];
+    status3.repostImageURL = [NSURL URLWithString:@"http://ww1.sinaimg.cn/thumbnail/982a42b9gw1dzfpij9efjj.jpg"];
+    status3.avatarURL = [NSURL URLWithString:@"http://tp2.sinaimg.cn/2693551385/180/5629884601/1"];
+    status3.commentCount = [NSNumber numberWithInt:10];
+    status3.repostCount = [NSNumber numberWithInt:57];
+    [self.status addObject:status3];
+    
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,6 +88,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // 初始化
+    [self setup];
     
     // 添加刷新按钮
     UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
@@ -54,19 +102,17 @@
     
     // 在视图载入时加载更多
 //    [self loadingMore];
-    [self fetch];
+//    [self fetch];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,26 +124,28 @@
 
 - (void)viewDidUnload {
     [self setTableView:nil];
+    [self setStatus:nil];
     [super viewDidUnload];
 }
 
 #pragma mark - Table view
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.fetchedResultsController sections] count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    NSLog(@"%d", [sectionInfo numberOfObjects]);
-    return [sectionInfo numberOfObjects];
+    return [self.status count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CBStatusCell *cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StatusCell"];
+    CBStatusCell *cell;
+    static NSString *CellIdentifier;
+    
+    CellIdentifier = @"StatusCell";
+    cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     [self configureCell:cell atIndexPath:indexPath];
     
     return [cell height];
@@ -108,9 +156,9 @@
     static NSString *CellIdentifier = @"StatusCell";
     CBStatusCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if (cell == nil) {
+    if (cell == nil)
         cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -120,48 +168,26 @@
 {
     // 取消选择
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    /* 跳转到详细页面 */
-    CBDetailStatusViewController *detailStatusViewController = [[CBDetailStatusViewController alloc] initWithNibName:@"CBDetailStatusViewController" bundle:nil];
-    detailStatusViewController.hidesBottomBarWhenPushed = YES;
-
-    // 为下一页面创建新cell
-    CBStatusCell *cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StatusCell"];
-    [self configureCell:cell atIndexPath:indexPath];
-    detailStatusViewController.headCell = cell;
-    detailStatusViewController.headCellHeight = [cell height];
-    detailStatusViewController.status_idstr = cell.status_idstr;
-    [self.navigationController pushViewController:detailStatusViewController animated:YES];
-    
-    cell = nil;
 }
 
 
 #pragma mark - Configure Cell
-- (void)configureCell:(CBStatusCell *)cell atIndexPath:(NSIndexPath *)indexpath
+- (void)configureCell:(CBStatusCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    FriendsTimeline *obj = [[self fetchedResultsController] objectAtIndexPath:indexpath];
-    UserInfo *user = obj.user;
+    NSInteger row;
+    CBStatus *status;
     
-    NSString *statusid = [obj valueForKey:@"status_idstr"];
-    NSString *name = [user valueForKey:@"screen_name"];
-    NSUInteger numComment = [[obj valueForKey:@"comments_count"] unsignedIntegerValue];
-    NSUInteger numRepost = [[obj valueForKey:@"reposts_count"] unsignedIntegerValue];
+    row = indexPath.row;
+    status = [self.status objectAtIndex:row];
     
-    [cell setStatus_idstr:statusid];
-    [cell setName:name];
-    [cell setCommentCount:numComment];
-    [cell setRepostCount:numRepost];
-    
-    // 设置头像
-    NSURL *avatarURL = [NSURL URLWithString:[user valueForKey:@"profile_image_url"]];
-    [cell setAvatarWithURL:avatarURL];
-
-    // 设置正文内容
-    NSString *text = [obj valueForKey:@"text"];
-    NSURL *repostImageURL = [NSURL URLWithString:[obj valueForKey:@"thumbnail_pic"]];
-    [cell setAvatarWithURL:avatarURL];
-    [cell setWhatISaid:text repostText:nil andImageWithURL:repostImageURL];
+    cell.statusID = status.statusID;
+    cell.text = status.text;
+    cell.imageURL = status.imageURL;
+    cell.repostText = status.repostText;
+    cell.repostImageURL = status.repostImageURL;
+    cell.avatarURL = status.avatarURL;
+    cell.commentCount = status.commentCount;
+    cell.repostCount = status.repostCount;
 }
 
 #pragma mark - Loading More

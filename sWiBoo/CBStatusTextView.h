@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface CBStatusTextView : UIView
+{
+//    UIImage __strong *_image;
+}
 
-@property (strong, nonatomic) UILabel *textContentLabel;
-@property (strong, nonatomic) UIImageView *imageContentView;
+@property (nonatomic, weak) NSString *text;
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, weak) UIImage *backgroudImage;
 
-- (CGSize)neededSize;
+//@property (atomic, weak) UIImage *img;
+
+- (void)setImageWithURL:(NSURL *)url;
+- (CGFloat)height;
 
 @end

@@ -7,115 +7,124 @@
 //
 
 #import "CBStatusTextView.h"
+#import "NSString+MD5.h"
+#import "UIImageView+WebCache.h"
 
-#define kImageWidth     50
-#define kImageHeight    50
-#define kScreenWidth    320
+@interface CBStatusTextView ()
+
+@property (assign, nonatomic) CGFloat textHeight;
+@property (assign, nonatomic) CGFloat imageHeight;
+
+- (NSData *)localImageDataWithIdentifier:(NSString *)identifier;
+- (void)saveImage:(NSData *)data withIdentifier:(NSString *)identifier;
+- (NSString *)imageSavingPath;
+
+@end
 
 @implementation CBStatusTextView
+{
+//    __block UIImage __strong *_img;
+}
 
-@synthesize textContentLabel = _textContentLabel;
-@synthesize imageContentView = _imageContentView;
+
+@synthesize textHeight = _textHeight;
+@synthesize text = _text;
+@synthesize image = _image;
+@synthesize backgroudImage = _backgroudImage;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor clearColor];
+    
+    if (self != nil) {
+        
     }
+    
     return self;
 }
 
-- (id)init
+- (CGFloat)height
 {
-    self = [super init];
-    if (self) {
-        self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor clearColor];
+    return (self.textHeight + self.imageHeight);
+}
+
+- (void)setText:(NSString *)text
+{
+    if (![_text isEqualToString:text]) {
+        _text = nil;
+        _text = text;
     }
-    return self;
+    CGSize constrainedSize = CGSizeMake(self.bounds.size.width, 10000);
+    _textHeight = [self.text sizeWithFont:[UIFont systemFontOfSize:13.0f] constrainedToSize:constrainedSize].height;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (void)setImage:(UIImage *)image
 {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor clearColor];
+    if (![_image isEqual:image]) {
+        _image = nil;
+        _image = image;
     }
-    return self;
-}
-
-- (UIFont *)defaultFont
-{
-    return [UIFont systemFontOfSize:13.0f];
-}
-
-- (UILabel *)textContentLabel
-{
-    if (_textContentLabel == nil) {
-        _textContentLabel = [[UILabel alloc] init];
-        _textContentLabel.numberOfLines = 0;
-        _textContentLabel.font = [self defaultFont];
-        _textContentLabel.backgroundColor = [UIColor clearColor];
-        [self addSubview:_textContentLabel];
-    }
-    return _textContentLabel;
-}
-
-- (UIImageView *)imageContentView
-{
-    if (_imageContentView == nil) {
-        _imageContentView = [[UIImageView alloc] init];
-        _imageContentView.backgroundColor = [UIColor clearColor];
-        _imageContentView.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:_imageContentView];
-    }
-    return _imageContentView;
-}
-
-- (CGSize)textSize: (NSString *)text
-{
-    CGFloat width = self.bounds.size.width;
-    CGSize constrainedSize = CGSizeMake(width, 1000);
-    CGSize newSize = [text sizeWithFont:[self defaultFont] constrainedToSize:constrainedSize];
-    return newSize;
+    
+    _imageHeight = (_image == nil) ? 0 : 50;
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    if ( (_textContentLabel != nil) && (_textContentLabel.text != nil) ) {
-        /* 添加文字 */
-        CGRect textRect = CGRectZero;
-        textRect.size = [self textSize:_textContentLabel.text];
-        [_textContentLabel.text drawInRect:textRect withFont:[self defaultFont]];
+    [self.text drawInRect:CGRectMake(3, 3, self.bounds.size.width-3, self.bounds.size.height-3) withFont:[UIFont systemFontOfSize:13.0f]];
+    [self.image drawInRect:CGRectMake(5, self.textHeight+3, 50, 50)];
+
+}
+
+- (void)setImageWithURL:(NSURL *)url
+{
+    if (url != nil) {
+        self.image = [UIImage imageNamed:@"avatar_default_big.png"];    //  默认图片
         
-        /* 添加图片 */
-        if ( (_imageContentView != nil) && (_imageContentView.image != nil) ) {
-            CGRect imageRect = CGRectMake(0, [self textSize:_textContentLabel.text].height, kImageWidth, kImageHeight);
-            [_imageContentView.image drawInRect:imageRect];
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSData *imageData;
+            UIImage *img;
+
+            imageData = [self localImageDataWithIdentifier:[url absoluteString]];   // 先从本地加载
+            if (imageData == nil)   // 本地未缓存
+                imageData = [NSData dataWithContentsOfURL:url];     // 联网下载
+            
+            [self saveImage:imageData withIdentifier:[url absoluteString]];         // 保存到本地路径
+            img = [UIImage imageWithData:imageData];   // 设置新图片
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (img != nil) {
+                    self.image = img;
+                    [self setNeedsDisplay];
+                }
+            });
+        });
     }
 }
 
-- (CGSize)neededSize
+#pragma mark - Private Method
+- (NSData *)localImageDataWithIdentifier:(NSString *)identifier
 {
-    CGSize newSize = CGSizeZero;
+    NSString *filePath;
+    filePath = [[self imageSavingPath] stringByAppendingPathComponent:[identifier md5HexDigest]];
+    if (filePath == nil)    // 没有找到
+        return nil;
     
-    if ( (_textContentLabel != nil) && (_textContentLabel.text != nil) ) {
-        /* 添加文字后的大小 */
-        newSize.width = self.bounds.size.width;
-        newSize.height = [self textSize:_textContentLabel.text].height;
-        
-        
-        /* 添加图片后的大小 */
-        if ( (_imageContentView != nil) && (_imageContentView.image != nil) ) {
-            newSize.height = [self textSize:_textContentLabel.text].height + kImageHeight;
-        }
-    }
+    return [NSData dataWithContentsOfFile:filePath];
+}
+
+- (void)saveImage:(NSData *)data withIdentifier:(NSString *)identifier
+{
+    NSString *filePath;
+    filePath = [[self imageSavingPath] stringByAppendingPathComponent:[identifier md5HexDigest]];
+    [data writeToFile:filePath atomically:YES];
+}
+
+- (NSString *)imageSavingPath
+{
+    NSString *home;
+    home = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    return newSize;
+    return home;
 }
 
 @end

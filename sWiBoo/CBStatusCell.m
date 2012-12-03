@@ -7,122 +7,178 @@
 //
 
 #import "CBStatusCell.h"
+#import "CBStatusContentView.h"
+#import "CBStatusTextView.h"
+#import "UIImageView+WebCache.h"
+
+@interface CBStatusCell()
+
+@property (nonatomic, strong) CBStatusContentView *cbContentView;
+@property (nonatomic, strong) UIImageView *avatarView;
+@property (nonatomic, strong) UIImageView *commentIcon;
+@property (nonatomic, strong) UILabel *commentLabel;
+@property (nonatomic, strong) UIImageView *repostIcon;
+@property (nonatomic, strong) UILabel *repostLabel;
+- (void)adjustContentViewSize;
+
+@end
 
 @implementation CBStatusCell
+@synthesize text = _text;
+@synthesize image = _image;
+@synthesize imageURL = _imageURL;
+@synthesize repostText = _repostText;
+@synthesize repostImage = _repostImage;
+@synthesize avatarURL = _avatarURL;
 
-@synthesize avatarImageView         = _avatarImageView;
-@synthesize retweetedCountLabel     = _retweetedCountLabel;
-@synthesize commentCountLabel       = _commentCountLabel;
-@synthesize retweetedCountImageView = _retweetedCountImageView;
-@synthesize commentCountImageView   = _commentCountImageView;
-@synthesize mainContentView         = _mainContentView;
+@synthesize cbContentView = _cbContentView;
+@synthesize avatarView = _avatarView;
+@synthesize commentIcon = _commentIcon;
+@synthesize repostIcon = _repostIcon;
+@synthesize repostLabel = _repostLabel;
 
 - (void)prepareForReuse
 {
-    self.avatarImageView.image = [UIImage imageNamed:@"avatar_default_big.png"];
-    self.retweetedCountImageView.image = [UIImage imageNamed:@"timeline_retweet_count_icon.png"];
-    self.commentCountImageView.image = [UIImage imageNamed:@"timeline_comment_count_icon.png"];
-    self.retweetedCountLabel.text = @"0";
-    self.commentCountLabel.text = @"0";
+    self.text = nil;
+    self.image = nil;
+    self.repostText = nil;
+    self.repostImage = nil;
+    self.avatarURL = nil;
+    self.commentCount = [NSNumber numberWithInt:0];
+    self.repostCount = [NSNumber numberWithInt:0];
+}
+
+- (CGFloat)height
+{
+    CGFloat height;
     
-    if (_mainContentView != nil)
-        [_mainContentView reset];
+    height = self.cbContentView.bounds.size.height + 10;
+    height = (height > 90) ? height : 90;
+    
+    return height;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
     if (self != nil) {
-        [self.contentView addSubview:self.avatarImageView];
-        [self.contentView addSubview:self.retweetedCountLabel];
-        [self.contentView addSubview:self.commentCountLabel];
-        [self.contentView addSubview:self.retweetedCountImageView];
-        [self.contentView addSubview:self.commentCountImageView];
-        [self.contentView addSubview:self.mainContentView];
+        self.clipsToBounds = YES;
+        _cbContentView = [[CBStatusContentView alloc] initWithFrame:CGRectMake(7, 7, 240, 0)];
+        [self addSubview:_cbContentView];
+        
+        _avatarView = [[UIImageView alloc] initWithFrame:CGRectMake(260, 7, 50, 50)];
+        [self addSubview:_avatarView];
+     
+        _commentIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_comment_count_icon.png"]];
+        _commentIcon.frame = CGRectMake(260, 60, 12, 12);
+        [self addSubview:_commentIcon];
+        
+        _commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(275, 60, 35, 12)];
+        [_commentLabel setFont:[UIFont systemFontOfSize:13.0f]];
+        [_commentLabel setText:@"0"];
+        [self addSubview:_commentLabel];
+        
+        _repostIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_retweet_count_icon.png"]];
+        _repostIcon.frame = CGRectMake(260, 75, 12, 12);
+        [self addSubview:_repostIcon];
+        
+        _repostLabel = [[UILabel alloc] initWithFrame:CGRectMake(275, 75, 35, 12)];
+        [_repostLabel setFont:[UIFont systemFontOfSize:13.0f]];
+        [_repostLabel setText:@"0"];
+        [self addSubview:_repostLabel];
     }
+    
     return self;
 }
 
-- (UIImageView *)avatarImageView
+- (void)adjustContentViewSize
 {
-    if (_avatarImageView == nil) {
-        _avatarImageView = [[UIImageView alloc] init];
-        _avatarImageView.frame = CGRectMake(266, 7, 44, 44);
-        _avatarImageView.image = [UIImage imageNamed:@"avatar_default_big.png"];
-        NSLog(@"image:%@", _avatarImageView.image);
-    }
-    return _avatarImageView;
-}
-
-- (UILabel *)retweetedCountLabel
-{
-    if (_retweetedCountLabel == nil) {
-        _retweetedCountLabel = [[UILabel alloc] init];
-        _retweetedCountLabel.backgroundColor = [UIColor clearColor];
-        _retweetedCountLabel.frame = CGRectMake(279, 57, 35, 15);
-        _retweetedCountLabel.text = @"0"; 
-    }
-    return _retweetedCountLabel;
-}
-
-- (UILabel *)commentCountLabel
-{
-    if (_commentCountLabel == nil) {
-        _commentCountLabel = [[UILabel alloc] init];
-        _commentCountLabel.backgroundColor = [UIColor clearColor];
-        _commentCountLabel.frame = CGRectMake(279, 76, 35, 15);
-        _commentCountLabel.text = @"0";
-    }
-    return _commentCountLabel;
-}
-
-- (UIImageView *)retweetedCountImageView
-{
-    if (_retweetedCountImageView == nil) {
-        _retweetedCountImageView = [[UIImageView alloc] init];
-        _retweetedCountImageView.frame = CGRectMake(266, 59, 12, 12);
-        _retweetedCountImageView.image = [UIImage imageNamed:@"timeline_retweet_count_icon.png"];
-    }
-    return _retweetedCountImageView;
-}
-
-- (UIImageView *)commentCountImageView
-{
-    if (_commentCountImageView == nil) {
-        _commentCountImageView = [[UIImageView alloc] init];
-        _commentCountImageView.frame = CGRectMake(266, 78, 12, 12);
-        _commentCountImageView.image = [UIImage imageNamed:@"timeline_comment_count_icon.png"];
-    }
-    return _commentCountImageView;
-}
-
-- (UIView *)mainContentView
-{
-    if (_mainContentView == nil) {
-        _mainContentView = [[CBStatusContentView alloc] init];
-        _mainContentView.frame = CGRectMake(10, 7, 248, 82);
-        _mainContentView.backgroundColor = [UIColor clearColor];
-    }
-    return _mainContentView;
+    CGFloat height = [self.cbContentView height];
+    CGRect frame = self.cbContentView.frame;
+    frame.size.height = height;
+    self.cbContentView.frame = frame;
 }
 
 - (void)setText:(NSString *)text
 {
-    [self.mainContentView setText:text];
+    if (![_text isEqualToString:text]) {
+        _text = nil;
+        _text = text;
+    }
+    
+    [self.cbContentView addText:_text];
+    [self adjustContentViewSize];
 }
 
 - (void)setImage:(UIImage *)image
 {
-    [self.mainContentView setImage:image];
+    if (![_image isEqual:image]) {
+        _image = nil;
+        _image = image;
+    }
+    
+    [self.cbContentView addImage:_image];
+    [self adjustContentViewSize];
 }
 
-- (void)setRetweetedText:(NSString *)retweetedText
+- (void)setImageURL:(NSURL *)imageURL
 {
-    [self.mainContentView setRetweetedText:retweetedText];
+    if (![_imageURL isEqual:imageURL]) {
+        _imageURL = nil;
+        _imageURL = imageURL;
+    }
+    
+    [self.cbContentView addimageWithURL:imageURL];
+    [self adjustContentViewSize];
 }
 
-- (void)setRetweetedImage:(UIImage *)retweetedImage
+- (void)setRepostText:(NSString *)repostText
 {
-    [self.mainContentView setRetweetedImage:retweetedImage];
+    if (![_repostText isEqualToString:repostText]) {
+        _repostText = nil;
+        _repostText = repostText;
+    }
+    
+    [self.cbContentView addrepostText:_repostText];
+    [self adjustContentViewSize];
 }
-@end
+
+- (void)setRepostImage:(UIImage *)repostImage
+{
+    if (![_repostImage isEqual:repostImage]) {
+        _repostImage = nil;
+        _repostImage = repostImage;
+    }
+    
+    [self.cbContentView addRepostImage:_repostImage];
+    [self adjustContentViewSize];
+}
+
+- (void)setRepostImageURL:(NSURL *)repostImageURL
+{
+    if (![_repostImageURL isEqual:repostImageURL]) {
+        _repostImageURL = nil;
+        _repostImageURL = repostImageURL;
+    }
+    
+    [self.cbContentView addRepostImageURL:repostImageURL];
+    [self adjustContentViewSize];
+}
+
+- (void)setAvatarURL:(NSURL *)avatarURL
+{
+    [self.avatarView setImageWithURL:avatarURL placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
+}
+
+- (void)setCommentCount:(NSNumber *)commentCount
+{
+    [self.commentLabel setText:[commentCount stringValue]];
+}
+
+- (void)setRepostCount:(NSNumber *)repostCount
+{
+    [self.repostLabel setText:[repostCount stringValue]];
+}
+
+@end;
