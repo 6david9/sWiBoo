@@ -41,6 +41,19 @@
         <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="status" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FriendsTimeline" inverseName="retweet_status" inverseEntity="FriendsTimeline" syncable="YES"/>
     </entity>
+    <entity name="Status" representedClassName="Status" syncable="YES">
+        <attribute name="avatar_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="image_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repost_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="repost_image_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repost_screen_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repost_text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="screen_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="UserInfo" representedClassName="UserInfo" syncable="YES">
         <attribute name="profile_image_url" attributeType="String" syncable="YES"/>
         <attribute name="screen_name" attributeType="String" syncable="YES"/>
@@ -51,7 +64,8 @@
         <element name="Comment" positionX="385" positionY="-1414" width="128" height="135"/>
         <element name="Follower" positionX="160" positionY="192" width="128" height="120"/>
         <element name="FriendsTimeline" positionX="27" positionY="-1530" width="128" height="253"/>
-        <element name="UserInfo" positionX="207" positionY="-1282" width="128" height="103"/>
         <element name="RetweetedStatus" positionX="225" positionY="-1459" width="128" height="163"/>
+        <element name="UserInfo" positionX="207" positionY="-1282" width="128" height="103"/>
+        <element name="Status" positionX="-189" positionY="-1260" width="128" height="208"/>
     </elements>
 </model>

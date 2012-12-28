@@ -79,6 +79,7 @@
 #pragma mark - Sina Weibo Delegate
 - (void)sinaweiboDidLogIn:(SinaWeibo *)sinaweibo
 {
+    NSLog(@"access token:%@", self.weibo.accessToken);
     NSLog(@"%s", __PRETTY_FUNCTION__);
     // 保存登录信息
     NSAssert(self.appDelegate != nil, @"self.appDelegate不能为nil");

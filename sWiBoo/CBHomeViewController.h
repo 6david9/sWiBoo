@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBStatusSet.h"
 
 @class CBStatusCell;
 @interface CBHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, SinaWeiboRequestDelegate>
-{
-    NSString *lastStatusID;
-}
 
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -20,6 +18,7 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) SinaWeibo *weibo;
+@property (strong, nonatomic) CBStatusSet *list;
 
 
 

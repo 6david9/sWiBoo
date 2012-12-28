@@ -53,7 +53,7 @@
 
 - (CGFloat)height
 {
-    return (self.statusView.frame.size.height + self.repostStatusView.frame.size.height);
+    return ([self.statusView height] + [self.repostStatusView height]);
 }
 
 - (void)adjustStatusViewSize

@@ -13,6 +13,7 @@
 #import "UIImageView+AsynImage.h"
 #import "CBUserDetailViewController.h"
 #import "CBStatusCell.h"
+#import "SinaWeibo.h"
 
 @interface CBFollowerViewController ()
 
@@ -77,10 +78,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    NSLog(@"table rows: %d", [sectionInfo numberOfObjects]);
     NSUInteger numComment = [sectionInfo numberOfObjects];
     return numComment;
-//    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,17 +104,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Follower *follower = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    // 反选
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    CBStatusCell *headerView = nil;
-    [self configureCell:headerView atIndexPath:indexPath];
-    headerView.bounds = CGRectMake(0, 0, 320, [headerView height]);
+    // 显示用户详情页面
+    Follower *follower = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     CBUserDetailViewController *userDetailViewController = [[CBUserDetailViewController alloc] initWithNibName:@"CBUserDetailViewController" bundle:nil];
     userDetailViewController.hidesBottomBarWhenPushed = YES;
-    userDetailViewController.user_id = follower.idstr;
-    userDetailViewController.headerView = headerView;
-    headerView = nil;
+    userDetailViewController.userID = follower.idstr;
     
     [self.navigationController pushViewController:userDetailViewController animated:YES];
 }
@@ -127,7 +124,7 @@
    
     cell.name.text = follower.screen_name;
     [cell.avatarView setImageWithURL:imageURL];
-    if (follower.follow_me) {
+    if ([follower.follow_me integerValue] == 1) {
         [cell.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
     } else {
         [cell.followButton setTitle:@"关注" forState:UIControlStateNormal];
@@ -145,6 +142,7 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
     [params setValue:self.weibo.accessToken forKey:@"access_token"];
     [params setValue:self.weibo.userID forKey:@"uid"];
+    [params setValue:@"100" forKey:@"count"];
     [self.weibo requestWithURL:@"friendships/followers.json"
                         params:params
                     httpMethod:@"GET"
@@ -171,7 +169,7 @@
                 follower.screen_name = [obj valueForKey:@"screen_name"];
                 follower.profile_image_url = [obj valueForKey:@"profile_image_url"];
                 follower.gender = [obj valueForKey:@"gender"];
-                follower.follow_me = [obj valueForKey:@"follow_me"];
+                follower.follow_me = [obj valueForKey:@"following"];
             }
         }];
         
@@ -294,9 +292,6 @@
     NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error])
         NSLog(@"fetch error: %@", error);
-    else {
-        NSLog(@"fetch success");
-    }
 }
 
 

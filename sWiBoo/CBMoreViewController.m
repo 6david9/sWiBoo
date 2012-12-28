@@ -8,6 +8,7 @@
 
 #import "CBMoreViewController.h"
 #import "CBAppDelegate.h"
+#import "SinaWeibo.h"
 
 @interface CBMoreViewController ()
 

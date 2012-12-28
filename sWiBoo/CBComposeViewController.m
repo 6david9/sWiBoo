@@ -9,6 +9,7 @@
 #import "CBComposeViewController.h"
 #import "CBAppDelegate.h"
 #import "CBEmotionView.h"
+#import "FaceBoard.h"
 
 @interface CBComposeViewController ()
 
@@ -42,6 +43,8 @@
     // 显示键盘
     [self.textView becomeFirstResponder];
     _showEmotions = NO;
+    
+    self.faceBoard = [[FaceBoard alloc] init];
     
 }
 
@@ -95,7 +98,7 @@
 
 - (IBAction)addLocationInfo:(id)sender
 {
-    
+    // not implemented
 }
 
 - (NSString *)emotionRootPath
@@ -108,10 +111,20 @@
 - (IBAction)showEmotion:(id)sender
 {
     _showEmotions = !_showEmotions;
+//    if (_showEmotions) {
+//        CBEmotionView *emotionView = [[CBEmotionView alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
+//        [self.textView resignFirstResponder];
+//        self.textView.inputView = emotionView;
+//        [self.textView becomeFirstResponder];
+//    } else {
+//        [self.textView resignFirstResponder];
+//        self.textView.inputView = nil;
+//        [self.textView becomeFirstResponder];
+//    }
     if (_showEmotions) {
-        CBEmotionView *emotionView = [[CBEmotionView alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
         [self.textView resignFirstResponder];
-        self.textView.inputView = emotionView;
+        self.textView.inputView = self.faceBoard;
+        self.faceBoard.inputTextView = self.textView;
         [self.textView becomeFirstResponder];
     } else {
         [self.textView resignFirstResponder];

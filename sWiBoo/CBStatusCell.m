@@ -46,6 +46,9 @@
     self.avatarURL = nil;
     self.commentCount = [NSNumber numberWithInt:0];
     self.repostCount = [NSNumber numberWithInt:0];
+    [_cbContentView removeFromSuperview];
+    _cbContentView = [[CBStatusContentView alloc] initWithFrame:CGRectMake(7, 7, 240, 0)];
+    [self addSubview:_cbContentView];
 }
 
 - (CGFloat)height
@@ -55,7 +58,7 @@
     height = self.cbContentView.bounds.size.height + 10;
     height = (height > 90) ? height : 90;
     
-    return height;
+    return height+10;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

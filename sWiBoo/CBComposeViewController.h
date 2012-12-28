@@ -12,6 +12,8 @@
 #define kAlbumIndex    0
 #define kCameraIndex   1
 
+@class FaceBoard;
+
 @interface CBComposeViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate>
 {
     BOOL _showEmotions;
@@ -24,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
+
+@property (strong, nonatomic) FaceBoard *faceBoard;
 
 
 - (IBAction)addLocationInfo:(id)sender;

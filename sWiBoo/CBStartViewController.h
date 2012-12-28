@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SinaWeibo.h"
 
 @class SinaWeibo;
 @class CBAppDelegate;

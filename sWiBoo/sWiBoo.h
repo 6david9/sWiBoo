@@ -11,7 +11,6 @@
 
 #import "EGORefreshTableHeaderView.h"
 #import "JSONKit.h"
-#import "SinaWeibo.h"
 #import "SinaWeiboAuthorizeView.h"
 #import "SinaWeiboConstants.h"
 #import "SinaWeiboRequest.h"

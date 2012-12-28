@@ -7,18 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CBCommentSet.h"
 
-@class CBStatusCell;
-@interface CBDetailStatusViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SinaWeiboRequestDelegate, NSFetchedResultsControllerDelegate>
+@class CBStatus;
+@interface CBDetailStatusViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SinaWeiboRequestDelegate>
 
-@property (nonatomic, strong) CBStatusCell *headCell;
-@property (nonatomic, assign) double headCellHeight;
-@property (nonatomic, strong, readonly) SinaWeibo *weibo;
-@property (nonatomic, strong) NSString *lastCommentID;
-@property (strong, nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (strong, nonatomic) NSString *status_idstr;
+@property (weak, nonatomic) CBStatus *status;
+@property (strong, nonatomic) CBCommentSet *list;
 
 @end
