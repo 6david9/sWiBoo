@@ -61,8 +61,6 @@
 #pragma mark - Private Method
 - (void)successLogin
 {
-    NSLog(@"%s\n%s", __FILE__, __PRETTY_FUNCTION__);
-    
     self.mainTabbarController = [[UITabBarController alloc] init];
     
     CBHomeViewController *homeViewController = [[CBHomeViewController alloc] initWithNibName:@"CBHomeViewController" bundle:nil];
@@ -79,9 +77,6 @@
 //    [self addChildViewController:self.mainTabbarController];
 //    [self.view addSubview:self.mainTabbarController.view];
     [self presentModalViewController:self.mainTabbarController animated:YES];
-    
-    NSLog(@"main tabbar controller: %@", self.mainTabbarController);
-    NSLog(@"%@", [[[self.view subviews] lastObject] subviews]);
 }
 
 #pragma mark - Sina Weibo Delegate
