@@ -18,7 +18,7 @@
 
 @interface CBHomeViewController ()
 
-@property (strong, nonatomic) NSMutableOrderedSet *status;
+//@property (strong, nonatomic) NSMutableOrderedSet *status;
 @property (strong, nonatomic) NSString *lastStatusID;
 
 - (void)configureCell:(CBStatusCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -31,7 +31,7 @@
 @implementation CBHomeViewController
 
 @synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize status = _status;
+//@synthesize status = _status;
 @synthesize lastStatusID = _lastStatusID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,7 +49,7 @@
     [super viewDidLoad];
 
     // 添加刷新按钮
-    UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+    UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshTable)];
     self.navigationItem.leftBarButtonItem = refresh;
     
     // 添加发微博按钮
@@ -58,6 +58,10 @@
     
     // 创建保存微博记录列表
     self.list = [[CBStatusSet alloc] init];
+    
+    // 设置pullTableView
+    self.tableView.pullDelegate = self;
+    self.tableView.pullBackgroundColor = [UIColor colorWithRed:240 green:240 blue:240 alpha:1];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,7 +71,7 @@
 
 - (void)viewDidUnload {
     [self setTableView:nil];
-    [self setStatus:nil];
+    self.list = nil;
     [super viewDidUnload];
 }
 
@@ -150,13 +154,31 @@
     cell.repostCount =      status.repostCount;
 }
 
-#pragma mark - Loading More
-- (void)refresh
+#pragma mark - PullTableView Delegate
+- (void)pullTableViewDidTriggerRefresh:(PullTableView*)pullTableView
+{
+//    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:0];
+    [self performSelectorOnMainThread:@selector(refreshTable) withObject:nil waitUntilDone:NO];
+}
+
+- (void)pullTableViewDidTriggerLoadMore:(PullTableView*)pullTableView
+{
+    [self performSelectorOnMainThread:@selector(loadMoreDataToTable) withObject:nil waitUntilDone:NO];
+}
+
+- (void)refreshTable
 {
     [self.list removeAllObjects];
     [self loadingMore];
 }
 
+- (void)loadMoreDataToTable
+{
+    [self loadingMore];
+}
+
+
+#pragma mark - Loading More
 - (void)compose
 {
     CBComposeViewController *composeViewController = [[CBComposeViewController alloc] initWithNibName:@"CBComposeViewController" bundle:nil];
@@ -175,7 +197,6 @@
         [params setValue:@"10" forKey:@"count"];
         if (self.lastStatusID != nil)
             [params setValue:self.lastStatusID forKey:@"max_id"];
-        NSLog(@"%@", self.lastStatusID);
         
         [self.weibo requestWithURL:@"statuses/home_timeline.json" params:params httpMethod:@"GET" delegate:self];
     }
@@ -207,6 +228,9 @@
             }
             
             statuses = nil;
+            self.tableView.pullLastRefreshDate = [NSDate date];
+            self.tableView.pullTableIsRefreshing = NO;
+            self.tableView.pullTableIsLoadingMore = NO;
         }
     }
 }

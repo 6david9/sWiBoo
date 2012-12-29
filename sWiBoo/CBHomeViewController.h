@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "CBStatusSet.h"
+#import "PullTableView.h"
 
 @class CBStatusCell;
-@interface CBHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, SinaWeiboRequestDelegate>
+@interface CBHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, SinaWeiboRequestDelegate, PullTableViewDelegate>
 
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet PullTableView *tableView;
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
