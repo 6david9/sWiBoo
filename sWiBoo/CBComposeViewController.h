@@ -14,7 +14,7 @@
 
 @class FaceBoard;
 
-@interface CBComposeViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate>
+@interface CBComposeViewController : UIViewController<UITextViewDelegate,UIActionSheetDelegate, SinaWeiboRequestDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     BOOL _showEmotions;
 }
@@ -27,11 +27,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 
+@property (strong, nonatomic) UIImagePickerController *imagePickerController;
+
 @property (strong, nonatomic) FaceBoard *faceBoard;
 
 
 - (IBAction)addLocationInfo:(id)sender;
-- (IBAction)takePicture:(id)sender;
+- (IBAction)choosePicture:(id)sender;
 - (IBAction)showEmotion:(id)sender;
 - (NSString *)emotionRootPath;
 

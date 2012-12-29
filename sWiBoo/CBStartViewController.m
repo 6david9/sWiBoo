@@ -40,6 +40,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    NSLog(@"%s\n%s", __FILE__, __PRETTY_FUNCTION__);
+    
     if ([[self weibo] isAuthValid]) 
         [self successLogin];
 }
@@ -59,6 +61,8 @@
 #pragma mark - Private Method
 - (void)successLogin
 {
+    NSLog(@"%s\n%s", __FILE__, __PRETTY_FUNCTION__);
+    
     self.mainTabbarController = [[UITabBarController alloc] init];
     
     CBHomeViewController *homeViewController = [[CBHomeViewController alloc] initWithNibName:@"CBHomeViewController" bundle:nil];
@@ -72,8 +76,12 @@
     CBMoreViewController *moreViewController = [[CBMoreViewController alloc] initWithNibName:@"CBMoreViewController" bundle:nil];
     
     self.mainTabbarController.viewControllers = @[homeNavi, userDetailNavigationController, moreViewController];
-    [self addChildViewController:self.mainTabbarController];
-    [self.view addSubview:self.mainTabbarController.view];
+//    [self addChildViewController:self.mainTabbarController];
+//    [self.view addSubview:self.mainTabbarController.view];
+    [self presentModalViewController:self.mainTabbarController animated:YES];
+    
+    NSLog(@"main tabbar controller: %@", self.mainTabbarController);
+    NSLog(@"%@", [[[self.view subviews] lastObject] subviews]);
 }
 
 #pragma mark - Sina Weibo Delegate

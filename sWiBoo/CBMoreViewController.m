@@ -47,6 +47,7 @@
 {
     [[[self appDelegate] weibo] logOut];
     [[self appDelegate] logoutWeibo];
-    [self.tabBarController.view removeFromSuperview];
+//    [self.tabBarController.view removeFromSuperview];
+    [self dismissModalViewControllerAnimated:YES];
 }
 @end

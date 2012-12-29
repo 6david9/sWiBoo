@@ -30,6 +30,7 @@
         self.backgroundColor = [UIColor colorWithRed:243.0/255.0 green:243.0/255.0 blue:243.0/255.0 alpha:1];
         
         // 获取系统语言
+/*      
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
         
@@ -39,6 +40,10 @@
         } else {
             _faceMap = [[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"faceMap_en" ofType:@"plist"]]retain];
         }
+ */
+        
+        // 默认使用简体中文
+        _faceMap = [[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"faceMap_ch" ofType:@"plist"]]retain];
        
         // 表情盘
         faceView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 190)];
