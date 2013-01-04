@@ -16,7 +16,9 @@
 @property (strong, nonatomic) UIImageView *avatarView;
 @property (strong, nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UILabel *postDateLabel;
+@property (strong, nonatomic) UIView *postTextView;
 @property (strong, nonatomic) UILabel *postTextLabel;
+@property (strong, nonatomic) UIButton *postImageView;
 @property (strong, nonatomic) UIImageView *repostTextBackgroudView;
 @property (strong, nonatomic) UILabel *repostTextLabel;
 @property (strong, nonatomic) UIButton *repostImageView;
@@ -28,7 +30,6 @@
 @end
 
 @implementation CBStatusCell
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -43,7 +44,9 @@
         self.avatarView = [[UIImageView alloc] initWithFrame:CGRectMake(11, 11, 40, 40)];
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(59, 11, 153, 14)];
         self.postDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(231, 11, 75, 14)];
-        self.postTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(59, 28, 240, 18)];
+        self.postTextView = [[UIView alloc] initWithFrame:CGRectMake(59, 28, 240, 18)];
+        self.postTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 240, 18)];
+        self.postImageView = [UIButton buttonWithType:UIButtonTypeCustom];
         self.repostTextBackgroudView = [[UIImageView alloc] initWithFrame:CGRectMake(59, 59, 240, 128)];
         self.repostTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 3, 240, 20)];
         self.repostImageView = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -79,11 +82,20 @@
         self.repostTextBackgroudView.image = backgroudImage;
         self.repostTextBackgroudView.clipsToBounds = YES;
         self.repostTextBackgroudView.userInteractionEnabled = YES;  /* 实现repostImageView交互 */
-        // repostImageView
+        // 可点击图片
+        self.postImageView.frame = CGRectMake(60, 60, 50, 50);
+        [self.postImageView addTarget:self
+                               action:@selector(postImageDidTouch:)
+                     forControlEvents:UIControlEventTouchUpInside];
+        
         self.repostImageView.frame =  CGRectMake(5, 25, 50, 50);
-        [self.repostImageView addTarget:self action:@selector(imageViewDidTouch:) forControlEvents:UIControlEventTouchUpInside];
+        [self.repostImageView addTarget:self
+                                 action:@selector(repostImageDidTouch:)
+                       forControlEvents:UIControlEventTouchUpInside];
         // 是否显示？
+        self.postTextView.hidden = YES;
         self.postTextLabel.hidden = YES;
+        self.postImageView.hidden = YES;
         self.repostTextBackgroudView.hidden = YES;
         self.repostTextLabel.hidden = YES;
         self.repostImageView.hidden = YES;
@@ -99,10 +111,15 @@
         [self addSubview:self.avatarView];
         [self addSubview:self.nameLabel];
         [self addSubview:self.postDateLabel];
-        [self addSubview:self.postTextLabel];
+        
+        [self addSubview:self.postTextView];
+        [self.postTextView addSubview:self.postTextLabel];
+        [self.postTextView addSubview:self.postImageView];
+        
         [self addSubview:self.repostTextBackgroudView];
         [self.repostTextBackgroudView addSubview:self.repostTextLabel];
         [self.repostTextBackgroudView addSubview:self.repostImageView];
+        
         [self addSubview:self.textFromLabel];
         [self addSubview:self.commentAndRepostCountLabel];
     }
@@ -121,14 +138,16 @@
     
     if (hasText && hasPostText)
     {
-        height = 25 + 3 + self.postTextLabel.frame.size.height + 3 + self.repostTextBackgroudView.frame.size.height + 3 + 14 + 6;
+        height = 25 + 3 + self.postTextView.frame.size.height + 3 + self.repostTextBackgroudView.frame.size.height + 3 + 14 + 6;
     }
     else if (hasText) {
-        height = 25 + 3 + self.postTextLabel.frame.size.height + 3 + 14 + 6;
+        height = 25 + 3 + self.postTextView.frame.size.height + 3 + 14 + 6;
     }
     else if (hasPostText) {
         height = 25 + 3 + self.repostTextBackgroudView.frame.size.height + 3 + 14 + 6;
     }
+    
+//    height = 280;
     
     return height;
 }
@@ -142,18 +161,59 @@
     self.nameLabel.text = name;
 }
 
-- (void)setText:(NSString *)text
+//- (void)setText:(NSString *)text
+//{
+//    _text = text;
+//    
+//    self.postTextLabel.hidden = (text!=nil ? NO : YES);
+//    
+//    // 调整label大小
+//    CGSize calcSize;
+//    calcSize = [self fitSizeForLabelText:text];
+//    self.postTextLabel.frame = CGRectMake(59, 28, calcSize.width, calcSize.height);
+//    
+//    self.postTextLabel.text = text;
+//}
+
+- (void)setText:(NSString *)text andImageWithURL:(NSURL *)imageURL
 {
+    // 保存引用
     _text = text;
+    _imageURL = imageURL;
     
-    self.postTextLabel.hidden = (text!=nil ? NO : YES);
+    BOOL hasText = (text!=nil ? YES:NO);
+    BOOL hasImage = (imageURL!=nil ? YES:NO);
     
-    // 调整label大小
-    CGSize calcSize;
-    calcSize = [self fitSizeForLabelText:text];
-    self.postTextLabel.frame = CGRectMake(59, 28, calcSize.width, calcSize.height);
+    // 是否需要显示?
+    self.postTextView.hidden = (hasText||hasImage ? NO:YES);
+    
+    // 调整内部位置
+    if (hasText && hasImage) {
+        CGSize calcSize = [self fitSizeForLabelText:text];
+        self.postTextLabel.frame = CGRectMake(0, 0, 240, calcSize.height);
+        
+        CGFloat y = self.postTextLabel.frame.size.height + 5;
+        self.postImageView.frame = CGRectMake(0, y, 50, 50);
+    }
+    else if (hasText) {
+        CGSize calcSize;
+        calcSize = [self fitSizeForLabelText:text];
+        self.postTextLabel.frame = CGRectMake(0, 0, 240, calcSize.height);
+    }
+    else if (hasImage) {
+        self.postImageView.frame = CGRectMake(0, 5, 50, 50);
+    }
+    self.postTextLabel.hidden = !hasText;
+    self.postImageView.hidden = !hasImage;
+    
+    // 调整外部距离
+    CGSize postTextViewSize = [self fitSizeForPostText:text andImage:hasImage];
+    self.postTextView.frame = CGRectMake(59, 28, 240, postTextViewSize.height);
+    
+    
     
     self.postTextLabel.text = text;
+    [self.postImageView setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
 }
 
 - (void)setAvatarURL:(NSURL *)avatarURL
@@ -214,7 +274,7 @@
     BOOL hasText = (self.postTextLabel.hidden ? NO:YES);
     CGFloat y;
     if (hasText) {
-        y = self.postTextLabel.frame.origin.y + self.postTextLabel.frame.size.height + 3;
+        y = self.postTextView.frame.origin.y + self.postTextView.frame.size.height + 3;
     } else {
         y = self.nameLabel.frame.origin.y + self.nameLabel.frame.size.height + 3;
     }
@@ -240,7 +300,7 @@
     }
     else if (hasText)
     {
-        CGFloat y = self.postTextLabel.frame.origin.y + self.postTextLabel.frame.size.height + 3;
+        CGFloat y = self.postTextView.frame.origin.y + self.postTextView.frame.size.height + 3;
         self.textFromLabel.frame = CGRectMake(59, y, 120, 14);
     }
     else if (hasRepostText)
@@ -270,7 +330,7 @@
     }
     else if (hasText)
     {
-        CGFloat y = self.postTextLabel.frame.origin.y + self.postTextLabel.frame.size.height + 3;
+        CGFloat y = self.postTextView.frame.origin.y + self.postTextView.frame.size.height + 3;
         self.commentAndRepostCountLabel.frame = CGRectMake(187, y, 112, 14);
     }
     else if (hasRepostText)
@@ -279,13 +339,18 @@
         self.commentAndRepostCountLabel.frame = CGRectMake(187, y, 112, 14);
     }
     
-    self.commentAndRepostCountLabel.text = [NSString stringWithFormat:@"评论:%d|转发:%d",[commentCount integerValue], [repostCount integerValue]];
+    self.commentAndRepostCountLabel.text = [NSString stringWithFormat:@"评论:%d 转发:%d",[commentCount integerValue], [repostCount integerValue]];
 }
 
 #pragma mark -
-- (void)imageViewDidTouch:(UIButton *)sender
+- (void)postImageDidTouch:(UIButton *)sender
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"%s:status id:%@", __PRETTY_FUNCTION__, self.statusID);
+}
+
+- (void)repostImageDidTouch:(UIButton *)sender
+{
+    NSLog(@"%s:status id:%@", __PRETTY_FUNCTION__, self.statusID);
 }
 
 
@@ -293,7 +358,7 @@
 - (NSString *)dateStringFromDate:(NSDate *)date
 {
     NSString *dateString = nil;
-    NSUInteger secondsSinceNow = (NSUInteger)[date timeIntervalSinceNow];
+    NSInteger secondsSinceNow = labs((NSInteger)[date timeIntervalSinceNow]);
     
     // 几秒前
     // 一分钟60秒
@@ -336,6 +401,14 @@
     calcSize.height += 12;  /* 上下边距，上6pt，下6pt */
     calcSize.height += (hasImage ? 50:0); /* 图片高度 */
     calcSize.height += (hasImage ? 5:0);  /* 图片与文字间距 */
+    
+    return calcSize;
+}
+
+- (CGSize)fitSizeForPostText:(NSString *)postText andImage:(BOOL)hasImage
+{
+    CGSize calcSize = [self fitSizeForLabelText:postText];
+    calcSize.height += (hasImage ? 60: 0);  /* 图片高度50pt, 图片上下边距各5pt */
     
     return calcSize;
 }

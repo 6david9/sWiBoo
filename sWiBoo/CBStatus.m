@@ -8,6 +8,12 @@
 
 #import "CBStatus.h"
 
+@interface CBStatus()
+
+- (NSString *)sourceString:(NSString *)rawSource;
+
+@end
+
 @implementation CBStatus
 
 - (id)initWithDictionary:(NSDictionary *)dictionary
@@ -25,6 +31,7 @@
         self.screen_name = [[dictionary valueForKey:@"user"] valueForKey:@"screen_name"];
         self.repost_screen_name = [[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"user"]  valueForKey:@"screen_name"];
         self.fromText = [self sourceString:[dictionary valueForKey:@"source"]];
+        self.postDate = [self dateFromString:[dictionary valueForKey:@"created_at"]];
     }
     
     return self;
@@ -48,6 +55,23 @@
     filtedString = components[0];
     
     return filtedString;
+}
+
+- (NSDate *)dateFromString:(NSString *)dateString
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EE MMM dd H:mm:ss +z yyy"];
+    NSDate *date = [dateFormatter dateFromString:dateString];
+    
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSTimeZoneCalendarUnit;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+    
+    NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:date];
+    [dateComponents setHour:dateComponents.hour-8];
+    [dateComponents setSecond:dateComponents.second+1]; /* 转换后的时间与新浪返回时间差一秒 */
+    
+    return [calendar dateFromComponents:dateComponents];
 }
 
 - (NSString *)description

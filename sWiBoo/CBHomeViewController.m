@@ -146,9 +146,8 @@
     cell.statusID =         status.statusID;
     cell.avatarURL =        status.avatarURL;
     cell.name =             status.screen_name;
-    cell.postDate =         [NSDate date];      /* need fix */
-    cell.text =             status.text;
-    cell.imageURL =         status.imageURL;
+    cell.postDate =         status.postDate;
+    [cell setText:status.text andImageWithURL:status.imageURL];
     [cell setRepostText:status.repostText andRepostImageWithURL:status.repostImageURL];
     cell.textFrom =         status.fromText;
     [cell setCommentCount:status.commentCount andRepostCount:status.repostCount];

@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSString *screen_name;
 @property (strong, nonatomic) NSString *repost_screen_name;
 @property (strong, nonatomic) NSString *fromText;
+@property (strong, nonatomic) NSDate *postDate;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
