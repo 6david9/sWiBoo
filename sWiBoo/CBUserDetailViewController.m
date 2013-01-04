@@ -192,9 +192,8 @@
         statusCell.statusID = status.statusID;
         statusCell.avatarURL = status.avatarURL;
         statusCell.name = status.screen_name;
-        statusCell.postDate = [NSDate date];
-        statusCell.text = status.text;
-        statusCell.imageURL = status.imageURL;
+        statusCell.postDate = status.postDate;
+        [statusCell setText:status.text andImageWithURL:status.imageURL];
         [statusCell setRepostText:status.repostText andRepostImageWithURL:status.repostImageURL];
         statusCell.textFrom =         status.fromText;
         [statusCell setCommentCount:status.commentCount andRepostCount:status.repostCount];

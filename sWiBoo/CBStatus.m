@@ -59,19 +59,14 @@
 
 - (NSDate *)dateFromString:(NSString *)dateString
 {
+    // Sun Mar 18 21:03:59 +0800 2012
+    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"EE MMM dd H:mm:ss +z yyy"];
+    [dateFormatter setLocale:usLocale];
+    [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss v yyyy"];
     NSDate *date = [dateFormatter dateFromString:dateString];
     
-    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSTimeZoneCalendarUnit;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
-    
-    NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:date];
-    [dateComponents setHour:dateComponents.hour-8];
-    [dateComponents setSecond:dateComponents.second+1]; /* 转换后的时间与新浪返回时间差一秒 */
-    
-    return [calendar dateFromComponents:dateComponents];
+    return date;
 }
 
 - (NSString *)description

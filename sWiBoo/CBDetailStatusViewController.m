@@ -156,13 +156,14 @@
         CBStatusCell *statusCell = (CBStatusCell *)cell;
         
         statusCell.statusID =       self.status.statusID;
-        statusCell.text =           [self.status.screen_name stringByAppendingFormat:@": %@",self.status.text];
-        statusCell.imageURL =       self.status.imageURL;
-        statusCell.repostText =     [self.status.repost_screen_name stringByAppendingFormat:@":%@", self.status.repostText];
-        statusCell.repostImageURL = self.status.repostImageURL;
         statusCell.avatarURL =      self.status.avatarURL;
-        statusCell.commentCount =   self.status.commentCount;
-        statusCell.repostCount =    self.status.repostCount;
+        statusCell.name = self.status.screen_name;
+        statusCell.postDate = self.status.postDate;
+        [statusCell setText:self.status.text andImageWithURL:self.status.imageURL];
+        NSString *repostText = [self.status.repost_screen_name stringByAppendingFormat:@":%@", self.status.repostText];
+        [statusCell setRepostText:repostText andRepostImageWithURL:self.status.repostImageURL];
+        statusCell.textFrom = self.status.fromText;
+        [statusCell setCommentCount:self.status.commentCount andRepostCount:self.status.repostCount];
     } else {
         CBComment *comment = [self.list objectAtIndex:row-1];
         [cell.imageView setImageWithURL:comment.avatarURL placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
