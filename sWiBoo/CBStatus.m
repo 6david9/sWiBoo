@@ -24,9 +24,30 @@
         self.avatarURL = [NSURL URLWithString:[[dictionary valueForKey:@"user"] valueForKey:@"profile_image_url"]];
         self.screen_name = [[dictionary valueForKey:@"user"] valueForKey:@"screen_name"];
         self.repost_screen_name = [[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"user"]  valueForKey:@"screen_name"];
+        self.fromText = [self sourceString:[dictionary valueForKey:@"source"]];
     }
     
     return self;
+}
+
+- (NSString *)sourceString:(NSString *)rawSource
+{
+    // <a href="http://weibo.com" rel="nofollow">新浪微博</a>
+    
+    NSArray *components;
+    NSString *filtedString;
+    
+    /* 第一次分割 */
+    components = [rawSource componentsSeparatedByString:@">"];
+    filtedString = components[1];
+    
+    /* 第二次分割 */
+    components = nil;
+    components = [filtedString componentsSeparatedByString:@"<"];
+    filtedString = nil;
+    filtedString = components[0];
+    
+    return filtedString;
 }
 
 - (NSString *)description

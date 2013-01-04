@@ -144,13 +144,14 @@
     
     
     cell.statusID =         status.statusID;
-    cell.text =             [status.screen_name stringByAppendingFormat:@": %@", status.text];
-    cell.imageURL =         status.imageURL;
-    cell.repostText =       [status.repost_screen_name stringByAppendingFormat:@": %@", status.repostText];
-    cell.repostImageURL =   status.repostImageURL;
     cell.avatarURL =        status.avatarURL;
-    cell.commentCount =     status.commentCount;
-    cell.repostCount =      status.repostCount;
+    cell.name =             status.screen_name;
+    cell.postDate =         [NSDate date];      /* need fix */
+    cell.text =             status.text;
+    cell.imageURL =         status.imageURL;
+    [cell setRepostText:status.repostText andRepostImageWithURL:status.repostImageURL];
+    cell.textFrom =         status.fromText;
+    [cell setCommentCount:status.commentCount andRepostCount:status.repostCount];
 }
 
 #pragma mark - PullTableView Delegate

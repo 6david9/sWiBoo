@@ -176,7 +176,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.row;
-    if (row == 0) {
+    if (row == 0) { /* 显示用户信息 */
         if (self.userInfoLoaded) {
             CBUserInfoCell *userInfoCell = (CBUserInfoCell *)cell;
             [userInfoCell.avatar setImageWithURL:self.userInfo.avatarURL placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
@@ -185,17 +185,19 @@
             userInfoCell.followerCountLabel.text = self.userInfo.followerCount;
             userInfoCell.friendsCountLabel.text = self.userInfo.friendsCount;
         }
-    } else {
+    } else {    /* 显示用户微博 */
         CBStatusCell *statusCell = (CBStatusCell *)cell;
         CBStatus *status = [self.list objectAtIndex:row-1];     //第0行为用户信息行，status起始行为row-1
+        
         statusCell.statusID = status.statusID;
+        statusCell.avatarURL = status.avatarURL;
+        statusCell.name = status.screen_name;
+        statusCell.postDate = [NSDate date];
         statusCell.text = status.text;
         statusCell.imageURL = status.imageURL;
-        statusCell.repostText = status.repostText;
-        statusCell.repostImageURL = status.repostImageURL;
-        statusCell.avatarURL = status.avatarURL;
-        statusCell.commentCount = status.commentCount;
-        statusCell.repostCount = status.repostCount;
+        [statusCell setRepostText:status.repostText andRepostImageWithURL:status.repostImageURL];
+        statusCell.textFrom =         status.fromText;
+        [statusCell setCommentCount:status.commentCount andRepostCount:status.repostCount];
     }
 }
 

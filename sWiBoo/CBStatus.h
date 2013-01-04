@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSNumber *repostCount;
 @property (strong, nonatomic) NSString *screen_name;
 @property (strong, nonatomic) NSString *repost_screen_name;
+@property (strong, nonatomic) NSString *fromText;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
