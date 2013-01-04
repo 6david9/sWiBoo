@@ -23,7 +23,6 @@
 
 - (void)configureCell:(CBStatusCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 - (void)loadingMore;
-- (void)refresh;
 - (void)compose;
 
 @end
