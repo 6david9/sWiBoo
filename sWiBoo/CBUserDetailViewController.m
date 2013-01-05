@@ -189,12 +189,15 @@
         CBStatusCell *statusCell = (CBStatusCell *)cell;
         CBStatus *status = [self.list objectAtIndex:row-1];     //第0行为用户信息行，status起始行为row-1
         
+        NSString *repostText = [status.repost_screen_name
+                                    stringByAppendingFormat:@":%@", status.repostText];
+        
         statusCell.statusID = status.statusID;
         statusCell.avatarURL = status.avatarURL;
         statusCell.name = status.screen_name;
         statusCell.postDate = status.postDate;
         [statusCell setText:status.text andImageWithURL:status.imageURL];
-        [statusCell setRepostText:status.repostText andRepostImageWithURL:status.repostImageURL];
+        [statusCell setRepostText:repostText andRepostImageWithURL:status.repostImageURL];
         statusCell.textFrom =         status.fromText;
         [statusCell setCommentCount:status.commentCount andRepostCount:status.repostCount];
     }

@@ -142,13 +142,15 @@
     row = indexPath.row;
     status = [self.list objectAtIndex:row];
     
+    NSString *repostText = [status.repost_screen_name
+                                stringByAppendingFormat:@":%@", status.repostText];
     
     cell.statusID =         status.statusID;
     cell.avatarURL =        status.avatarURL;
     cell.name =             status.screen_name;
     cell.postDate =         status.postDate;
     [cell setText:status.text andImageWithURL:status.imageURL];
-    [cell setRepostText:status.repostText andRepostImageWithURL:status.repostImageURL];
+    [cell setRepostText:repostText andRepostImageWithURL:status.repostImageURL];
     cell.textFrom =         status.fromText;
     [cell setCommentCount:status.commentCount andRepostCount:status.repostCount];
 }
