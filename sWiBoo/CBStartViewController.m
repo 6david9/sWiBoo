@@ -38,11 +38,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    NSLog(@"%s\n%s", __FILE__, __PRETTY_FUNCTION__);
-    
-    if ([[self weibo] isAuthValid]) 
+    if ([[self weibo] isAuthValid])
         [self successLogin];
 }
 
