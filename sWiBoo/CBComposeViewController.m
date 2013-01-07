@@ -75,10 +75,23 @@
     NSString *postString = self.textView.text;
 //    postString = [postString substringWithRange:NSMakeRange(0, 140)];     // 截断前先判断长度，否则会溢出崩溃
     
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
     [params setValue:self.weibo.accessToken forKey:@"access_token"];
     [params setValue:postString forKey:@"status"];
-    [self.weibo requestWithURL:@"statuses/update.json" params:params httpMethod:@"POST" delegate:self];
+    
+    
+    if (self.uploadImage != nil)    /* 上传图片 */
+    {  
+        NSData *imageData = UIImagePNGRepresentation(self.uploadImage);
+        
+        [params setValue:imageData forKey:@"pic"];
+        [self.weibo requestWithURL:@"statuses/upload.json" params:params httpMethod:@"POST" delegate:self];
+    }
+    else    /* 不上传图片 */
+    {    
+        [self.weibo requestWithURL:@"statuses/update.json" params:params httpMethod:@"POST" delegate:self];
+    }
 }
 
 - (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error;
@@ -86,6 +99,8 @@
     // 发布失败
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"发布失败！" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
     [alertView show];
+    
+    NSLog(@"%@", error);
 }
 - (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result
 {
@@ -220,13 +235,63 @@
 {
     if ([[info valueForKey:UIImagePickerControllerMediaType] isEqual:@"public.image"]) {
         UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-        // 保存图片到相册
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         
+        /* 保存图片到相册 */
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        /* 压缩图片 */
+        UIImage *compressedImage = [self imageAfterCompress:image];
+        /* 保留引用 */
+        self.uploadImage = compressedImage;
+        
+        /* 隐藏imagepicker */
         [self dismissImagePickerController];
     } else {
         [self dismissImagePickerController];
     }
+}
+
+- (UIImage *)imageAfterCompress:(UIImage *)originImage
+{
+    UIImage* newImage;
+    CGSize drawSize;
+    CGSize imageSize = originImage.size;                      /*  获取图片大小 */
+    
+    CGFloat maxLength = (imageSize.height>imageSize.width ? imageSize.height:imageSize.width);
+    
+    /* 需要压缩大小, 最大边>800px */
+    if (maxLength > 800.0) {
+        CGFloat compressedWidth;
+        CGFloat compressedHeight;
+        
+        /* 计算压缩后的边长度 */
+        if (imageSize.width > imageSize.height) {       /* 以宽度为最大边，按比例压缩 */
+            compressedWidth = 800.0;
+            compressedHeight = 800.0*imageSize.height/imageSize.width;
+        } else {                                        /* 以高度为最大边，按比例压缩 */
+            compressedHeight = 800.0;
+            compressedWidth =  800.0*imageSize.width/imageSize.height;
+        }
+        
+        drawSize.width = compressedWidth;
+        drawSize.height = compressedHeight;
+        
+        NSLog(@"%f, %f", drawSize.width, drawSize.height);
+
+        NSLog(@"before compress");
+        /* 压缩图片 */
+        UIGraphicsBeginImageContext(drawSize);
+        [originImage drawInRect:CGRectMake(0, 0, drawSize.width, drawSize.height)];
+        newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        NSLog(@"end compress");
+        
+        return newImage;
+    }
+    
+    /* 不需要压缩图片大小, 最大边<=800px */
+    else
+        return originImage;
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

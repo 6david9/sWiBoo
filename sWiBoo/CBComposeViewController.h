@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 // 用于选择添加照片时的数据源
-#define kAlbumIndex    0
-#define kCameraIndex   1
+#define kAlbumIndex         0
+#define kCameraIndex        1
+#define kdeleteImageIndex   2
 
 @class FaceBoard;
 
@@ -26,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
+
+@property (strong, nonatomic) UIImage *uploadImage;
 
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
 
