@@ -26,6 +26,8 @@
 @property (strong, nonatomic) NSNumber *repostCount;
 @property (strong, nonatomic) NSString *textFrom;
 
+@property (weak, nonatomic) UIViewController *containerViewController;
+
 - (void)setText:(NSString *)text andImageWithURL:(NSURL *)imageURL;
 - (void)setRepostText:(NSString *)repostText andRepostImageWithURL:(NSURL *)repostImageURL;
 - (void)setCommentCount:(NSNumber *)commentCount andRepostCount:(NSNumber *)repostCount;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08361A89169C23DA007D2A33 /* CBPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08361A88169C23DA007D2A33 /* CBPreviewViewController.m */; };
+		08361A8C169C2440007D2A33 /* CBPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08361A8B169C2440007D2A33 /* CBPreviewViewController.xib */; };
 		084E0934163D2EBF00F9331D /* input_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 084E0932163D2EBF00F9331D /* input_window.png */; };
 		084E0935163D2EBF00F9331D /* input_window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 084E0933163D2EBF00F9331D /* input_window@2x.png */; };
 		084E093D163D37E600F9331D /* compose_camerabutton_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 084E0937163D37E600F9331D /* compose_camerabutton_background.png */; };
@@ -455,6 +457,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08361A87169C23DA007D2A33 /* CBPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPreviewViewController.h; sourceTree = "<group>"; };
+		08361A88169C23DA007D2A33 /* CBPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPreviewViewController.m; sourceTree = "<group>"; };
+		08361A8B169C2440007D2A33 /* CBPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBPreviewViewController.xib; sourceTree = "<group>"; };
 		084E0932163D2EBF00F9331D /* input_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = input_window.png; sourceTree = "<group>"; };
 		084E0933163D2EBF00F9331D /* input_window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_window@2x.png"; sourceTree = "<group>"; };
 		084E0937163D37E600F9331D /* compose_camerabutton_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compose_camerabutton_background.png; sourceTree = "<group>"; };
@@ -1250,6 +1255,9 @@
 		08724251166CB3ED0074565A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				08361A8B169C2440007D2A33 /* CBPreviewViewController.xib */,
+				08361A87169C23DA007D2A33 /* CBPreviewViewController.h */,
+				08361A88169C23DA007D2A33 /* CBPreviewViewController.m */,
 				0888129E166B26C9000C4603 /* CBStatusCell.h */,
 				0888129F166B26C9000C4603 /* CBStatusCell.m */,
 				088812A1166B2721000C4603 /* CBStatusContentView.h */,
@@ -2263,6 +2271,7 @@
 				0865131F168EC3EF007CFDCC /* whiteArrow@2x.png in Resources */,
 				08D370CD16970DF700D62618 /* timeline_rt_border_t.png in Resources */,
 				08D370CE16970DF700D62618 /* timeline_rt_border_t@2x.png in Resources */,
+				08361A8C169C2440007D2A33 /* CBPreviewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2368,6 +2377,7 @@
 				08651315168EC3EE007CFDCC /* LoadMoreTableFooterView.m in Sources */,
 				08651316168EC3EE007CFDCC /* MessageInterceptor.m in Sources */,
 				08651317168EC3EE007CFDCC /* PullTableView.m in Sources */,
+				08361A89169C23DA007D2A33 /* CBPreviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

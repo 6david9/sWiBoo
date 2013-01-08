@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
+#import "CBPreviewViewController.h"
 
 @interface CBStatusCell()
 
@@ -345,12 +346,35 @@
 #pragma mark -
 - (void)postImageDidTouch:(UIButton *)sender
 {
-    NSLog(@"%s:status id:%@", __PRETTY_FUNCTION__, self.statusID);
+    if (self.containerViewController != nil)
+    {
+        CBPreviewViewController *previewerController;
+        
+        previewerController = [[CBPreviewViewController alloc]
+                                    initWithNibName:@"CBPreviewViewController"
+                                             bundle:nil];
+        previewerController.imageURL = self.imageURL;
+        previewerController.containerController = self.containerViewController;
+        
+        [self.containerViewController presentModalViewController:previewerController animated:NO];
+    }
+    
 }
 
 - (void)repostImageDidTouch:(UIButton *)sender
 {
-    NSLog(@"%s:status id:%@", __PRETTY_FUNCTION__, self.statusID);
+    if (self.containerViewController != nil)
+    {
+        CBPreviewViewController *previewerController;
+        
+        previewerController = [[CBPreviewViewController alloc]
+                               initWithNibName:@"CBPreviewViewController"
+                               bundle:nil];
+        previewerController.imageURL = self.repostImageURL;
+        previewerController.containerController = self.containerViewController;
+        
+        [self.containerViewController presentModalViewController:previewerController animated:NO];
+    }
 }
 
 
@@ -413,4 +437,4 @@
     return calcSize;
 }
 
-@end;
+@end
