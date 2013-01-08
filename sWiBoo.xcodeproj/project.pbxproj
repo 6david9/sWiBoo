@@ -1152,6 +1152,21 @@
 			path = ../Emotions;
 			sourceTree = "<group>";
 		};
+		084EBF0A169AAFD000ADD519 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				08897945168D88FF00912B0D /* inactive_page_image.png */,
+				08897946168D88FF00912B0D /* inactive_page_image@2x.png */,
+				0889788C168D88FE00912B0D /* active_page_image.png */,
+				0889788D168D88FE00912B0D /* active_page_image@2x.png */,
+				0889788E168D88FE00912B0D /* backFace.png */,
+				0889788F168D88FE00912B0D /* backFace@2x.png */,
+				08897890168D88FE00912B0D /* backFaceSelect.png */,
+				08897891168D88FE00912B0D /* backFaceSelect@2x.png */,
+			);
+			name = image;
+			sourceTree = "<group>";
+		};
 		085BBF0D16466105005BB343 /* Follower */ = {
 			isa = PBXGroup;
 			children = (
@@ -1303,12 +1318,7 @@
 		0889788B168D88FE00912B0D /* FaceBoard */ = {
 			isa = PBXGroup;
 			children = (
-				0889788C168D88FE00912B0D /* active_page_image.png */,
-				0889788D168D88FE00912B0D /* active_page_image@2x.png */,
-				0889788E168D88FE00912B0D /* backFace.png */,
-				0889788F168D88FE00912B0D /* backFace@2x.png */,
-				08897890168D88FE00912B0D /* backFaceSelect.png */,
-				08897891168D88FE00912B0D /* backFaceSelect@2x.png */,
+				084EBF0A169AAFD000ADD519 /* image */,
 				08897892168D88FE00912B0D /* face */,
 				0889793D168D88FF00912B0D /* FaceBoard.h */,
 				0889793E168D88FF00912B0D /* FaceBoard.m */,
@@ -1318,8 +1328,6 @@
 				08897942168D88FF00912B0D /* faceMap_en.plist */,
 				08897943168D88FF00912B0D /* GrayPageControl.h */,
 				08897944168D88FF00912B0D /* GrayPageControl.m */,
-				08897945168D88FF00912B0D /* inactive_page_image.png */,
-				08897946168D88FF00912B0D /* inactive_page_image@2x.png */,
 			);
 			path = FaceBoard;
 			sourceTree = "<group>";

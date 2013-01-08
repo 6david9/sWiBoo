@@ -70,7 +70,7 @@
 #pragma mark - Private Method
 - (void)compose
 {
-    [self.textView resignFirstResponder];
+    [self.activityIndicator startAnimating];            /* 开始动画，提示用户等待 */
     
     NSString *postString = self.textView.text;
 //    postString = [postString substringWithRange:NSMakeRange(0, 140)];     // 截断前先判断长度，否则会溢出崩溃
@@ -96,6 +96,8 @@
 
 - (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error;
 {
+    [self.activityIndicator stopAnimating];     /* 结束发送提示 */
+    
     // 发布失败
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"发布失败！" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
     [alertView show];
@@ -104,6 +106,8 @@
 }
 - (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result
 {
+    [self.activityIndicator stopAnimating];     /* 结束发送提示 */
+    
     // 发送成功
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"微博发布成功！" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
     [alertView show];
@@ -141,6 +145,7 @@
     [self setLocationButton:nil];
     [self setPictureButton:nil];
     [self setEmotionButton:nil];
+    [self setActivityIndicator:nil];
     [super viewDidUnload];
 }
 
