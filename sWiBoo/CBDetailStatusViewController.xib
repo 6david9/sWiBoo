@@ -38,11 +38,11 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="808590973">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">274</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUITableView" id="708925626">
 								<reference key="NSNextResponder" ref="808590973"/>
-								<int key="NSvFlags">274</int>
+								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{320, 383}</string>
 								<reference key="NSSuperview" ref="808590973"/>
 								<reference key="NSWindow"/>
@@ -53,6 +53,7 @@
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUIContentMode">9</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<bool key="IBUIAlwaysBounceVertical">YES</bool>
 								<int key="IBUISeparatorStyle">1</int>
@@ -64,13 +65,14 @@
 							</object>
 							<object class="IBUITextField" id="465775000">
 								<reference key="NSNextResponder" ref="808590973"/>
-								<int key="NSvFlags">266</int>
+								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{0, 385}, {320, 30}}</string>
 								<reference key="NSSuperview" ref="808590973"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUIContentMode">11</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
