@@ -13,6 +13,7 @@
 #import "CBStatus.h"
 #import "CBComment.h"
 #import "UIImageView+WebCache.h"
+#import "CBCommentCell.h"
 
 @interface CBDetailStatusViewController ()
 
@@ -28,6 +29,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 添加转发按钮
+    UIBarButtonItem *repostItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Repost", @"repost baf button item") style:UIBarButtonItemStyleBordered target:self action:@selector(repost)];
+    self.navigationItem.rightBarButtonItem = repostItem;
     
     NSAssert(self.status != nil, @"status属性必须在页面加载前被赋值");
     self.list = [[CBCommentSet alloc] init];
@@ -51,6 +56,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)repost
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
+    [params setValue:self.status.statusID forKey:@"id"];
+    [[self weibo] requestWithURL:@"statuses/repost.json" params:params httpMethod:@"POST" delegate:self];
 }
 
 - (void)loadingComment
@@ -86,6 +98,9 @@
             }];
             [self.tableView reloadData];
         }
+    } else if ([request.url rangeOfString:@"statuses/repost.json"].location != NSNotFound){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"转发成功" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 
@@ -110,7 +125,12 @@
         
         return [cell height];
     } else {
-        return 50;
+        CBCommentCell *commentCell = [[CBCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommentCellHeight"];
+        [self configureCell:commentCell atIndexPath:indexPath];
+        CGFloat height = [commentCell height];
+        commentCell = nil;
+
+        return height;
     }
 }
 
@@ -140,10 +160,10 @@
         return cell;
     } else {
         static NSString *CellIdentifier = @"CommentCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        CBCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (cell == nil)
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+            cell = [[CBCommentCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         return cell;
     }
 }
@@ -168,10 +188,13 @@
         [statusCell setCommentCount:self.status.commentCount andRepostCount:self.status.repostCount];
     } else {
         CBComment *comment = [self.list objectAtIndex:row-1];
-        [cell.imageView setImageWithURL:comment.avatarURL placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
-        cell.textLabel.text = comment.userName;
-        cell.detailTextLabel.text = comment.text;
+        
+        CBCommentCell *commentCell = (CBCommentCell *)cell;
+        [commentCell setName:comment.userName];
+        [commentCell setCommentText:comment.text];
     }
+    
+    cell.clipsToBounds = YES;
 }
 
 @end
