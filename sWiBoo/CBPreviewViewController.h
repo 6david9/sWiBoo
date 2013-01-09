@@ -15,5 +15,6 @@
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) NSURL *imageURL;
 @property (weak, nonatomic) UIViewController *containerController;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
