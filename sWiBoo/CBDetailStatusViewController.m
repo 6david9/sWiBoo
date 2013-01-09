@@ -17,6 +17,8 @@
 
 @interface CBDetailStatusViewController ()
 
+@property (assign, nonatomic) CGFloat originalHeight;
+
 - (SinaWeibo *)weibo;
 - (void)loadingComment;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexpath;
@@ -29,6 +31,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 视图的默认高度
+    CGFloat navigationBarHeight = 44.0;
+    self.originalHeight = [[UIScreen mainScreen] applicationFrame].size.height-navigationBarHeight;
+    
+    // 监视键盘显示或隐藏事件
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adjustContainerSize:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adjustContainerSize:) name:UIKeyboardWillHideNotification object:nil];
     
     // 添加转发按钮
     UIBarButtonItem *repostItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Repost", @"repost baf button item") style:UIBarButtonItemStyleBordered target:self action:@selector(repost)];
@@ -49,6 +59,7 @@
     self.tableView = nil;
     self.status = nil;
     self.list = nil;
+    [self setContainerView:nil];
     [super viewDidUnload];
 }
 
@@ -84,11 +95,14 @@
 - (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error
 {
     NSLog(@"%@", error);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
 }
 
 - (void)request:(SinaWeiboRequest *)request didFinishLoadingWithResult:(id)result
 {
-    if ([request.url rangeOfString:@"comments/show.json"].location != NSNotFound) {
+    if ([request.url rangeOfString:@"comments/show.json"].location != NSNotFound)
+    {
         if ([result isKindOfClass:[NSDictionary class]]) {
             NSArray *comments = [result valueForKey:@"comments"];
             
@@ -98,10 +112,41 @@
             }];
             [self.tableView reloadData];
         }
-    } else if ([request.url rangeOfString:@"statuses/repost.json"].location != NSNotFound){
+    }
+    else if ([request.url rangeOfString:@"statuses/repost.json"].location != NSNotFound)
+    {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"转发成功" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
+    else if ([request.url rangeOfString:@"comments/create.json"].location != NSNotFound)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"评论成功" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+#pragma mark - Keyboard Hide Or Show
+- (void)adjustContainerSize:(NSDictionary *)notification
+{
+    // 保存变化前的frame的大小
+    __block CGRect aFrame = self.containerView.frame;
+    
+    NSString *notificationName = [notification valueForKey:@"name"];
+    NSDictionary *userInfo = [notification valueForKey:@"userInfo"];
+    
+    CGRect keyboardFrame = [[userInfo valueForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    CGFloat duration = [[userInfo valueForKey:@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
+    
+    // 计算更改后的container的frame
+    if ([notificationName isEqualToString:UIKeyboardWillShowNotification])
+        aFrame.size.height = self.originalHeight - keyboardFrame.size.height;
+    else
+        aFrame.size.height = self.originalHeight;
+    
+    // 动画效果，更改container的frame
+    [UIView animateWithDuration:duration animations:^{
+        self.containerView.frame = aFrame;
+    }];
 }
 
 #pragma mark - Table view data source
@@ -124,7 +169,11 @@
         [self configureCell:cell atIndexPath:indexPath];
         
         return [cell height];
-    } else {
+    }
+    else if ([self.list count] == 0) {
+        return 44;
+    }
+    else {
         CBCommentCell *commentCell = [[CBCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommentCellHeight"];
         [self configureCell:commentCell atIndexPath:indexPath];
         CGFloat height = [commentCell height];
@@ -195,6 +244,18 @@
     }
     
     cell.clipsToBounds = YES;
+}
+- (IBAction)hideKeyboard:(id)sender
+{
+    UITextField *textfiled = (UITextField *)sender;
+    [textfiled resignFirstResponder];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:2];
+    [params setValue:[textfiled text] forKey:@"comment"];
+    [params setValue:self.status.statusID forKey:@"id"];
+    [[self weibo] requestWithURL:@"comments/create.json" params:params httpMethod:@"POST" delegate:self];
+    
+    textfiled.text = @"";
 }
 
 @end

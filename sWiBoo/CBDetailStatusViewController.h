@@ -12,6 +12,7 @@
 @class CBStatus;
 @interface CBDetailStatusViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SinaWeiboRequestDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) CBStatus *status;
 @property (strong, nonatomic) CBCommentSet *list;

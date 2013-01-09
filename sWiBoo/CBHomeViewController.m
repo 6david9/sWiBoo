@@ -114,6 +114,7 @@
     // 显示详细页面
     CBDetailStatusViewController *detailStatusViewController = [[CBDetailStatusViewController alloc] initWithNibName:@"CBDetailStatusViewController" bundle:nil];
     detailStatusViewController.status = [self.list objectAtIndex:row];
+    detailStatusViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailStatusViewController animated:YES];
 }
 
