@@ -70,27 +70,30 @@
 #pragma mark - Private Method
 - (void)compose
 {
-    [self.activityIndicator startAnimating];            /* 开始动画，提示用户等待 */
-    
     NSString *postString = self.textView.text;
-//    postString = [postString substringWithRange:NSMakeRange(0, 140)];     // 截断前先判断长度，否则会溢出崩溃
-    
-    
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
-    [params setValue:self.weibo.accessToken forKey:@"access_token"];
-    [params setValue:postString forKey:@"status"];
-    
-    
-    if (self.uploadImage != nil)    /* 上传图片 */
-    {  
-        NSData *imageData = UIImagePNGRepresentation(self.uploadImage);
+
+    if ([postString length] > 140) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"发送文字字数超过140字限制" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    } else {
+        [self.activityIndicator startAnimating];            /* 开始动画，提示用户等待 */
         
-        [params setValue:imageData forKey:@"pic"];
-        [self.weibo requestWithURL:@"statuses/upload.json" params:params httpMethod:@"POST" delegate:self];
-    }
-    else    /* 不上传图片 */
-    {    
-        [self.weibo requestWithURL:@"statuses/update.json" params:params httpMethod:@"POST" delegate:self];
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
+        [params setValue:self.weibo.accessToken forKey:@"access_token"];
+        [params setValue:postString forKey:@"status"];
+        
+        
+        if (self.uploadImage != nil)    /* 上传图片 */
+        {
+            NSData *imageData = UIImagePNGRepresentation(self.uploadImage);
+            
+            [params setValue:imageData forKey:@"pic"];
+            [self.weibo requestWithURL:@"statuses/upload.json" params:params httpMethod:@"POST" delegate:self];
+        }
+        else    /* 不上传图片 */
+        {
+            [self.weibo requestWithURL:@"statuses/update.json" params:params httpMethod:@"POST" delegate:self];
+        }
     }
 }
 
@@ -146,6 +149,7 @@
     [self setPictureButton:nil];
     [self setEmotionButton:nil];
     [self setActivityIndicator:nil];
+    [self setCountDownLabel:nil];
     [super viewDidUnload];
 }
 
@@ -233,6 +237,13 @@
 - (void)dismissImagePickerController
 {
     [self.imagePickerController dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - UITextView Delegate
+- (void)textViewDidChange:(UITextView *)textView
+{
+    NSInteger numWords = [textView.text length];
+    self.countDownLabel.text = [NSString stringWithFormat:@"%d", 140-numWords];
 }
 
 #pragma mark - UIImagePickerController Delegate
