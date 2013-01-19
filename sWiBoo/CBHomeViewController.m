@@ -13,6 +13,7 @@
 #import "CBDetailStatusViewController.h"
 #import "CBStatusCell.h"
 #import "SinaWeibo.h"
+#import "SDImageCache.h"
 
 #import "CBStatus.h"
 
@@ -29,7 +30,7 @@
 
 @implementation CBHomeViewController
 
-@synthesize fetchedResultsController = _fetchedResultsController;
+//@synthesize fetchedResultsController = _fetchedResultsController;
 //@synthesize status = _status;
 @synthesize lastStatusID = _lastStatusID;
 
@@ -66,6 +67,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [[SDImageCache sharedImageCache] clearMemory];
 }
 
 - (void)viewDidUnload {
@@ -89,7 +91,7 @@
 {
     CBStatusCell *cell;
     
-    cell = [self newCellForTalble:tableView];
+    cell = [self newCellForTable:tableView];
     [self configureCell:cell atIndexPath:indexPath];
     
     return [cell height];
@@ -99,7 +101,7 @@
 {
     CBStatusCell *cell;
     
-    cell = [self newCellForTalble:tableView];
+    cell = [self newCellForTable:tableView];
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -121,17 +123,20 @@
 
 #pragma mark Configure Cell
 
-- (CBStatusCell *)newCellForTalble:(UITableView *)tableView
+- (CBStatusCell *)newCellForTable:(UITableView *)tableView
 {
     static NSString *CellIdentifier;
     CBStatusCell *cell;
     
-    CellIdentifier = @"StatusCell";
-    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil)
-        cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    
+    @autoreleasepool {
+        CellIdentifier = @"StatusCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (cell == nil)
+            cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:CellIdentifier];
+    }
+
     return cell;
 }
 
@@ -173,6 +178,7 @@
 {
     [self.list removeAllObjects];
     [self loadingMore];
+    [self.tableView scrollsToTop];
 }
 
 - (void)loadMoreDataToTable
@@ -224,6 +230,7 @@
             if (addCount != 0) {
                 [self.tableView reloadData];
                 self.lastStatusID = [[statuses lastObject] valueForKey:@"idstr"];
+                [[SDImageCache sharedImageCache] clearMemory];
             } else {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"刷新微博" message:@"没有新微博" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
                 [alertView show];

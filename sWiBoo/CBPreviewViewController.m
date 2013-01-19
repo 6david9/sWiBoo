@@ -47,6 +47,13 @@
         
     });
 }
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.imageView cancelCurrentImageLoad];
+}
+
 - (IBAction)handTap:(UITapGestureRecognizer *)sender
 {
     if (sender.state == UIGestureRecognizerStateEnded) {

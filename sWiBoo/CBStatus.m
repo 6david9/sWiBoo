@@ -20,18 +20,22 @@
 {
     self = [super init];
     if (self != nil) {
-        self.statusID = [dictionary valueForKey:@"idstr"];
-        self.text = [dictionary valueForKey:@"text"];
-        self.imageURL = [NSURL URLWithString:[dictionary valueForKey:@"bmiddle_pic"]];
-        self.repostText = [[dictionary valueForKey:@"retweeted_status"] valueForKey:@"text"];
-        self.repostImageURL = [NSURL URLWithString:[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"bmiddle_pic"]];
-        self.commentCount = [dictionary valueForKey:@"comments_count"];
-        self.repostCount = [dictionary valueForKey:@"reposts_count"];
-        self.avatarURL = [NSURL URLWithString:[[dictionary valueForKey:@"user"] valueForKey:@"profile_image_url"]];
-        self.screen_name = [[dictionary valueForKey:@"user"] valueForKey:@"screen_name"];
-        self.repost_screen_name = [[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"user"]  valueForKey:@"screen_name"];
-        self.fromText = [self sourceString:[dictionary valueForKey:@"source"]];
-        self.postDate = [self dateFromString:[dictionary valueForKey:@"created_at"]];
+        @autoreleasepool {
+            self.statusID = [dictionary valueForKey:@"idstr"];
+            self.text = [dictionary valueForKey:@"text"];
+            self.imageURL = [NSURL URLWithString:[dictionary valueForKey:@"bmiddle_pic"]];
+            self.repostText = [[dictionary valueForKey:@"retweeted_status"] valueForKey:@"text"];
+            self.repostImageURL = [NSURL URLWithString:[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"bmiddle_pic"]];
+            self.commentCount = [dictionary valueForKey:@"comments_count"];
+            self.repostCount = [dictionary valueForKey:@"reposts_count"];
+            self.avatarURL = [NSURL URLWithString:[[dictionary valueForKey:@"user"] valueForKey:@"profile_image_url"]];
+            self.screen_name = [[dictionary valueForKey:@"user"] valueForKey:@"screen_name"];
+            self.repost_screen_name = [[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"user"]  valueForKey:@"screen_name"];
+            self.fromText = [self sourceString:[dictionary valueForKey:@"source"]];
+            NSString *dataStr = [dictionary valueForKey:@"created_at"];
+            self.postDate = [self dateFromString:dataStr];
+            dataStr = nil;
+        } 
     }
     
     return self;
@@ -59,12 +63,16 @@
 
 - (NSDate *)dateFromString:(NSString *)dateString
 {
-    // Sun Mar 18 21:03:59 +0800 2012
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setLocale:usLocale];
-    [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss v yyyy"];
-    NSDate *date = [dateFormatter dateFromString:dateString];
+    NSDate *date = nil;
+    
+    @autoreleasepool {
+        // Sun Mar 18 21:03:59 +0800 2012
+        NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setLocale:usLocale];
+        [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss v yyyy"];
+        date = [dateFormatter dateFromString:dateString];
+    }
     
     return date;
 }

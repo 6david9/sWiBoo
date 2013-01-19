@@ -96,16 +96,20 @@ static SDWebImageDecoder *sharedInstance;
 
 + (UIImage *)decodedImageWithImage:(UIImage *)image
 {
-    CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(image.CGImage);
-    BOOL imageHasAlphaInfo = (alphaInfo != kCGImageAlphaNone &&
-                              alphaInfo != kCGImageAlphaNoneSkipFirst &&
-                              alphaInfo != kCGImageAlphaNoneSkipLast);
-
-    UIGraphicsBeginImageContextWithOptions(image.size, !imageHasAlphaInfo, 0);
-    CGRect rect = (CGRect){.origin = CGPointZero, .size = image.size};
-    [image drawInRect:rect];
-    UIImage *decompressedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *decompressedImage;
+    @autoreleasepool {
+        CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(image.CGImage);
+        BOOL imageHasAlphaInfo = (alphaInfo != kCGImageAlphaNone &&
+                                  alphaInfo != kCGImageAlphaNoneSkipFirst &&
+                                  alphaInfo != kCGImageAlphaNoneSkipLast);
+        
+        UIGraphicsBeginImageContextWithOptions(image.size, !imageHasAlphaInfo, 0);
+        CGRect rect = (CGRect){.origin = CGPointZero, .size = image.size};
+        [image drawInRect:rect];
+        decompressedImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    
 
     return decompressedImage;
 }

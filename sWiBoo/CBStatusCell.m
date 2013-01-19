@@ -128,6 +128,11 @@
     return self;
 }
 
+- (void)prepareForReuse
+{
+    
+}
+
 
 #pragma mark - Cell Height
 - (CGFloat)height
@@ -161,20 +166,6 @@
     
     self.nameLabel.text = name;
 }
-
-//- (void)setText:(NSString *)text
-//{
-//    _text = text;
-//    
-//    self.postTextLabel.hidden = (text!=nil ? NO : YES);
-//    
-//    // 调整label大小
-//    CGSize calcSize;
-//    calcSize = [self fitSizeForLabelText:text];
-//    self.postTextLabel.frame = CGRectMake(59, 28, calcSize.width, calcSize.height);
-//    
-//    self.postTextLabel.text = text;
-//}
 
 - (void)setText:(NSString *)text andImageWithURL:(NSURL *)imageURL
 {
@@ -340,7 +331,9 @@
         self.commentAndRepostCountLabel.frame = CGRectMake(187, y, 112, 14);
     }
     
-    self.commentAndRepostCountLabel.text = [NSString stringWithFormat:@"评论:%d 转发:%d",[commentCount integerValue], [repostCount integerValue]];
+    @autoreleasepool {
+        self.commentAndRepostCountLabel.text = [NSString stringWithFormat:@"评论:%d 转发:%d",[commentCount integerValue], [repostCount integerValue]];
+    }
 }
 
 #pragma mark -
