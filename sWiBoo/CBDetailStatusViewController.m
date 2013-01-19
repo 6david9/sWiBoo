@@ -14,6 +14,7 @@
 #import "CBComment.h"
 #import "UIImageView+WebCache.h"
 #import "CBCommentCell.h"
+#import "CBRepostViewController.h"
 
 @interface CBDetailStatusViewController ()
 
@@ -72,9 +73,12 @@
 
 - (void)repost
 {
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
-    [params setValue:self.status.statusID forKey:@"id"];
-    [[self weibo] requestWithURL:@"statuses/repost.json" params:params httpMethod:@"POST" delegate:self];
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
+//    [params setValue:self.status.statusID forKey:@"id"];
+//    [[self weibo] requestWithURL:@"statuses/repost.json" params:params httpMethod:@"POST" delegate:self];
+    CBRepostViewController *repostViewController = [[CBRepostViewController alloc] initWithNibName:@"CBRepostViewController" bundle:nil];
+    repostViewController.statusId = self.status.statusID;
+    [self.navigationController pushViewController:repostViewController animated:YES];
 }
 
 - (void)loadingComment

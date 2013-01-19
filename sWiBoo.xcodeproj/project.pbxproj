@@ -12,6 +12,8 @@
 		08361A8C169C2440007D2A33 /* CBPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08361A8B169C2440007D2A33 /* CBPreviewViewController.xib */; };
 		08361A9B169C2A2D007D2A33 /* timeline_retweet_count_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 08361A99169C2A2D007D2A33 /* timeline_retweet_count_icon.png */; };
 		08361A9C169C2A2D007D2A33 /* timeline_retweet_count_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08361A9A169C2A2D007D2A33 /* timeline_retweet_count_icon@2x.png */; };
+		083C2F2716AAE848006AF8D9 /* CBRepostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 083C2F2516AAE848006AF8D9 /* CBRepostViewController.m */; };
+		083C2F2816AAE848006AF8D9 /* CBRepostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C2F2616AAE848006AF8D9 /* CBRepostViewController.xib */; };
 		084E0934163D2EBF00F9331D /* input_window.png in Resources */ = {isa = PBXBuildFile; fileRef = 084E0932163D2EBF00F9331D /* input_window.png */; };
 		084E0935163D2EBF00F9331D /* input_window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 084E0933163D2EBF00F9331D /* input_window@2x.png */; };
 		084E093D163D37E600F9331D /* compose_camerabutton_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 084E0937163D37E600F9331D /* compose_camerabutton_background.png */; };
@@ -465,6 +467,9 @@
 		08361A8B169C2440007D2A33 /* CBPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBPreviewViewController.xib; sourceTree = "<group>"; };
 		08361A99169C2A2D007D2A33 /* timeline_retweet_count_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_retweet_count_icon.png; sourceTree = "<group>"; };
 		08361A9A169C2A2D007D2A33 /* timeline_retweet_count_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_retweet_count_icon@2x.png"; sourceTree = "<group>"; };
+		083C2F2416AAE848006AF8D9 /* CBRepostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBRepostViewController.h; sourceTree = "<group>"; };
+		083C2F2516AAE848006AF8D9 /* CBRepostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBRepostViewController.m; sourceTree = "<group>"; };
+		083C2F2616AAE848006AF8D9 /* CBRepostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBRepostViewController.xib; sourceTree = "<group>"; };
 		084E0932163D2EBF00F9331D /* input_window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = input_window.png; sourceTree = "<group>"; };
 		084E0933163D2EBF00F9331D /* input_window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_window@2x.png"; sourceTree = "<group>"; };
 		084E0937163D37E600F9331D /* compose_camerabutton_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compose_camerabutton_background.png; sourceTree = "<group>"; };
@@ -1014,6 +1019,16 @@
 				0888129F166B26C9000C4603 /* CBStatusCell.m */,
 			);
 			name = "status cell";
+			sourceTree = "<group>";
+		};
+		083C2F2216AAE828006AF8D9 /* Repost Controller */ = {
+			isa = PBXGroup;
+			children = (
+				083C2F2416AAE848006AF8D9 /* CBRepostViewController.h */,
+				083C2F2516AAE848006AF8D9 /* CBRepostViewController.m */,
+				083C2F2616AAE848006AF8D9 /* CBRepostViewController.xib */,
+			);
+			name = "Repost Controller";
 			sourceTree = "<group>";
 		};
 		083FA15A16395AE500471B8E /* Models */ = {
@@ -1604,6 +1619,7 @@
 				089462C11638443F00E0E9F1 /* CBHomeViewController.m */,
 				089462C21638443F00E0E9F1 /* CBHomeViewController.xib */,
 				089F314E1642653B006E96D1 /* Detail Status */,
+				083C2F2216AAE828006AF8D9 /* Repost Controller */,
 				0863DF48163A747100133645 /* Compose Controller */,
 			);
 			name = Home;
@@ -2291,6 +2307,7 @@
 				08361A8C169C2440007D2A33 /* CBPreviewViewController.xib in Resources */,
 				08361A9B169C2A2D007D2A33 /* timeline_retweet_count_icon.png in Resources */,
 				08361A9C169C2A2D007D2A33 /* timeline_retweet_count_icon@2x.png in Resources */,
+				083C2F2816AAE848006AF8D9 /* CBRepostViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2396,6 +2413,7 @@
 				08651317168EC3EE007CFDCC /* PullTableView.m in Sources */,
 				08361A89169C23DA007D2A33 /* CBPreviewViewController.m in Sources */,
 				082050FD169D69D5003D9942 /* CBCommentCell.m in Sources */,
+				083C2F2716AAE848006AF8D9 /* CBRepostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
