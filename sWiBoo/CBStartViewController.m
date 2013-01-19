@@ -63,22 +63,25 @@
 #pragma mark - Private Method
 - (void)successLogin
 {
-    self.mainTabbarController = [[UITabBarController alloc] init];
-    
-    CBHomeViewController *homeViewController = [[CBHomeViewController alloc] initWithNibName:@"CBHomeViewController" bundle:nil];
-    homeViewController.managedObjectContext = self.managedObjectContext;
-    homeViewController.weibo = self.weibo;
-    UINavigationController *homeNavi = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-    
-    CBFollowerViewController *followerViewController = [[CBFollowerViewController alloc] initWithNibName:@"CBFollowerViewController" bundle:nil];
-    UINavigationController *userDetailNavigationController = [[UINavigationController alloc] initWithRootViewController:followerViewController];
-    
-    CBMoreViewController *moreViewController = [[CBMoreViewController alloc] initWithNibName:@"CBMoreViewController" bundle:nil];
-    
-    self.mainTabbarController.viewControllers = @[homeNavi, userDetailNavigationController, moreViewController];
-//    [self addChildViewController:self.mainTabbarController];
-//    [self.view addSubview:self.mainTabbarController.view];
-    [self presentModalViewController:self.mainTabbarController animated:YES];
+    @autoreleasepool {
+        self.mainTabbarController = [[UITabBarController alloc] init];
+        
+        CBHomeViewController *homeViewController = [[CBHomeViewController alloc] initWithNibName:@"CBHomeViewController" bundle:nil];
+        homeViewController.managedObjectContext = self.managedObjectContext;
+        homeViewController.weibo = self.weibo;
+        UINavigationController *homeNavi = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+        
+        CBFollowerViewController *followerViewController = [[CBFollowerViewController alloc] initWithNibName:@"CBFollowerViewController" bundle:nil];
+        UINavigationController *userDetailNavigationController = [[UINavigationController alloc] initWithRootViewController:followerViewController];
+        
+        CBMoreViewController *moreViewController = [[CBMoreViewController alloc] initWithNibName:@"CBMoreViewController" bundle:nil];
+        
+        self.mainTabbarController.viewControllers = @[homeNavi, userDetailNavigationController, moreViewController];
+        [self presentModalViewController:self.mainTabbarController animated:YES];
+        homeNavi = nil;
+        userDetailNavigationController = nil;
+        moreViewController = nil;
+    } 
 }
 
 #pragma mark - Sina Weibo Delegate

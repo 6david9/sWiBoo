@@ -35,6 +35,7 @@
     // 视图的默认高度
     CGFloat navigationBarHeight = 44.0;
     self.originalHeight = [[UIScreen mainScreen] applicationFrame].size.height-navigationBarHeight;
+    self.tableView.rowHeight = 44;
     
     // 监视键盘显示或隐藏事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adjustContainerSize:) name:UIKeyboardWillShowNotification object:nil];

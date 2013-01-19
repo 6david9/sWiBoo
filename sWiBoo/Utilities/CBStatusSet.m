@@ -39,6 +39,15 @@
     [self.IDSet removeAllObjects];
 }
 
+- (void)removeObjectsInRange:(NSRange)range
+{
+    for (NSInteger i = range.location;  i< range.length; i++) {
+        CBStatus *s = [self.list objectAtIndex:i];
+        [self.IDSet removeObject:s.statusID];
+    }
+    [self.list removeObjectsInRange:range];
+}
+
 - (BOOL)addStatus:(CBStatus *)status
 {
     if (status!=nil && ![self containsStatus:status]) {
@@ -47,6 +56,23 @@
         return YES;
     }
     return NO;
+}
+
+- (NSInteger)addStatusesFromArray:(NSArray *)array
+{
+    NSInteger count = 0;
+    
+    for (NSInteger i = 0; i < [array count]; i++)
+        @autoreleasepool {
+            CBStatus *status = array[i];
+            if (status!=nil && ![self containsStatus:status]) {
+                [self.list addObject:status];
+                [self.IDSet addObject:status.statusID];
+                count++;
+            }
+        }
+    
+    return count;
 }
 
 - (CBStatus *)objectAtIndex:(NSUInteger)index

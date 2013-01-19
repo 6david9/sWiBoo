@@ -322,27 +322,29 @@
 
 - (void)connect
 {
-    NSString* urlString = [[self class] serializeURL:url params:params httpMethod:httpMethod];
-    NSMutableURLRequest* request =
-    [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
-                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                        timeoutInterval:kSinaWeiboRequestTimeOutInterval];
-    
-    [request setHTTPMethod:self.httpMethod];
-    if ([self.httpMethod isEqualToString: @"POST"])
-    {
-        BOOL hasRawData = NO;
-        [request setHTTPBody:[self postBodyHasRawData:&hasRawData]];
+    @autoreleasepool {
+        NSString* urlString = [[self class] serializeURL:url params:params httpMethod:httpMethod];
+        NSMutableURLRequest* request =
+        [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                            timeoutInterval:kSinaWeiboRequestTimeOutInterval];
         
-        if (hasRawData)
+        [request setHTTPMethod:self.httpMethod];
+        if ([self.httpMethod isEqualToString: @"POST"])
         {
-            NSString* contentType = [NSString
-                                     stringWithFormat:@"multipart/form-data; boundary=%@", kSinaWeiboRequestStringBoundary];
-            [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
+            BOOL hasRawData = NO;
+            [request setHTTPBody:[self postBodyHasRawData:&hasRawData]];
+            
+            if (hasRawData)
+            {
+                NSString* contentType = [NSString
+                                         stringWithFormat:@"multipart/form-data; boundary=%@", kSinaWeiboRequestStringBoundary];
+                [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
+            }
         }
+        
+        connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     }
-    
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 }
 
 - (void)disconnect

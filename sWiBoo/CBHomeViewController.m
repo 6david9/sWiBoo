@@ -29,17 +29,19 @@
 @end
 
 @implementation CBHomeViewController
-
-//@synthesize fetchedResultsController = _fetchedResultsController;
-//@synthesize status = _status;
+{
+    CBStatusCell *heightCell;
+}
 @synthesize lastStatusID = _lastStatusID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Home", @"主页");
-        self.tabBarItem.image = [UIImage imageNamed:@"navigationbar_home.png"];
+        @autoreleasepool {
+            self.title = NSLocalizedString(@"Home", @"主页");
+            self.tabBarItem.image = [UIImage imageNamed:@"navigationbar_home.png"];
+        }
     }
     return self;
 }
@@ -47,6 +49,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 行高
+    self.tableView.rowHeight = 44;
 
     // 添加刷新按钮
     UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshTable)];
@@ -89,19 +94,33 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CBStatusCell *cell;
+    static NSInteger i = 0;
+    static NSString *CellIdentifier = @"StatusCellHeight";
+    if (heightCell == nil) {
+        heightCell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault
+                            reuseIdentifier:CellIdentifier];
+        NSLog(@"height reuse cell:%d", ++i);
+    }
     
-    cell = [self newCellForTable:tableView];
-    [self configureCell:cell atIndexPath:indexPath];
+    [self configureCell:heightCell atIndexPath:indexPath];
     
-    return [cell height];
+    return [heightCell height];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CBStatusCell *cell;
+    static NSString *CellIdentifier = @"HomeStatusCell";
+    static NSInteger i = 0;
     
-    cell = [self newCellForTable:tableView];
+    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:CellIdentifier];
+        NSLog(@"cell reuse:%d", i);
+    }
+    
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -125,16 +144,16 @@
 
 - (CBStatusCell *)newCellForTable:(UITableView *)tableView
 {
-    static NSString *CellIdentifier;
+    static NSString *CellIdentifier = @"StatusCell";
     CBStatusCell *cell;
+    static NSInteger i = 0;
     
-    @autoreleasepool {
-        CellIdentifier = @"StatusCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (cell == nil)
-            cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:CellIdentifier];
+    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[CBStatusCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:CellIdentifier];
+        NSLog(@"%d", ++i);
     }
 
     return cell;
@@ -176,9 +195,25 @@
 
 - (void)refreshTable
 {
+    NSMutableArray *indexPathArray = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < [self.list count]; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        [indexPathArray addObject:indexPath];
+        indexPath = nil;
+    }
+    
     [self.list removeAllObjects];
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:indexPathArray
+                          withRowAnimation:UITableViewScrollPositionNone];
+    [self.tableView endUpdates];
+    
+    
     [self loadingMore];
-    [self.tableView scrollsToTop];
+    
+    if ([self.list count]>0) {
+        [self.tableView scrollsToTop];
+    }
 }
 
 - (void)loadMoreDataToTable
@@ -228,7 +263,8 @@
             
             // 判断是否获取到新的微博信息
             if (addCount != 0) {
-                [self.tableView reloadData];
+                [self performSelectorOnMainThread:@selector(addNewStatusToTable:) withObject:[NSNumber numberWithInteger:addCount] waitUntilDone:YES];
+                
                 self.lastStatusID = [[statuses lastObject] valueForKey:@"idstr"];
                 [[SDImageCache sharedImageCache] clearMemory];
             } else {
@@ -245,9 +281,79 @@
     }
 }
 
+- (void)addNewStatusToTable:(NSNumber *)addCountNum
+{
+    @autoreleasepool {
+        NSInteger addCount = [addCountNum integerValue];
+        NSInteger oldListCount = [self.list count]-addCount;
+        NSMutableArray *indexPathArray = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < addCount; i++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:oldListCount+i inSection:0];
+            [indexPathArray addObject:indexPath];
+        }
+        
+        // 插入数据
+        [self.tableView beginUpdates];
+        [self.tableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        
+        // 清理内存
+        [self performSelectorOnMainThread:@selector(deleteOldStatus:) withObject:addCountNum waitUntilDone:YES];
+    }
+}
+
+- (void)deleteOldStatus:(NSNumber *)addCountNum
+{
+    NSInteger addCount = [addCountNum integerValue];
+    
+    if ( ([self.list count]-addCount) >= 20) {
+        NSMutableArray *indexPathArray = [[NSMutableArray alloc] init];
+        // 生成需要删除的indexPath
+        for (NSInteger i = 0; i < 20; i++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0 ];
+            [indexPathArray addObject:indexPath];
+        }
+        
+        // 先删除list中数据
+        NSRange removeRange = NSMakeRange(0, 20);
+        [self.list removeObjectsInRange:removeRange];
+        
+        // 删除行
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        
+        // 滚动到更新前的最后一行
+        NSInteger row = [self.list count] - addCount - 1;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewRowAnimationTop animated:NO];
+    }
+}
+
 - (void)request:(SinaWeiboRequest *)request didFailWithError:(NSError *)error
 {
     NSLog(@"%s, %@", __PRETTY_FUNCTION__, error);
+    
+    // 停止更新
+    self.tableView.pullLastRefreshDate = [NSDate date];
+    self.tableView.pullTableIsRefreshing = NO;
+    self.tableView.pullTableIsLoadingMore = NO;
+    
+    // 显示错误提示
+    NSString *alertString;
+    if ([error code] == 10023) {    // User requests out of rate limit!
+       alertString = @"用户请求太频繁，请稍后重试！";
+    } else {
+        alertString = @"未知错误，请稍后重试！";
+    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                           message:alertString
+                                          delegate:nil
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil];
+    [alertView show];
+   
+    
 }
 
 @end

@@ -15,7 +15,9 @@
 
 - (NSUInteger)count;
 - (void)removeAllObjects;
+- (void)removeObjectsInRange:(NSRange)range;
 - (BOOL)addStatus:(CBStatus *)status;
+- (NSInteger)addStatusesFromArray:(NSArray *)array;
 - (CBStatus *)objectAtIndex:(NSUInteger)index;
 
 @end

@@ -31,20 +31,21 @@
     // Do any additional setup after loading the view from its nib.
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.activityIndicator startAnimating];
-        });
-        
-        NSData *imageDate = [NSData dataWithContentsOfURL:self.imageURL];
-        UIImage *image = [UIImage imageWithData:imageDate];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.imageView.image = image;
+        @autoreleasepool {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.activityIndicator startAnimating];
+            });
             
-            [self.activityIndicator stopAnimating];
-        });
-        
+            NSData *imageDate = [NSData dataWithContentsOfURL:self.imageURL];
+            UIImage *image = [UIImage imageWithData:imageDate];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.imageView.image = image;
+                [self.activityIndicator stopAnimating];
+            });
+            imageDate = nil;
+            image = nil;
+        }
     });
 }
 

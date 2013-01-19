@@ -169,43 +169,45 @@
 
 - (void)setText:(NSString *)text andImageWithURL:(NSURL *)imageURL
 {
-    // 保存引用
-    _text = text;
-    _imageURL = imageURL;
-    
-    BOOL hasText = (text!=nil ? YES:NO);
-    BOOL hasImage = (imageURL!=nil ? YES:NO);
-    
-    // 是否需要显示?
-    self.postTextView.hidden = (hasText||hasImage ? NO:YES);
-    
-    // 调整内部位置
-    if (hasText && hasImage) {
-        CGSize calcSize = [self fitSizeForLabelText:text];
-        self.postTextLabel.frame = CGRectMake(0, 0, 240, calcSize.height);
+    @autoreleasepool {
+        // 保存引用
+        _text = text;
+        _imageURL = imageURL;
         
-        CGFloat y = self.postTextLabel.frame.size.height + 5;
-        self.postImageView.frame = CGRectMake(0, y, 50, 50);
+        BOOL hasText = (text!=nil ? YES:NO);
+        BOOL hasImage = (imageURL!=nil ? YES:NO);
+        
+        // 是否需要显示?
+        self.postTextView.hidden = (hasText||hasImage ? NO:YES);
+        
+        // 调整内部位置
+        if (hasText && hasImage) {
+            CGSize calcSize = [self fitSizeForLabelText:text];
+            self.postTextLabel.frame = CGRectMake(0, 0, 240, calcSize.height);
+            
+            CGFloat y = self.postTextLabel.frame.size.height + 5;
+            self.postImageView.frame = CGRectMake(0, y, 50, 50);
+        }
+        else if (hasText) {
+            CGSize calcSize;
+            calcSize = [self fitSizeForLabelText:text];
+            self.postTextLabel.frame = CGRectMake(0, 0, 240, calcSize.height);
+        }
+        else if (hasImage) {
+            self.postImageView.frame = CGRectMake(0, 5, 50, 50);
+        }
+        self.postTextLabel.hidden = !hasText;
+        self.postImageView.hidden = !hasImage;
+        
+        // 调整外部距离
+        CGSize postTextViewSize = [self fitSizeForPostText:text andImage:hasImage];
+        self.postTextView.frame = CGRectMake(59, 28, 240, postTextViewSize.height);
+        
+        
+        
+        self.postTextLabel.text = text;
+        [self.postImageView setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
     }
-    else if (hasText) {
-        CGSize calcSize;
-        calcSize = [self fitSizeForLabelText:text];
-        self.postTextLabel.frame = CGRectMake(0, 0, 240, calcSize.height);
-    }
-    else if (hasImage) {
-        self.postImageView.frame = CGRectMake(0, 5, 50, 50);
-    }
-    self.postTextLabel.hidden = !hasText;
-    self.postImageView.hidden = !hasImage;
-    
-    // 调整外部距离
-    CGSize postTextViewSize = [self fitSizeForPostText:text andImage:hasImage];
-    self.postTextView.frame = CGRectMake(59, 28, 240, postTextViewSize.height);
-    
-    
-    
-    self.postTextLabel.text = text;
-    [self.postImageView setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
 }
 
 - (void)setAvatarURL:(NSURL *)avatarURL
@@ -332,7 +334,9 @@
     }
     
     @autoreleasepool {
-        self.commentAndRepostCountLabel.text = [NSString stringWithFormat:@"评论:%d 转发:%d",[commentCount integerValue], [repostCount integerValue]];
+        NSString *str = [NSString stringWithFormat:@"评论:%d 转发:%d",[commentCount integerValue], [repostCount integerValue]];
+        self.commentAndRepostCountLabel.text = str;
+        str = nil;
     }
 }
 
@@ -407,9 +411,13 @@
 
 - (CGSize)fitSizeForLabelText:(NSString *)text
 {
-    CGSize constrainedSize = CGSizeMake(230, 1000);
-    
-    return [text sizeWithFont:[UIFont systemFontOfSize:13.0f] constrainedToSize:constrainedSize];
+    CGSize retSize = CGSizeZero;
+    @autoreleasepool {
+        CGSize constrainedSize = CGSizeMake(230, 1000);
+        
+        retSize =  [text sizeWithFont:[UIFont systemFontOfSize:13.0f] constrainedToSize:constrainedSize];
+    }
+    return retSize;
 }
 
 - (CGSize)fitSizeForRepostText:(NSString *)repostText andRepostImage:(BOOL)hasImage

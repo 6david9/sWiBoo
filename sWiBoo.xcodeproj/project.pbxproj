@@ -1277,8 +1277,8 @@
 		08724251166CB3ED0074565A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				082050FF169D69DB003D9942 /* comment cell */,
 				08205100169D69E9003D9942 /* status cell */,
+				082050FF169D69DB003D9942 /* comment cell */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
