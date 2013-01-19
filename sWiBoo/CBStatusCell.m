@@ -350,7 +350,7 @@
         previewerController = [[CBPreviewViewController alloc]
                                     initWithNibName:@"CBPreviewViewController"
                                              bundle:nil];
-        previewerController.imageURL = self.imageURL;
+        previewerController.imageURL = self.bigImageURL;
         previewerController.containerController = self.containerViewController;
         
         [self.containerViewController presentModalViewController:previewerController animated:NO];
@@ -367,7 +367,7 @@
         previewerController = [[CBPreviewViewController alloc]
                                initWithNibName:@"CBPreviewViewController"
                                bundle:nil];
-        previewerController.imageURL = self.repostImageURL;
+        previewerController.imageURL = self.bigRepostImageURL;
         previewerController.containerController = self.containerViewController;
         
         [self.containerViewController presentModalViewController:previewerController animated:NO];

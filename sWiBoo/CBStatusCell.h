@@ -26,6 +26,8 @@
 @property (strong, nonatomic) NSNumber *repostCount;
 @property (strong, nonatomic) NSString *textFrom;
 
+@property (strong, nonatomic) NSURL *bigImageURL;
+@property (strong, nonatomic) NSURL *bigRepostImageURL;
 @property (weak, nonatomic) UIViewController *containerViewController;
 
 - (void)setText:(NSString *)text andImageWithURL:(NSURL *)imageURL;

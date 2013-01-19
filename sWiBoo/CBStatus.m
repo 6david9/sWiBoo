@@ -23,9 +23,9 @@
         @autoreleasepool {
             self.statusID = [dictionary valueForKey:@"idstr"];
             self.text = [dictionary valueForKey:@"text"];
-            self.imageURL = [NSURL URLWithString:[dictionary valueForKey:@"bmiddle_pic"]];
+            self.imageURL = [NSURL URLWithString:[dictionary valueForKey:@"thumbnail_pic"]];
             self.repostText = [[dictionary valueForKey:@"retweeted_status"] valueForKey:@"text"];
-            self.repostImageURL = [NSURL URLWithString:[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"bmiddle_pic"]];
+            self.repostImageURL = [NSURL URLWithString:[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"thumbnail_pic"]];
             self.commentCount = [dictionary valueForKey:@"comments_count"];
             self.repostCount = [dictionary valueForKey:@"reposts_count"];
             self.avatarURL = [NSURL URLWithString:[[dictionary valueForKey:@"user"] valueForKey:@"profile_image_url"]];
@@ -35,6 +35,9 @@
             NSString *dataStr = [dictionary valueForKey:@"created_at"];
             self.postDate = [self dateFromString:dataStr];
             dataStr = nil;
+            
+            self.bigImageURL = [NSURL URLWithString:[dictionary valueForKey:@"bmiddle_pic"]];
+            self.bigRepostImageURL = [NSURL URLWithString:[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"bmiddle_pic"]];
         } 
     }
     

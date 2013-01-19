@@ -236,6 +236,10 @@
         [statusCell setRepostText:repostText andRepostImageWithURL:self.status.repostImageURL];
         statusCell.textFrom = self.status.fromText;
         [statusCell setCommentCount:self.status.commentCount andRepostCount:self.status.repostCount];
+        statusCell.containerViewController = self;
+        
+        statusCell.bigImageURL = self.status.bigImageURL;
+        statusCell.bigRepostImageURL = self.status.bigRepostImageURL;
     } else {
         CBComment *comment = [self.list objectAtIndex:row-1];
         

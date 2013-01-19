@@ -179,6 +179,9 @@
     cell.textFrom =         status.fromText;
     [cell setCommentCount:status.commentCount andRepostCount:status.repostCount];
     cell.containerViewController = self;
+    
+    cell.bigImageURL = status.bigImageURL;
+    cell.bigRepostImageURL = status.bigRepostImageURL;
 }
 
 #pragma mark - PullTableView Delegate

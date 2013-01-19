@@ -23,6 +23,9 @@
 @property (strong, nonatomic) NSString *fromText;
 @property (strong, nonatomic) NSDate *postDate;
 
+@property (strong, nonatomic) NSURL *bigImageURL;
+@property (strong, nonatomic) NSURL *bigRepostImageURL;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
