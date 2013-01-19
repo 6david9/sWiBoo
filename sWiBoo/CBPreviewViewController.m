@@ -42,6 +42,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.imageView.image = image;
                 [self.activityIndicator stopAnimating];
+                self.saveButton.hidden = NO;
             });
             imageDate = nil;
             image = nil;
@@ -83,4 +84,27 @@
     [self setScrollView:nil];
     [super viewDidUnload];
 }
+
+- (IBAction)saveImage:(id)sender
+{
+    UIImage *image = self.imageView.image;
+    if (image != nil) {
+        UIImageWriteToSavedPhotosAlbum(image, self,
+            @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
+  contextInfo:(void *)contextInfo
+{
+    NSString *alertStr;
+    if (error == nil) {
+        alertStr = @"保存成功";
+    } else {
+        alertStr = @"保存失败";
+    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:alertStr delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+}
+
 @end
