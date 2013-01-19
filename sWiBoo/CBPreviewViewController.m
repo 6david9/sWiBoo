@@ -30,8 +30,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    [self.imageView setImageWithURL:self.imageURL];
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -49,6 +47,12 @@
         
     });
 }
+- (IBAction)handTap:(UITapGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        [self dismissModalViewControllerAnimated:NO];
+    }
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -60,10 +64,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.imageView;
+}
 
 - (void)viewDidUnload {
     [self setImageView:nil];
     [self setActivityIndicator:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
 }
 @end
