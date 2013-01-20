@@ -124,10 +124,13 @@
    
     cell.name.text = follower.screen_name;
     [cell.avatarView setImageWithURL:imageURL];
-    if ([follower.follow_me integerValue] == 1) {
-        [cell.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
-    } else {
+    cell.userId = follower.idstr;       // 用户id
+    if ([follower.follow_me integerValue] == 0) {
         [cell.followButton setTitle:@"关注" forState:UIControlStateNormal];
+        cell.followMe = NO;
+    } else {
+        [cell.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
+        cell.followMe = YES;
     }
 }
 

@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SinaWeibo.h"
 
-@interface CBFollowerCell : UITableViewCell
+@interface CBFollowerCell : UITableViewCell <SinaWeiboRequestDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarView;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
+
+@property (weak, nonatomic) NSString *userId;
+@property (assign, nonatomic) BOOL followMe;
+
+- (IBAction)createOrDestroyFriendship:(UIButton *)sender;
 
 @end
