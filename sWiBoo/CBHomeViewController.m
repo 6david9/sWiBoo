@@ -358,6 +358,8 @@
     NSString *alertString;
     if ([error code] == 10023) {    // User requests out of rate limit!
        alertString = @"用户请求太频繁，请稍后重试！";
+    } else if ([error code] == -1009) { //The Internet connection appears to be offline.
+        alertString = @"未检测到网络，请联网后重试";
     } else {
         alertString = @"未知错误，请稍后重试！";
     }
