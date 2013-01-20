@@ -212,7 +212,7 @@
     [self.tableView endUpdates];
     
     
-    [self loadingMore];
+    [self loadingNew];
     
     if ([self.list count]>0) {
         [self.tableView scrollsToTop];
@@ -231,6 +231,18 @@
     CBComposeViewController *composeViewController = [[CBComposeViewController alloc] initWithNibName:@"CBComposeViewController" bundle:nil];
     [composeViewController setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:composeViewController animated:YES];
+}
+
+- (void)loadingNew
+{
+    if ([[self weibo] isLoggedIn]) {
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [params setValue:@"10" forKey:@"count"];
+        [[self weibo] requestWithURL:@"statuses/home_timeline.json"
+                              params:params
+                          httpMethod:@"GET"
+                            delegate:self];
+    }
 }
 
 - (void)loadingMore
