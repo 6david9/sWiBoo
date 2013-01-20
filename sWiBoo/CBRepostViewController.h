@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CBRepostViewController : UIViewController <SinaWeiboRequestDelegate>
+@interface CBRepostViewController : UIViewController
+<SinaWeiboRequestDelegate,UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) NSString *statusId;
+
+@property (weak, nonatomic) IBOutlet UILabel *countDownLabel;
 
 @end

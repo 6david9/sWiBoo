@@ -20,7 +20,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        CALayer *layer = self.countDownLabel.layer;
+        layer.masksToBounds = YES;
+        layer.cornerRadius = 4;
     }
     return self;
 }
@@ -34,6 +36,11 @@
     self.navigationItem.rightBarButtonItem = repostItem;
     
     [self.textView becomeFirstResponder];
+}
+
+- (void)viewDidUnload {
+    [self setTextView:nil];
+    [super viewDidUnload];
 }
 
 - (SinaWeibo *)weibo
@@ -77,8 +84,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
-    [self setTextView:nil];
-    [super viewDidUnload];
+#pragma mark - Text view delegate
+- (void)textViewDidChange:(UITextView *)textView
+{
+    self.countDownLabel.text = [NSString stringWithFormat:@"%d", 140-[textView.text length]];
 }
+
 @end
