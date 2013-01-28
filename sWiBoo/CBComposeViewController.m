@@ -85,7 +85,7 @@
         
         if (self.uploadImage != nil)    /* 上传图片 */
         {
-            NSData *imageData = UIImagePNGRepresentation(self.uploadImage);
+            __weak NSData *imageData = UIImagePNGRepresentation(self.uploadImage);
             
             [params setValue:imageData forKey:@"pic"];
             [self.weibo requestWithURL:@"statuses/upload.json" params:params httpMethod:@"POST" delegate:self];
@@ -250,12 +250,12 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     if ([[info valueForKey:UIImagePickerControllerMediaType] isEqual:@"public.image"]) {
-        UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+        __weak UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
         
         /* 保存图片到相册 */
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         /* 压缩图片 */
-        UIImage *compressedImage = [self imageAfterCompress:image];
+        __weak UIImage *compressedImage = [self imageAfterCompress:image];
         /* 保留引用 */
         self.uploadImage = compressedImage;
         
@@ -268,7 +268,7 @@
 
 - (UIImage *)imageAfterCompress:(UIImage *)originImage
 {
-    UIImage* newImage;
+    __weak UIImage* newImage;
     CGSize drawSize;
     CGSize imageSize = originImage.size;                      /*  获取图片大小 */
     

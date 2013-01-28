@@ -33,8 +33,11 @@
             self.repost_screen_name = [[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"user"]  valueForKey:@"screen_name"];
             self.fromText = [self sourceString:[dictionary valueForKey:@"source"]];
             NSString *dataStr = [dictionary valueForKey:@"created_at"];
-            self.postDate = [self dateFromString:dataStr];
+            NSDate *aDate = [self dateFromString:dataStr];
+            self.postDate = aDate;
             dataStr = nil;
+            aDate = nil;
+            
             
             self.bigImageURL = [NSURL URLWithString:[dictionary valueForKey:@"bmiddle_pic"]];
             self.bigRepostImageURL = [NSURL URLWithString:[[dictionary valueForKey:@"retweeted_status"] valueForKey:@"bmiddle_pic"]];
@@ -73,8 +76,12 @@
         NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setLocale:usLocale];
+        usLocale = nil;
+        
         [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss v yyyy"];
         date = [dateFormatter dateFromString:dateString];
+        dateFormatter = nil;
+//        date = [NSDate date];
     }
     
     return date;

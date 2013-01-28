@@ -78,8 +78,11 @@
         self.repostTextLabel.backgroundColor = [UIColor clearColor];
         self.postDateLabel.backgroundColor = [UIColor whiteColor];
         // 转发背景图片
-        UIImage *backgroudImage = [[UIImage imageNamed:@"timeline_rt_border_t.png"]
-                                            resizableImageWithCapInsets:UIEdgeInsetsMake(7, 30, 3, 20)];
+        UIImage *backgroudImageOrigin = [[UIImage alloc] initWithContentsOfFile:
+                                         pathInBundleDirectory(@"timeline_rt_border_t.png")];
+        UIImage *backgroudImage = [backgroudImageOrigin
+                                   resizableImageWithCapInsets:UIEdgeInsetsMake(7, 30, 3, 20)];
+        backgroudImageOrigin = nil;
         self.repostTextBackgroudView.image = backgroudImage;
         self.repostTextBackgroudView.clipsToBounds = YES;
         self.repostTextBackgroudView.userInteractionEnabled = YES;  /* 实现repostImageView交互 */
@@ -206,7 +209,9 @@
         
         
         self.postTextLabel.text = text;
-        [self.postImageView setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
+        [self.postImageView setImageWithURL:imageURL
+                                   forState:UIControlStateNormal
+                           placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
     }
 }
 
@@ -235,6 +240,7 @@
     // 赋值
     self.repostTextLabel.text = repostText;
     [self.repostImageView setImageWithURL:repostImageURL
+                                 forState:UIControlStateNormal
                          placeholderImage:[UIImage imageNamed:@"avatar_default_big.png"]];
     
     // 是否显示转发视图

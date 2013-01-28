@@ -18,4 +18,7 @@
     #import <CoreGraphics/CoreGraphics.h>
 
     #import "sWiBoo.h"
+
+extern NSString *pathInBundleDirectory(NSString *path);
+
 #endif

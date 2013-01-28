@@ -65,6 +65,11 @@
     [self saveContext];
 }
 
+NSString *pathInBundleDirectory(NSString *path)
+{
+    return [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:path];
+}
+
 - (void)saveContext
 {
     NSError *error = nil;

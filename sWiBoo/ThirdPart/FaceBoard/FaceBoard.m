@@ -86,8 +86,14 @@
              */
             faceButton.frame = CGRectMake((((i-1)%28)%7)*44+6+((i-1)/28*320), (((i-1)%28)/7)*44+8, 44, 44);
             
-            [faceButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%03d",i]] forState:UIControlStateNormal];
+//            [faceButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%03d",i]]
+//                        forState:UIControlStateNormal];
+            
+            UIImage *faceImage = [[UIImage alloc] initWithContentsOfFile:
+                                  pathInBundleDirectory([NSString stringWithFormat:@"%03d.png",i])];
+            [faceButton setImage:faceImage forState:UIControlStateNormal];
             [faceView addSubview:faceButton];
+            [faceImage release];
         }
         
         // 添加键盘View
@@ -106,8 +112,17 @@
         // 添加删除键
         UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
         [back setTitle:@"删除" forState:UIControlStateNormal];
-        [back setImage:[UIImage imageNamed:@"backFace"] forState:UIControlStateNormal];
-        [back setImage:[UIImage imageNamed:@"backFaceSelect"] forState:UIControlStateSelected];
+//        [back setImage:[UIImage imageNamed:@"backFace"] forState:UIControlStateNormal];
+//        [back setImage:[UIImage imageNamed:@"backFaceSelect"] forState:UIControlStateSelected];
+        UIImage *backFaceImage = [[UIImage alloc] initWithContentsOfFile:
+                                  pathInBundleDirectory(@"backFace.png")];
+        UIImage *backFaceSelectImage = [[UIImage alloc] initWithContentsOfFile:
+                                        pathInBundleDirectory(@"backFaceSelect.png")];
+        [back setImage:backFaceImage forState:UIControlStateNormal];
+        [back setImage:backFaceSelectImage forState:UIControlStateSelected];
+        [backFaceImage release];
+        [backFaceSelectImage release];
+        
         [back addTarget:self action:@selector(backFace) forControlEvents:UIControlEventTouchUpInside];
         back.frame = CGRectMake(270, 185, 38, 27);
         [self addSubview:back];

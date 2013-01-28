@@ -141,7 +141,9 @@ static CGFloat kBorderWidth = 10;
         [self addSubview:webView];
         [webView release];
         
-        UIImage* closeImage = [UIImage imageNamed:@"SinaWeibo.bundle/images/close.png"];
+//        UIImage* closeImage = [UIImage imageNamed:@"SinaWeibo.bundle/images/close.png"];
+        UIImage *closeImage = [[UIImage alloc] initWithContentsOfFile:
+                               pathInBundleDirectory(@"SinaWeibo.bundle/images/close.png")];
         UIColor* color = [UIColor colorWithRed:167.0/255 green:184.0/255 blue:216.0/255 alpha:1];
         closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [closeButton setImage:closeImage forState:UIControlStateNormal];
@@ -153,6 +155,7 @@ static CGFloat kBorderWidth = 10;
         closeButton.showsTouchWhenHighlighted = YES;
         closeButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
         [self addSubview:closeButton];
+        [closeImage release];
         
         indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
                     UIActivityIndicatorViewStyleGray];
