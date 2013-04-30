@@ -11,8 +11,10 @@
 #import "FaceBoard.h"
 #import "SinaWeibo.h"
 #import "NSString+URLEncode.h"
+#import "CBMentionViewController.h"
+#import "CBFollower.h"
 
-@interface CBComposeViewController ()
+@interface CBComposeViewController () <CBMentionDelgate>
 
 @property (weak, nonatomic, readonly) SinaWeibo *weibo;
 @property (assign, nonatomic) CGFloat originalHeight;
@@ -238,6 +240,24 @@
 {
     [self.imagePickerController dismissModalViewControllerAnimated:YES];
 }
+
+#pragma  mark - Mention Friends
+- (IBAction)showMentionView:(UIButton *)sender
+{
+    CBMentionViewController *mentionController = [[CBMentionViewController alloc] initWithNibName:@"CBMentionViewController" bundle:nil];
+    mentionController.delegate = self;
+    [self presentModalViewController:mentionController animated:YES];
+    mentionController = nil;
+}
+
+- (void)userDidSelectFollower:(CBFollower *)follower
+{
+    NSString *text = self.textView.text;
+    text = [text stringByAppendingFormat:@"@%@", follower.screen_name];
+    self.textView.text = text;
+    text = nil;
+}
+
 
 #pragma mark - UITextView Delegate
 - (void)textViewDidChange:(UITextView *)textView

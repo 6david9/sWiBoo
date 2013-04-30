@@ -10,4 +10,17 @@
 
 @implementation CBFollower
 
+- (id)initWithDictionary:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self != nil) {
+        // do some initial
+        @autoreleasepool {
+            self.uid = [dict valueForKey:@"idstr"];
+            self.screen_name = [dict valueForKey:@"screen_name"];
+        }
+    }
+    return self;
+}
+
 @end

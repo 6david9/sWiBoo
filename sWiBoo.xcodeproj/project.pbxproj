@@ -444,6 +444,10 @@
 		08CA93F5166E171700201B45 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 08CA93F4166E171700201B45 /* Status.m */; };
 		08D370CD16970DF700D62618 /* timeline_rt_border_t.png in Resources */ = {isa = PBXBuildFile; fileRef = 08D370CB16970DF700D62618 /* timeline_rt_border_t.png */; };
 		08D370CE16970DF700D62618 /* timeline_rt_border_t@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08D370CC16970DF700D62618 /* timeline_rt_border_t@2x.png */; };
+		08E94F2316D4C20A009C3775 /* compose_mentionbutton_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 08E94F2116D4C20A009C3775 /* compose_mentionbutton_background.png */; };
+		08E94F2416D4C20A009C3775 /* compose_mentionbutton_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08E94F2216D4C20A009C3775 /* compose_mentionbutton_background@2x.png */; };
+		08E94F2816D4C2F4009C3775 /* CBMentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E94F2616D4C2F4009C3775 /* CBMentionViewController.m */; };
+		08E94F2916D4C2F4009C3775 /* CBMentionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E94F2716D4C2F4009C3775 /* CBMentionViewController.xib */; };
 		08FE87DF167733EA0061E49B /* CBUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FE87DE167733EA0061E49B /* CBUserInfo.m */; };
 		08FE87E216774F8A0061E49B /* avatar_default_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 08FE87E016774F890061E49B /* avatar_default_big.png */; };
 		08FE87E316774F8A0061E49B /* avatar_default_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08FE87E116774F890061E49B /* avatar_default_big@2x.png */; };
@@ -955,6 +959,11 @@
 		08CA93F4166E171700201B45 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		08D370CB16970DF700D62618 /* timeline_rt_border_t.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_rt_border_t.png; sourceTree = "<group>"; };
 		08D370CC16970DF700D62618 /* timeline_rt_border_t@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_rt_border_t@2x.png"; sourceTree = "<group>"; };
+		08E94F2116D4C20A009C3775 /* compose_mentionbutton_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compose_mentionbutton_background.png; sourceTree = "<group>"; };
+		08E94F2216D4C20A009C3775 /* compose_mentionbutton_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compose_mentionbutton_background@2x.png"; sourceTree = "<group>"; };
+		08E94F2516D4C2F4009C3775 /* CBMentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMentionViewController.h; sourceTree = "<group>"; };
+		08E94F2616D4C2F4009C3775 /* CBMentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMentionViewController.m; sourceTree = "<group>"; };
+		08E94F2716D4C2F4009C3775 /* CBMentionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBMentionViewController.xib; sourceTree = "<group>"; };
 		08FE87DD167733AF0061E49B /* CBUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBUserInfo.h; sourceTree = "<group>"; };
 		08FE87DE167733EA0061E49B /* CBUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBUserInfo.m; sourceTree = "<group>"; };
 		08FE87E016774F890061E49B /* avatar_default_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_default_big.png; sourceTree = "<group>"; };
@@ -1625,6 +1634,7 @@
 				089F314E1642653B006E96D1 /* Detail Status */,
 				083C2F2216AAE828006AF8D9 /* Repost Controller */,
 				0863DF48163A747100133645 /* Compose Controller */,
+				08E94F2A16D4C2FB009C3775 /* Mention Controller */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1643,6 +1653,8 @@
 			isa = PBXGroup;
 			children = (
 				084E0C50163D607200F9331D /* Emotions */,
+				08E94F2216D4C20A009C3775 /* compose_mentionbutton_background@2x.png */,
+				08E94F2116D4C20A009C3775 /* compose_mentionbutton_background.png */,
 				08361A99169C2A2D007D2A33 /* timeline_retweet_count_icon.png */,
 				08361A9A169C2A2D007D2A33 /* timeline_retweet_count_icon@2x.png */,
 				08D370CB16970DF700D62618 /* timeline_rt_border_t.png */,
@@ -1812,6 +1824,16 @@
 				089F314A16426534006E96D1 /* CBDetailStatusViewController.xib */,
 			);
 			name = "Detail Status";
+			sourceTree = "<group>";
+		};
+		08E94F2A16D4C2FB009C3775 /* Mention Controller */ = {
+			isa = PBXGroup;
+			children = (
+				08E94F2516D4C2F4009C3775 /* CBMentionViewController.h */,
+				08E94F2616D4C2F4009C3775 /* CBMentionViewController.m */,
+				08E94F2716D4C2F4009C3775 /* CBMentionViewController.xib */,
+			);
+			name = "Mention Controller";
 			sourceTree = "<group>";
 		};
 		08FE87EA16775E880061E49B /* Custom */ = {
@@ -2312,6 +2334,9 @@
 				08361A9B169C2A2D007D2A33 /* timeline_retweet_count_icon.png in Resources */,
 				08361A9C169C2A2D007D2A33 /* timeline_retweet_count_icon@2x.png in Resources */,
 				083C2F2816AAE848006AF8D9 /* CBRepostViewController.xib in Resources */,
+				08E94F2316D4C20A009C3775 /* compose_mentionbutton_background.png in Resources */,
+				08E94F2416D4C20A009C3775 /* compose_mentionbutton_background@2x.png in Resources */,
+				08E94F2916D4C2F4009C3775 /* CBMentionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2420,6 +2445,7 @@
 				088CEE9A16B64D2000D5B9D6 /* SDWebImagePrefetcher.m in Sources */,
 				088CEE9B16B64D2000D5B9D6 /* UIButton+WebCache.m in Sources */,
 				088CEE9C16B64D2000D5B9D6 /* UIImageView+WebCache.m in Sources */,
+				08E94F2816D4C2F4009C3775 /* CBMentionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2486,6 +2512,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2500,7 +2527,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2514,6 +2542,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2521,7 +2550,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2536,6 +2567,7 @@
 				INFOPLIST_FILE = "sWiBoo/sWiBoo-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2549,6 +2581,7 @@
 				INFOPLIST_FILE = "sWiBoo/sWiBoo-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

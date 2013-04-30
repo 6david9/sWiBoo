@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
+@property (weak, nonatomic) IBOutlet UIButton *mentionButton;
 
 @property (strong, nonatomic) UIImage *uploadImage;
 

@@ -8,6 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CBMentionViewController : UIViewController
+@class CBFollower;
+@protocol  SinaWeiboRequestDelegate;
+
+@protocol CBMentionDelgate <NSObject>
+
+- (void)userDidSelectFollower:(CBFollower *)follower;
+
+@end
+
+@interface CBMentionViewController : UIViewController <SinaWeiboRequestDelegate,
+                                                        UITableViewDataSource,
+                                                        UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+@property (strong, nonatomic) NSMutableArray *list;
+@property (weak, nonatomic) id<CBMentionDelgate> delegate;
 
 @end

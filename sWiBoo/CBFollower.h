@@ -10,4 +10,9 @@
 
 @interface CBFollower : NSObject
 
+@property (strong, nonatomic) NSString *uid;
+@property (strong, nonatomic) NSString *screen_name;
+
+- (id)initWithDictionary:(NSDictionary *)dict;
+
 @end
