@@ -39,7 +39,8 @@
 - (NSData *)localImageDataWithIdentifier:(NSString *)identifier
 {
     NSString *filePath = [[self imageSavingPath] stringByAppendingPathComponent:[identifier md5HexDigest]];
-    if (filePath == nil)    // 没有找到
+    BOOL found = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+    if (!found)    // 没有找到
         return nil;
     
     return [NSData dataWithContentsOfFile:filePath];
